@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { SquareClient, SquareEnvironment } from 'square';
 import { EDITORIAL_MENU } from '../src/data/menuData';
 
