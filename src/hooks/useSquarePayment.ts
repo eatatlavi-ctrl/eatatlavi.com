@@ -58,7 +58,7 @@ export function useSquarePayment(): UseSquarePaymentReturn {
           '.input-container': { borderColor: '#27272A', borderRadius: '0px' },
           '.input-container.is-focus': { borderColor: '#D4AF37' },
           '.input-container.is-error': { borderColor: '#ef4444' },
-          input: { color: '#FFFFFF', fontFamily: 'Inter', fontSize: '14px' },
+          input: { color: '#FFFFFF', fontSize: '14px' },
           'input::placeholder': { color: '#71717A' },
           '.message-icon': { color: '#D4AF37' },
           '.message-text': { color: '#A1A1AA' },
