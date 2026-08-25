@@ -1,39 +1,28 @@
-import * as sq from 'square';
-
-let client: any = null;
-
 export default async function handler(req: any, res: any) {
   res.setHeader('Cache-Control', 's-maxage=60, stale-while-revalidate=3600');
 
   try {
-    if (!client) {
-      // @ts-ignore
-      const ClientConstructor = sq.Client || sq.default?.Client || sq.SquareClient;
-      // @ts-ignore
-      const Env = sq.SquareEnvironment || sq.default?.SquareEnvironment || sq.Environment;
-
-      if (!ClientConstructor) throw new Error('Square Client constructor not found in square package exports');
-
-      const token = process.env.SQUARE_ACCESS_TOKEN || 'EAAAlwWfgbI1rjM-gIHF3gm0-TOaFCoWxq17RDSZl_ulLRRFecCRAIEjSkz8wjDa';
-
-      client = new ClientConstructor({
-        token,
-        accessToken: token,
-        bearerAuthCredentials: {
-          accessToken: token
-        },
-        environment: Env?.Production || 'Production'
-      });
-    }
-
-    if (!client) throw new Error('Square Client failed to initialize');
+    const token = process.env.SQUARE_ACCESS_TOKEN || 'EAAAlwWfgbI1rjM-gIHF3gm0-TOaFCoWxq17RDSZl_ulLRRFecCRAIEjSkz8wjDa';
     
-    const response = await client.catalog.search({
-      objectTypes: ['ITEM', 'CATEGORY'],
-      includeDeletedObjects: false,
-      includeRelatedObjects: false
+    const squareRes = await fetch('https://connect.squareup.com/v2/catalog/search', {
+      method: 'POST',
+      headers: {
+        'Square-Version': '2024-06-04',
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        object_types: ['ITEM', 'CATEGORY'],
+        include_deleted_objects: false,
+        include_related_objects: false
+      })
     });
 
+    if (!squareRes.ok) {
+      throw new Error(`Square API Error: ${squareRes.status} ${await squareRes.text()}`);
+    }
+
+    const response = await squareRes.json();
     const objects = response.objects || [];
     
     // Map Square Category IDs to their Names
