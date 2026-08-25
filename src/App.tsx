@@ -20,7 +20,7 @@ export function App() {
   const [isLoadingMenu, setIsLoadingMenu] = useState(true);
 
   useEffect(() => {
-    fetch('/api/catalog')
+    fetch('/api/catalog.ts')
       .then(res => res.json())
       .then(data => {
         if (Array.isArray(data)) setMenuItems(data);
