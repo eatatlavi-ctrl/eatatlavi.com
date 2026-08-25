@@ -804,7 +804,7 @@ export const EDITORIAL_MENU: EditorialMenuItem[] = [
   {
     "id": "sq-ODTYANZGETW2DVM7HUAVLZO4",
     "name": "Half Pan Fried Wings",
-    "category": "Wings",
+    "category": "Catering",
     "priceDisplay": "$64.99",
     "price": 64.99,
     "description": "",
@@ -814,7 +814,7 @@ export const EDITORIAL_MENU: EditorialMenuItem[] = [
   {
     "id": "sq-3DGF47ZLMXGJSIIWQ4JNWWIQ",
     "name": "Half Pan Honey BBQ Wings",
-    "category": "Wings",
+    "category": "Catering",
     "priceDisplay": "$69.99",
     "price": 69.99,
     "description": "",
@@ -824,7 +824,7 @@ export const EDITORIAL_MENU: EditorialMenuItem[] = [
   {
     "id": "sq-WHI4XTEAJY5UBCTI2J2BMXKW",
     "name": "Half Pan Curry Chicken",
-    "category": "Entrees",
+    "category": "Catering",
     "priceDisplay": "$64.99",
     "price": 64.99,
     "description": "",
@@ -834,7 +834,7 @@ export const EDITORIAL_MENU: EditorialMenuItem[] = [
   {
     "id": "sq-BNLOJ7UQQMA5SV6IXWOP5KY2",
     "name": "Half Pan Stew Chicken",
-    "category": "Entrees",
+    "category": "Catering",
     "priceDisplay": "$64.99",
     "price": 64.99,
     "description": "",
@@ -844,7 +844,7 @@ export const EDITORIAL_MENU: EditorialMenuItem[] = [
   {
     "id": "sq-MXGIE5OH4EQQ5U6JLT7GEG4Z",
     "name": "Half Pan Jerk Chicken",
-    "category": "Entrees",
+    "category": "Catering",
     "priceDisplay": "$64.99",
     "price": 64.99,
     "description": "",
@@ -854,7 +854,7 @@ export const EDITORIAL_MENU: EditorialMenuItem[] = [
   {
     "id": "sq-F2XRPZIMOFQUHBFUFVBDTUXR",
     "name": "Half Pan String Beans",
-    "category": "Sides",
+    "category": "Catering",
     "priceDisplay": "$39.99",
     "price": 39.99,
     "description": "",
@@ -864,7 +864,7 @@ export const EDITORIAL_MENU: EditorialMenuItem[] = [
   {
     "id": "sq-2V373HPGNW4GSWJLLDI6TLD6",
     "name": "Half Pan Baked Chicken",
-    "category": "Entrees",
+    "category": "Catering",
     "priceDisplay": "$64.99",
     "price": 64.99,
     "description": "",
@@ -874,7 +874,7 @@ export const EDITORIAL_MENU: EditorialMenuItem[] = [
   {
     "id": "sq-5NPSNWLFS6AR3PXIGV3IUNI7",
     "name": "Half Pan Oxtails",
-    "category": "Entrees",
+    "category": "Catering",
     "priceDisplay": "$149.99",
     "price": 149.99,
     "description": "",
@@ -884,7 +884,7 @@ export const EDITORIAL_MENU: EditorialMenuItem[] = [
   {
     "id": "sq-U45JZJELOUSYZBN5PGEJR7XK",
     "name": "Half pan collard greens",
-    "category": "Sides",
+    "category": "Catering",
     "priceDisplay": "$39.99",
     "price": 39.99,
     "description": "",
@@ -894,7 +894,7 @@ export const EDITORIAL_MENU: EditorialMenuItem[] = [
   {
     "id": "sq-X3YCONT2CQPIH2MTPYDMZ5G3",
     "name": "Half Pan Mac & Cheese",
-    "category": "Sides",
+    "category": "Catering",
     "priceDisplay": "$64.99",
     "price": 64.99,
     "description": "",
@@ -904,7 +904,7 @@ export const EDITORIAL_MENU: EditorialMenuItem[] = [
   {
     "id": "sq-KO363PHQP3TGGN4IQY7DLPNF",
     "name": "Large pan Mac & Cheese",
-    "category": "Sides",
+    "category": "Catering",
     "priceDisplay": "$99.99",
     "price": 99.99,
     "description": "",
@@ -914,7 +914,7 @@ export const EDITORIAL_MENU: EditorialMenuItem[] = [
   {
     "id": "sq-WAS2VBTFEMGBUQ4DX2VKJBNW",
     "name": "Large Pan Oxtails",
-    "category": "Entrees",
+    "category": "Catering",
     "priceDisplay": "$199.99",
     "price": 199.99,
     "description": "",
@@ -924,7 +924,7 @@ export const EDITORIAL_MENU: EditorialMenuItem[] = [
   {
     "id": "sq-DCKM534MRZ26U65CTBUVBJFG",
     "name": "Large Pan Stew Chicken",
-    "category": "Entrees",
+    "category": "Catering",
     "priceDisplay": "$89.99",
     "price": 89.99,
     "description": "",
@@ -934,7 +934,7 @@ export const EDITORIAL_MENU: EditorialMenuItem[] = [
   {
     "id": "sq-GJLQNWH2FNHX7DJVGFLM7HTI",
     "name": "Large Pan Jerk Chicken",
-    "category": "Entrees",
+    "category": "Catering",
     "priceDisplay": "$129.99",
     "price": 129.99,
     "description": "",
@@ -944,7 +944,7 @@ export const EDITORIAL_MENU: EditorialMenuItem[] = [
   {
     "id": "sq-YHU7XQ3TX2EC37K4XM4J3GH3",
     "name": "Large Pan Yams",
-    "category": "Sides",
+    "category": "Catering",
     "priceDisplay": "$99.99",
     "price": 99.99,
     "description": "",
@@ -954,7 +954,7 @@ export const EDITORIAL_MENU: EditorialMenuItem[] = [
   {
     "id": "sq-5AIASLRRBBZNFMQRTAXYGIEX",
     "name": "Large Pan Cabbage",
-    "category": "Sides",
+    "category": "Catering",
     "priceDisplay": "$54.99",
     "price": 54.99,
     "description": "",
@@ -964,7 +964,7 @@ export const EDITORIAL_MENU: EditorialMenuItem[] = [
   {
     "id": "sq-I5CLKVSQZEU5OVIJCVWZNZZ2",
     "name": "Half Pan Cabbage",
-    "category": "Sides",
+    "category": "Catering",
     "priceDisplay": "$39.99",
     "price": 39.99,
     "description": "",
@@ -974,7 +974,7 @@ export const EDITORIAL_MENU: EditorialMenuItem[] = [
   {
     "id": "sq-3WSTGYGARJ5CTUNEP5IVOHLN",
     "name": "Large Pan Corn Bread",
-    "category": "Sides",
+    "category": "Catering",
     "priceDisplay": "$39.99",
     "price": 39.99,
     "description": "",
@@ -984,7 +984,7 @@ export const EDITORIAL_MENU: EditorialMenuItem[] = [
   {
     "id": "sq-2RHMHII46X37SP4KXDQT2WLC",
     "name": "Large Pan Banana Pudding",
-    "category": "Sweet Treats",
+    "category": "Catering",
     "priceDisplay": "$149.99",
     "price": 149.99,
     "description": "",
@@ -994,7 +994,7 @@ export const EDITORIAL_MENU: EditorialMenuItem[] = [
   {
     "id": "sq-S7IVWHYAET4NHPCVS5AY75IA",
     "name": "Large Pan Rice & Peas",
-    "category": "Sides",
+    "category": "Catering",
     "priceDisplay": "$69.99",
     "price": 69.99,
     "description": "",

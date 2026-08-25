@@ -5,6 +5,7 @@ import { Plus, Sparkles } from 'lucide-react';
 
 const CATEGORIES: MenuCategory[] = [
   'Entrees',
+  'Catering',
   'Wings',
   'Empanadas & Patties',
   'Tacos, Burritos & Wraps',
@@ -213,6 +214,11 @@ export const EditorialMenu: React.FC<EditorialMenuProps> = ({ onOpenOrderModal, 
                     {category === 'Entrees' && (
                       <p className="text-[11px] text-[#A1A1AA] font-mono mt-0.5 uppercase tracking-wider">
                         Served with choice of White, Yellow, Rice & Peas, or Jollof Rice
+                      </p>
+                    )}
+                    {category === 'Catering' && (
+                      <p className="text-[11px] text-[#D4AF37] font-mono mt-0.5 uppercase tracking-wider">
+                        Half Pan & Large Pan Trays for Events & Parties
                       </p>
                     )}
                   </div>

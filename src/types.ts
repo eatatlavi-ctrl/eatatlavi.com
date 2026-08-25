@@ -1,5 +1,6 @@
 export type MenuCategory = 
   | 'Entrees'
+  | 'Catering'
   | 'Wings'
   | 'Empanadas & Patties'
   | 'Tacos, Burritos & Wraps'
