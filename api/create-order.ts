@@ -1,6 +1,6 @@
 // @ts-nocheck
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { Client, Environment, ApiError } from 'square';
+import { Client, Environment } from 'square';
 import { randomUUID } from 'crypto';
 
 // Square client — Access Token is ONLY here on the server, never sent to browser
@@ -123,8 +123,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     });
   } catch (error) {
     console.error('Square API error:', error);
-    if (error instanceof ApiError) {
-      const msg = error.errors?.[0]?.detail || error.message;
+    if (error && typeof error === 'object' && 'errors' in error) {
+      const msg = (error as any).errors?.[0]?.detail || error.message;
       return res.status(400).json({ error: msg });
     }
     return res.status(500).json({ error: 'Order could not be processed. Please try again.' });
