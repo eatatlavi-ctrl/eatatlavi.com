@@ -55,13 +55,17 @@ export function useSquarePayment(): UseSquarePaymentReturn {
       paymentsRef.current = await window.Square.payments(APP_ID, LOCATION_ID);
       cardRef.current = await paymentsRef.current.card({
         style: {
-          '.input-container': { borderColor: '#27272A', borderRadius: '0px' },
+          '.input-container': { borderColor: '#E4E4E7', borderRadius: '4px' },
           '.input-container.is-focus': { borderColor: '#D4AF37' },
           '.input-container.is-error': { borderColor: '#ef4444' },
-          input: { backgroundColor: 'transparent', color: '#FFFFFF', fontSize: '14px' },
+          input: { color: '#18181B', fontSize: '14px' },
+          '.cardNumber': { color: '#18181B' },
+          '.expirationDate': { color: '#18181B' },
+          '.cvv': { color: '#18181B' },
+          '.postalCode': { color: '#18181B' },
           'input::placeholder': { color: '#71717A' },
           '.message-icon': { color: '#D4AF37' },
-          '.message-text': { color: '#A1A1AA' },
+          '.message-text': { color: '#71717A' },
         },
       });
       await cardRef.current.attach('#square-card-container');
