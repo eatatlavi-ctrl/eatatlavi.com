@@ -1,7 +1,7 @@
 // @ts-ignore
 import pkg from 'square';
 // @ts-ignore
-const { Client, Environment } = pkg;
+const { Client, SquareEnvironment } = pkg;
 
 let client: any;
 try {
@@ -9,7 +9,7 @@ try {
     bearerAuthCredentials: {
       accessToken: process.env.SQUARE_ACCESS_TOKEN || 'EAAAlwWfgbI1rjM-gIHF3gm0-TOaFCoWxq17RDSZl_ulLRRFecCRAIEjSkz8wjDa'
     },
-    environment: Environment.Production
+    environment: SquareEnvironment.Production
   });
 } catch (err) {
   console.error('Failed to initialize Square Client:', err);
