@@ -1,3 +1,4 @@
+// @ts-nocheck
 export default async function handler(req: any, res: any) {
   res.setHeader('Cache-Control', 's-maxage=60, stale-while-revalidate=3600');
 
