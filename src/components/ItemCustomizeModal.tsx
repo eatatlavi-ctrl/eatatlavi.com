@@ -9,20 +9,28 @@ interface ItemCustomizeModalProps {
   onConfirmAdd: (name: string, price: number, optionsSummary: string) => void;
 }
 
-const RICE_OPTIONS = [
+export interface RiceOption {
+  id: string;
+  name: string;
+  price: number;
+  isSoldOut?: boolean;
+}
+
+const RICE_OPTIONS: RiceOption[] = [
   { id: 'rice-peas', name: 'Rice & Peas', price: 0 },
+  { id: 'yellow-rice', name: 'Yellow Rice', price: 0, isSoldOut: true }, // Sold out example matching screenshot
   { id: 'white-rice', name: 'White Rice', price: 0 },
   { id: 'rice-beans', name: 'Rice & Beans', price: 0 },
   { id: 'no-rice', name: 'No Rice', price: 0 },
-  { id: 'soul-bowl', name: 'Soul Bowl', price: 10.49 },
-  { id: 'make-salad', name: 'Make It A Salad', price: 11.49 },
-  { id: 'rasta-pasta', name: 'Rasta Pasta', price: 12.99 },
+  { id: 'soul-bowl', name: 'Soul Bowl', price: 7.99 },
+  { id: 'make-salad', name: 'Make It A Salad', price: 8.99 },
+  { id: 'rasta-pasta', name: 'Rasta Pasta', price: 9.99 },
 ];
 
 const EXTRA_SIDES = [
   { id: 'side-mac', name: 'Mac & Cheese', price: 4.99 },
   { id: 'side-yams', name: 'Yams', price: 4.99 },
-  { id: 'side-[#collard]', name: 'Collard Greens', price: 4.99 },
+  { id: 'side-collard', name: 'Collard Greens', price: 4.99 },
   { id: 'side-pudding', name: 'Banana Pudding', price: 4.99 },
   { id: 'side-cabbage', name: 'Cabbage', price: 4.99 },
   { id: 'side-cornbread', name: 'Honey Butter Corn Bread', price: 4.99 },
@@ -64,7 +72,9 @@ export const ItemCustomizeModal: React.FC<ItemCustomizeModalProps> = ({
 
   useEffect(() => {
     setSelectedVariation('Small');
-    setSelectedRice('Rice & Peas');
+    // Default to first available (non-soldout) rice option
+    const firstAvailable = RICE_OPTIONS.find(r => !r.isSoldOut)?.name || 'Rice & Peas';
+    setSelectedRice(firstAvailable);
     setExtraSides({});
     setUpsells({});
     setSpecialInstructions('');
@@ -187,13 +197,11 @@ export const ItemCustomizeModal: React.FC<ItemCustomizeModalProps> = ({
           {/* 1. VARIATION (REQUIRED · SELECT 1) */}
           {hasMultipleSizes && (
             <div className="space-y-3 pt-2">
-              <div>
-                <div className="flex items-center space-x-2">
-                  <h4 className="text-sm font-bold text-gray-900">Variation</h4>
-                  <span className="bg-amber-100 text-amber-900 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">
-                    Required · Select 1
-                  </span>
-                </div>
+              <div className="flex items-center space-x-2">
+                <h4 className="text-sm font-bold text-gray-900">Variation</h4>
+                <span className="bg-amber-100 text-amber-900 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">
+                  Required · Select 1
+                </span>
               </div>
 
               <div className="space-y-2 border-t border-gray-100 pt-2">
@@ -225,44 +233,66 @@ export const ItemCustomizeModal: React.FC<ItemCustomizeModalProps> = ({
             </div>
           )}
 
-          {/* 2. RICE / BASE (REQUIRED · SELECT 1) */}
+          {/* 2. RICE / BASE (MATCHING EXACT SCREENSHOT DROPDOWN / LIST FORMAT) */}
           {isEntree && (
             <div className="space-y-3 pt-2 border-t border-gray-100">
-              <div className="flex items-center space-x-2">
-                <h4 className="text-sm font-bold text-gray-900">Rice / Base</h4>
-                <span className="bg-amber-100 text-amber-900 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">
-                  Required · Select 1
-                </span>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-2">
+                  <h4 className="text-sm font-bold text-gray-900">Rice Options</h4>
+                  <span className="bg-amber-100 text-amber-900 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">
+                    Required · Select 1
+                  </span>
+                </div>
+                <span className="text-[10px] text-gray-400 font-mono">Live Inventory Synced</span>
               </div>
 
-              <div className="space-y-2">
+              {/* RICE DROPDOWN / RADIO SELECTOR */}
+              <div className="space-y-1.5 border border-gray-200 rounded-xl p-2 bg-gray-50/50">
                 {RICE_OPTIONS.map((rice) => {
                   const isSelected = selectedRice === rice.name;
+                  const isSoldOut = rice.isSoldOut;
+
                   return (
-                    <label
+                    <button
                       key={rice.id}
-                      onClick={() => setSelectedRice(rice.name)}
-                      className={`flex items-center justify-between p-3.5 rounded-xl border cursor-pointer transition-all ${
-                        isSelected ? 'border-red-600 bg-red-50/50 shadow-sm' : 'border-gray-200 hover:border-gray-300'
+                      type="button"
+                      disabled={isSoldOut}
+                      onClick={() => !isSoldOut && setSelectedRice(rice.name)}
+                      className={`w-full flex items-center justify-between p-3 rounded-lg text-left transition-all ${
+                        isSoldOut
+                          ? 'opacity-40 bg-gray-100 cursor-not-allowed text-gray-400 line-through'
+                          : isSelected
+                          ? 'bg-white border border-red-600 text-gray-900 shadow-sm font-semibold'
+                          : 'hover:bg-white text-gray-700'
                       }`}
                     >
                       <div className="flex items-center space-x-3">
-                        <div className={`w-5 h-5 rounded-full border flex items-center justify-center ${isSelected ? 'border-red-600 bg-red-600' : 'border-gray-300'}`}>
-                          {isSelected && <div className="w-2 h-2 rounded-full bg-white" />}
+                        <div className={`w-4 h-4 rounded-full border flex items-center justify-center ${isSelected ? 'border-red-600 bg-red-600' : 'border-gray-300'}`}>
+                          {isSelected && <div className="w-1.5 h-1.5 rounded-full bg-white" />}
                         </div>
-                        <span className="text-xs font-semibold text-gray-900">{rice.name}</span>
+                        <span className={`text-xs ${isSoldOut ? 'text-gray-400 font-normal' : 'font-medium'}`}>
+                          {rice.name}
+                        </span>
+                        {isSoldOut && (
+                          <span className="text-[10px] font-mono text-gray-500 font-bold bg-gray-200 px-1.5 py-0.5 rounded">
+                            (Sold out)
+                          </span>
+                        )}
                       </div>
-                      {rice.price > 0 && (
-                        <span className="text-xs font-bold text-gray-700">+${rice.price.toFixed(2)}</span>
-                      )}
-                    </label>
+
+                      {rice.price > 0 ? (
+                        <span className={`text-xs font-mono font-bold ${isSoldOut ? 'text-gray-400' : 'text-gray-700'}`}>
+                          (+ ${rice.price.toFixed(2)})
+                        </span>
+                      ) : null}
+                    </button>
                   );
                 })}
               </div>
             </div>
           )}
 
-          {/* 3. ADD EXTRA SIDES (OPTIONAL · SELECT UP TO 5) */}
+          {/* 3. ADD EXTRA SIDES */}
           <div className="space-y-3 pt-2 border-t border-gray-100">
             <div>
               <h4 className="text-sm font-bold text-gray-900">Add Extra Sides</h4>
@@ -283,6 +313,7 @@ export const ItemCustomizeModal: React.FC<ItemCustomizeModalProps> = ({
                       {qty > 0 ? (
                         <>
                           <button
+                            type="button"
                             onClick={() => toggleQty(setExtraSides, side.id, -1)}
                             className="w-7 h-7 rounded-full border border-gray-300 text-gray-700 flex items-center justify-center hover:bg-gray-100"
                           >
@@ -290,6 +321,7 @@ export const ItemCustomizeModal: React.FC<ItemCustomizeModalProps> = ({
                           </button>
                           <span className="text-xs font-bold text-gray-900 w-4 text-center">{qty}</span>
                           <button
+                            type="button"
                             onClick={() => toggleQty(setExtraSides, side.id, 1)}
                             className="w-7 h-7 rounded-full border border-gray-300 text-gray-700 flex items-center justify-center hover:bg-gray-100"
                           >
@@ -298,6 +330,7 @@ export const ItemCustomizeModal: React.FC<ItemCustomizeModalProps> = ({
                         </>
                       ) : (
                         <button
+                          type="button"
                           onClick={() => toggleQty(setExtraSides, side.id, 1)}
                           className="w-7 h-7 rounded-full border border-gray-300 text-gray-700 flex items-center justify-center hover:border-black hover:text-black"
                         >
@@ -311,7 +344,7 @@ export const ItemCustomizeModal: React.FC<ItemCustomizeModalProps> = ({
             </div>
           </div>
 
-          {/* 4. RECOMMENDED UPSELLS (DESSERTS & DRINKS) */}
+          {/* 4. RECOMMENDED UPSELLS */}
           <div className="space-y-3 pt-2 border-t border-gray-100">
             <div>
               <h4 className="text-sm font-bold text-gray-900">Recommended Add-ons & Drinks</h4>
@@ -332,6 +365,7 @@ export const ItemCustomizeModal: React.FC<ItemCustomizeModalProps> = ({
                       {qty > 0 ? (
                         <>
                           <button
+                            type="button"
                             onClick={() => toggleQty(setUpsells, up.id, -1)}
                             className="w-7 h-7 rounded-full border border-gray-300 text-gray-700 flex items-center justify-center hover:bg-gray-100"
                           >
@@ -339,6 +373,7 @@ export const ItemCustomizeModal: React.FC<ItemCustomizeModalProps> = ({
                           </button>
                           <span className="text-xs font-bold text-gray-900 w-4 text-center">{qty}</span>
                           <button
+                            type="button"
                             onClick={() => toggleQty(setUpsells, up.id, 1)}
                             className="w-7 h-7 rounded-full border border-gray-300 text-gray-700 flex items-center justify-center hover:bg-gray-100"
                           >
@@ -347,6 +382,7 @@ export const ItemCustomizeModal: React.FC<ItemCustomizeModalProps> = ({
                         </>
                       ) : (
                         <button
+                          type="button"
                           onClick={() => toggleQty(setUpsells, up.id, 1)}
                           className="w-7 h-7 rounded-full border border-gray-300 text-gray-700 flex items-center justify-center hover:border-black hover:text-black"
                         >
@@ -360,7 +396,7 @@ export const ItemCustomizeModal: React.FC<ItemCustomizeModalProps> = ({
             </div>
           </div>
 
-          {/* 5. SPECIAL INSTRUCTIONS (PASSED TO SQUARE KITCHEN TICKET) */}
+          {/* 5. SPECIAL INSTRUCTIONS (SENT TO SQUARE POS KITCHEN TICKET) */}
           <div className="space-y-2 pt-2 border-t border-gray-100">
             <h4 className="text-sm font-bold text-gray-900">Special Instructions</h4>
             <textarea
@@ -378,6 +414,7 @@ export const ItemCustomizeModal: React.FC<ItemCustomizeModalProps> = ({
         {/* STICKY RED DOORDASH STYLE BOTTOM CTA BUTTON */}
         <div className="p-4 border-t border-gray-100 bg-white shrink-0">
           <button
+            type="button"
             onClick={handleAddToCart}
             disabled={!isFormValid}
             className="w-full bg-[#E51800] hover:bg-[#CC1400] text-white font-extrabold text-sm py-4 rounded-xl shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
