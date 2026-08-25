@@ -12,13 +12,13 @@ export default async function handler(req: any, res: any) {
   res.setHeader('Cache-Control', 's-maxage=60, stale-while-revalidate=3600');
 
   try {
-    const response = await client.catalogApi.searchCatalogObjects({
+    const response = await client.catalog.search({
       objectTypes: ['ITEM', 'CATEGORY'],
       includeDeletedObjects: false,
       includeRelatedObjects: false
     });
 
-    const objects = response.result.objects || [];
+    const objects = response.objects || [];
     
     // Map Square Category IDs to their Names
     const categoryMap = new Map();
@@ -38,7 +38,8 @@ export default async function handler(req: any, res: any) {
       const parsedVariations = variations.map((v: any) => ({
         id: v.id,
         name: v.itemVariationData.name,
-        price: v.itemVariationData.priceMoney?.amount ? Number(v.itemVariationData.priceMoney.amount) / 100 : 0
+        // SDK v45 returns amount as bigint — Number() converts it safely
+        price: v.itemVariationData.priceMoney?.amount != null ? Number(v.itemVariationData.priceMoney.amount) / 100 : 0
       }));
 
       const name = itemData.name;
