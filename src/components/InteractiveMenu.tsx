@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { EDITORIAL_MENU } from '../data/menuData';
+import { Loader2, Sparkles } from 'lucide-react';
 import type { MenuCategory } from '../types';
-import { Sparkles } from 'lucide-react';
 
 const CATEGORIES: MenuCategory[] = [
   'Entrees',
@@ -17,16 +16,21 @@ const CATEGORIES: MenuCategory[] = [
   'Vegan'
 ];
 
-export const InteractiveMenu: React.FC = () => {
+interface InteractiveMenuProps {
+  items: any[];
+  isLoading: boolean;
+}
+
+export const InteractiveMenu: React.FC<InteractiveMenuProps> = ({ items, isLoading }) => {
   const [activeCategory, setActiveCategory] = useState<MenuCategory>('Entrees');
 
   // Most ordered / popular items for top showcase
-  const popularItems = EDITORIAL_MENU.filter((item) => item.isPopular).slice(0, 6);
+  const popularItems = items.filter((item) => item.isPopular).slice(0, 6);
 
   // Group items by category
   const categorizedMenu = CATEGORIES.map((cat) => ({
     category: cat,
-    items: EDITORIAL_MENU.filter((item) => item.category === cat)
+    items: items.filter((item) => item.category === cat)
   })).filter((group) => group.items.length > 0);
 
   const scrollToCategory = (cat: MenuCategory) => {
@@ -65,7 +69,14 @@ export const InteractiveMenu: React.FC = () => {
           <div className="w-16 h-px bg-[#D4AF37] mx-auto mt-4" />
         </div>
 
-        {/* MOST ORDERED SHOWCASE */}
+        {isLoading ? (
+          <div className="flex flex-col items-center justify-center py-20 space-y-4">
+            <Loader2 className="w-8 h-8 text-[#D4AF37] animate-spin" />
+            <p className="text-xs font-mono tracking-widest text-[#A1A1AA] uppercase">Loading Digital Menu...</p>
+          </div>
+        ) : (
+          <>
+            {/* MOST ORDERED SHOWCASE */}
         {popularItems.length > 0 && (
           <div className="mb-16">
             <div className="flex items-center space-x-2 mb-6">
@@ -137,7 +148,7 @@ export const InteractiveMenu: React.FC = () => {
                 >
                   <span>{cat}</span>
                   <span className="text-[10px] opacity-70">
-                    ({EDITORIAL_MENU.filter((i) => i.category === cat).length})
+                    ({items.filter((i) => i.category === cat).length})
                   </span>
                 </button>
               ))}
@@ -236,8 +247,9 @@ export const InteractiveMenu: React.FC = () => {
               </div>
             ))}
           </div>
-
         </div>
+        </>
+        )}
 
       </div>
     </section>

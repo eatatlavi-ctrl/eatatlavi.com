@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/HeroSection';
 import { AboutSection } from './components/AboutSection';
@@ -16,6 +16,21 @@ export function App() {
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
   const [customizingItem, setCustomizingItem] = useState<EditorialMenuItem | null>(null);
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [menuItems, setMenuItems] = useState<EditorialMenuItem[]>([]);
+  const [isLoadingMenu, setIsLoadingMenu] = useState(true);
+
+  useEffect(() => {
+    fetch('/api/catalog')
+      .then(res => res.json())
+      .then(data => {
+        if (Array.isArray(data)) setMenuItems(data);
+        setIsLoadingMenu(false);
+      })
+      .catch(err => {
+        console.error('Failed to load menu:', err);
+        setIsLoadingMenu(false);
+      });
+  }, []);
 
   // ── Initiate Customization Modal ──────────────────────────────────────
   const handleInitiateAdd = useCallback((item: EditorialMenuItem) => {
@@ -81,11 +96,13 @@ export function App() {
       )}
 
       {currentView === 'menu' && (
-        <InteractiveMenu />
+        <InteractiveMenu items={menuItems} isLoading={isLoadingMenu} />
       )}
 
       {currentView === 'store' && (
         <EditorialMenu
+          items={menuItems}
+          isLoading={isLoadingMenu}
           onInitiateAdd={handleInitiateAdd}
         />
       )}
