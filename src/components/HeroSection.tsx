@@ -178,26 +178,26 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
               </p>
             </div>
 
-            {/* CARD 2: CURRY CHICKEN & RICE (REAL CURRY CHICKEN FOOD DISH PHOTO - FULL COLOR) */}
+            {/* CARD 2: OXTAILS (FULL COLOR) */}
             <div className="group border border-[#D4AF37]/40 bg-[#09090B] p-3 text-left transition-all duration-300 hover:border-[#D4AF37]">
               <div className="relative overflow-hidden h-52 mb-3 rounded-none">
                 <img
-                  src="/images/curry_chicken.png"
-                  alt="Curry Chicken & Rice Dish"
+                  src="/images/oxtail.png"
+                  alt="Braised Oxtails"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
               </div>
               <div className="p-1 flex items-baseline justify-between">
-                <h4 className="font-serif text-base text-[#E5C158] font-medium transition-colors">
-                  Curry Chicken & Rice
+                <h4 className="font-serif text-base text-[#E5C158] font-medium transition-colors truncate pr-2">
+                  Slow-Braised Oxtails
                 </h4>
-                <span className="font-mono text-xs text-[#E5C158] font-bold">
-                  $8.99 / $13.99
+                <span className="font-mono text-xs text-[#E5C158] font-bold shrink-0">
+                  $20.99 / $34.99
                 </span>
               </div>
               <p className="text-[11px] text-[#A1A1AA] font-light mt-1">
-                Golden West Indian curry simmered with fresh herbs & potatoes.
+                6-hour slow-cooked tender meat in a rich, savory butter-bean gravy.
               </p>
             </div>
 
