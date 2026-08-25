@@ -2,7 +2,6 @@
   "version": 2,
   "routes": [
     { "src": "/api/(.*)", "dest": "/api/$1" },
-    { "src": "/.well-known/apple-developer-merchantid-domain-association", "dest": "/api/apple-pay-verification" },
     { "handle": "filesystem" },
     { "src": "/(.*)", "dest": "/index.html" }
   ]
