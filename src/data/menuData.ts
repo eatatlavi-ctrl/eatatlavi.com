@@ -1000,5 +1000,835 @@ export const EDITORIAL_MENU: EditorialMenuItem[] = [
     "description": "",
     "options": "",
     "isPopular": false
+  },
+  {
+    "id": "sq-TS6YKJE6AOXWQNC4C5XGLVPW",
+    "name": "Large Pan White Rice",
+    "category": "Catering",
+    "priceDisplay": "$49.99",
+    "price": 49.99,
+    "description": "",
+    "options": "",
+    "isPopular": false
+  },
+  {
+    "id": "sq-4GNCLXV7YCWSVFEUJQHYNGS2",
+    "name": "Large Pan Jollof Rice",
+    "category": "Catering",
+    "priceDisplay": "$79.99",
+    "price": 79.99,
+    "description": "",
+    "options": "",
+    "isPopular": false
+  },
+  {
+    "id": "sq-AL5NX2ZRYV57R7MITHYKXFZR",
+    "name": "Honey BBQ Leg & Thighs",
+    "category": "Catering",
+    "priceDisplay": "$119.99",
+    "price": 119.99,
+    "description": "",
+    "options": "",
+    "isPopular": false
+  },
+  {
+    "id": "sq-J24KMONSAJHGIQ4NFZ5WAJO2",
+    "name": "Large Pan Turkey Wings",
+    "category": "Catering",
+    "priceDisplay": "$164.99",
+    "price": 164.99,
+    "description": "",
+    "options": "",
+    "isPopular": true
+  },
+  {
+    "id": "sq-JGXNIXP7V2DQVAFKNJ3H2627",
+    "name": "Large Pan Meat Loaf",
+    "category": "Catering",
+    "priceDisplay": "$79.99",
+    "price": 79.99,
+    "description": "",
+    "options": "",
+    "isPopular": false
+  },
+  {
+    "id": "sq-LZMSFJMV5VO3MDP6VFEVGOQA",
+    "name": "Half Pan Empanadas",
+    "category": "Catering",
+    "priceDisplay": "$129.99",
+    "price": 129.99,
+    "description": "",
+    "options": "",
+    "isPopular": true
+  },
+  {
+    "id": "sq-37F6VBVNWLMJ2TN6BZM5Q7FQ",
+    "name": "Large Pan Empanadas",
+    "category": "Catering",
+    "priceDisplay": "$199.99",
+    "price": 199.99,
+    "description": "",
+    "options": "",
+    "isPopular": true
+  },
+  {
+    "id": "sq-SE5QHAPDKBGN37RPJ2A63RBV",
+    "name": "Large Pan Ribs",
+    "category": "Catering",
+    "priceDisplay": "$129.99",
+    "price": 129.99,
+    "description": "",
+    "options": "",
+    "isPopular": true
+  },
+  {
+    "id": "sq-LYKEGJIBAOE73FS4BRE23DZJ",
+    "name": "Large Pan Mashed Potatoes",
+    "category": "Catering",
+    "priceDisplay": "$89.99",
+    "price": 89.99,
+    "description": "",
+    "options": "",
+    "isPopular": false
+  },
+  {
+    "id": "sq-BWLO2YWBEGOAOIAWJIV2CHJ4",
+    "name": "Large Pan Baked Chicken",
+    "category": "Catering",
+    "priceDisplay": "$89.99",
+    "price": 89.99,
+    "description": "",
+    "options": "",
+    "isPopular": false
+  },
+  {
+    "id": "sq-A3KPIEIWXFCY6FBNK6QERO4P",
+    "name": "Large Pan Salmon",
+    "category": "Catering",
+    "priceDisplay": "$139.99",
+    "price": 139.99,
+    "description": "",
+    "options": "",
+    "isPopular": true
+  },
+  {
+    "id": "sq-O3ZQWHZXTQFXJM33SU2W5X4L",
+    "name": "Sweet Chilli Wings (10) w/ fries",
+    "category": "Sweet Treats",
+    "priceDisplay": "$8.99",
+    "price": 8.99,
+    "description": "",
+    "options": "",
+    "isPopular": true
+  },
+  {
+    "id": "sq-TXFOGBQ5BPBCYUZLC2SVR3WZ",
+    "name": "BuffaQ Wings (10) with fries",
+    "category": "Wings",
+    "priceDisplay": "$8.99",
+    "price": 8.99,
+    "description": "BuffaQue Wings deliver a perfect balance of spicy BBQ flavor and crispy texture, making them an irresistible finger-licking treat.",
+    "options": "",
+    "isPopular": true
+  },
+  {
+    "id": "sq-6OHBZEALUWSPJVESHK3EBACQ",
+    "name": "Seasoned fries",
+    "category": "Sides",
+    "priceDisplay": "$3.99",
+    "price": 3.99,
+    "description": "",
+    "options": "",
+    "isPopular": false
+  },
+  {
+    "id": "sq-3RBV24M57H37ZT6GSB42YWES",
+    "name": "Large Mac",
+    "category": "Entrees",
+    "priceDisplay": "$7.99",
+    "price": 7.99,
+    "description": "",
+    "options": "",
+    "isPopular": false
+  },
+  {
+    "id": "sq-3CTY424ZWQ7THSNSCMGLTQZP",
+    "name": "Veggie Burger with Fries",
+    "category": "Breakfast (All Day)",
+    "priceDisplay": "$7.00  /  $9.00",
+    "price": 7,
+    "description": "",
+    "options": "Options: Regular ($7.00), Plant Based Cheese Burger ($9.00)",
+    "isPopular": false
+  },
+  {
+    "id": "sq-Z3QQKDT2VUKMU4TUX5HR25GG",
+    "name": "Waffles",
+    "category": "Breakfast (All Day)",
+    "priceDisplay": "$4.99",
+    "price": 4.99,
+    "description": "",
+    "options": "",
+    "isPopular": false
+  },
+  {
+    "id": "sq-GC4F37CYS5DSNUH3QBEJUCXA",
+    "name": "Chicken & Waffles",
+    "category": "Breakfast (All Day)",
+    "priceDisplay": "$13.99",
+    "price": 13.99,
+    "description": "",
+    "options": "",
+    "isPopular": false
+  },
+  {
+    "id": "sq-Q5PWKJHIOF4QMAAUUV7H5RLL",
+    "name": "Large Yams",
+    "category": "Sides",
+    "priceDisplay": "$7.99",
+    "price": 7.99,
+    "description": "",
+    "options": "",
+    "isPopular": false
+  },
+  {
+    "id": "sq-7YUC3LBSD4BX3ZGQQWKX5KGV",
+    "name": "Red Velvet Waffles",
+    "category": "Breakfast (All Day)",
+    "priceDisplay": "$6.99",
+    "price": 6.99,
+    "description": "",
+    "options": "",
+    "isPopular": true
+  },
+  {
+    "id": "sq-JJQKIB4CYS2UEDYZVQ76QTQJ",
+    "name": "Red Velvet Chicken & Waffles",
+    "category": "Breakfast (All Day)",
+    "priceDisplay": "$15.99",
+    "price": 15.99,
+    "description": "",
+    "options": "",
+    "isPopular": true
+  },
+  {
+    "id": "sq-BH72REGRLDAR7YV33FAV7G5Z",
+    "name": "Curry Chicken Patty",
+    "category": "Empanadas & Patties",
+    "priceDisplay": "$2.99",
+    "price": 2.99,
+    "description": "",
+    "options": "",
+    "isPopular": false
+  },
+  {
+    "id": "sq-U66JUHY32ONRFLKNEAUYWDTF",
+    "name": "Stingin Honey Garlic Wings (10pcs) with Fries",
+    "category": "Wings",
+    "priceDisplay": "$8.99",
+    "price": 8.99,
+    "description": "",
+    "options": "",
+    "isPopular": true
+  },
+  {
+    "id": "sq-R45BRZ3ZXXVANYNB7O7K3LU2",
+    "name": "Teriyaki wings 10pcs w/ fries",
+    "category": "Wings",
+    "priceDisplay": "$8.99",
+    "price": 8.99,
+    "description": "",
+    "options": "",
+    "isPopular": true
+  },
+  {
+    "id": "sq-BBJDAT6QICYPIAZPGTR26QIT",
+    "name": "Garlic Buffalo Wings 10pcs w/ fries",
+    "category": "Wings",
+    "priceDisplay": "$8.99",
+    "price": 8.99,
+    "description": "",
+    "options": "",
+    "isPopular": true
+  },
+  {
+    "id": "sq-KB3FJAA2K6JQXXAA52BFTJSX",
+    "name": "Pineapple Upside Down Cake",
+    "category": "Sweet Treats",
+    "priceDisplay": "$4.00",
+    "price": 4,
+    "description": "",
+    "options": "",
+    "isPopular": false
+  },
+  {
+    "id": "sq-WVFTHIHCAR2TY3S2XG6IDYPL",
+    "name": "Spring Roll",
+    "category": "Entrees",
+    "priceDisplay": "$0.99",
+    "price": 0.99,
+    "description": "",
+    "options": "",
+    "isPopular": false
+  },
+  {
+    "id": "sq-YVWTYXVF3DIZ5O4ALR2NL7Y4",
+    "name": "Red Velvet Cake",
+    "category": "Sweet Treats",
+    "priceDisplay": "$3.99",
+    "price": 3.99,
+    "description": "",
+    "options": "",
+    "isPopular": true
+  },
+  {
+    "id": "sq-CD6FHEI3H2HQCOLVYRT3I2N2",
+    "name": "Jerk Chicken Sandwich with fries",
+    "category": "Burgers & Hot Dogs",
+    "priceDisplay": "$4.99",
+    "price": 4.99,
+    "description": "",
+    "options": "",
+    "isPopular": true
+  },
+  {
+    "id": "sq-KX5P2NVOLLG5L2DFZDUINZW4",
+    "name": "Jerk Chicken Salad",
+    "category": "Sides",
+    "priceDisplay": "$11.99",
+    "price": 11.99,
+    "description": "",
+    "options": "",
+    "isPopular": true
+  },
+  {
+    "id": "sq-3AJYFVHA3HBIOT4IXM26PCRF",
+    "name": "Jerk Chicken Mac & Cheese",
+    "category": "Sides",
+    "priceDisplay": "$16.99",
+    "price": 16.99,
+    "description": "",
+    "options": "",
+    "isPopular": true
+  },
+  {
+    "id": "sq-KZZEX3L4VSRD2C7JY4TYEARL",
+    "name": "Pulled Pork Sandwich with fries",
+    "category": "Burgers & Hot Dogs",
+    "priceDisplay": "$9.99",
+    "price": 9.99,
+    "description": "",
+    "options": "",
+    "isPopular": false
+  },
+  {
+    "id": "sq-6MTXHIDA2BBKJFC54BEMBDEM",
+    "name": "Watermelon Bowl",
+    "category": "Beverages",
+    "priceDisplay": "$1.99",
+    "price": 1.99,
+    "description": "",
+    "options": "",
+    "isPopular": false
+  },
+  {
+    "id": "sq-BL2LQSR37NC45Q6I3H3DXGWK",
+    "name": "Mango Habanero Wings 10pc w/ fries",
+    "category": "Wings",
+    "priceDisplay": "$8.99",
+    "price": 8.99,
+    "description": "",
+    "options": "",
+    "isPopular": true
+  },
+  {
+    "id": "sq-ZAPP6MN6RPLGCDY5R2E726KB",
+    "name": "Nashville Hot Wings 10pc w/ fries",
+    "category": "Wings",
+    "priceDisplay": "$8.99",
+    "price": 8.99,
+    "description": "",
+    "options": "",
+    "isPopular": true
+  },
+  {
+    "id": "sq-52ONBJMLUKRLTXXFJGY3RVAX",
+    "name": "General Tso Wings 10pc w/ fries",
+    "category": "Wings",
+    "priceDisplay": "$8.99",
+    "price": 8.99,
+    "description": "",
+    "options": "",
+    "isPopular": true
+  },
+  {
+    "id": "sq-ZWV5CMJKGCK4GKSRPCL6GA54",
+    "name": "Grilled Cheese",
+    "category": "Entrees",
+    "priceDisplay": "$1.99",
+    "price": 1.99,
+    "description": "",
+    "options": "",
+    "isPopular": false
+  },
+  {
+    "id": "sq-4FL2TCOPUCN4FCCQH4JWPKYD",
+    "name": "Small Chicken",
+    "category": "Entrees",
+    "priceDisplay": "$4.99",
+    "price": 4.99,
+    "description": "",
+    "options": "Options: Jerk ($4.99), Baked Chicken ($4.99), Curry ($4.99), Stew ($4.99)",
+    "isPopular": false
+  },
+  {
+    "id": "sq-J5SC6T2NIXKWBG267WNDGQB5",
+    "name": "Hot Honey Wings 10pc w/ fries",
+    "category": "Wings",
+    "priceDisplay": "$8.99",
+    "price": 8.99,
+    "description": "",
+    "options": "",
+    "isPopular": true
+  },
+  {
+    "id": "sq-QTJ4LRA5MDLCNXJX3V4IXE5I",
+    "name": "Pineapple Jerk BBQ Wings 10pc w/ fries",
+    "category": "Wings",
+    "priceDisplay": "$8.99",
+    "price": 8.99,
+    "description": "",
+    "options": "",
+    "isPopular": true
+  },
+  {
+    "id": "sq-GVITUYQOHPVQ2KHPUV4UXHAW",
+    "name": "Fish (2) & Shrimp (10) w/ Fries",
+    "category": "Sides",
+    "priceDisplay": "$13.99",
+    "price": 13.99,
+    "description": "",
+    "options": "",
+    "isPopular": false
+  },
+  {
+    "id": "sq-QFVZNXP5Z4552TK56XDGEYHQ",
+    "name": "Fresh Squeezed Lemonade",
+    "category": "Beverages",
+    "priceDisplay": "$2.99",
+    "price": 2.99,
+    "description": "16oz",
+    "options": "Options: Regular ($2.99), Mango Lemonade ($2.99), Blue Raspberry ($2.99), Mango Lemonade ($2.99), Pina Colada ($2.99)",
+    "isPopular": false
+  },
+  {
+    "id": "sq-ZA4NB6FKVT52VWP36XKVM5LD",
+    "name": "Fresh Squeezed Lemonade Large",
+    "category": "Beverages",
+    "priceDisplay": "$5.99",
+    "price": 5.99,
+    "description": "32oz",
+    "options": "Options: Regular ($5.99), Blue Raspberry ($5.99), Mango ($5.99), Pina Colada ($5.99)",
+    "isPopular": false
+  },
+  {
+    "id": "sq-QVQICYNAQYOQBO6WFNKNUVCN",
+    "name": "Dot Cake",
+    "category": "Sweet Treats",
+    "priceDisplay": "$3.99",
+    "price": 3.99,
+    "description": "",
+    "options": "",
+    "isPopular": false
+  },
+  {
+    "id": "sq-HA4RK2KUX5CKS4FJBNPA2XJS",
+    "name": "Empanadas 2pcs",
+    "category": "Empanadas & Patties",
+    "priceDisplay": "$4.99",
+    "price": 4.99,
+    "description": "",
+    "options": "Options: Chicken ($4.99), Jerk Chicken ($4.99), Curry Chicken ($4.99), Apple ($4.99), Mac & Cheese ($4.99)",
+    "isPopular": true
+  },
+  {
+    "id": "sq-OHXNPLBCPIJZ6OTSY2VK4RUF",
+    "name": "Apple Juice",
+    "category": "Entrees",
+    "priceDisplay": "$1.99",
+    "price": 1.99,
+    "description": "",
+    "options": "",
+    "isPopular": false
+  },
+  {
+    "id": "sq-AGWGWUTCNTXKI7X2KTQWZJHF",
+    "name": "Beef Patty",
+    "category": "Empanadas & Patties",
+    "priceDisplay": "$2.99  /  $3.99",
+    "price": 2.99,
+    "description": "",
+    "options": "Options: Regular ($2.99), Jerk ($3.99), w/ Cheese ($3.99), w/ mozzarella ($3.99)",
+    "isPopular": false
+  },
+  {
+    "id": "sq-NJROYANRZVLQWCHNZDA5DCVJ",
+    "name": "Oxtail Gravy",
+    "category": "Entrees",
+    "priceDisplay": "$2.00",
+    "price": 2,
+    "description": "",
+    "options": "",
+    "isPopular": true
+  },
+  {
+    "id": "sq-NRNNULQ4Y5Q2HSYUTQZAPTFV",
+    "name": "Large Collard",
+    "category": "Sides",
+    "priceDisplay": "$7.99",
+    "price": 7.99,
+    "description": "",
+    "options": "",
+    "isPopular": false
+  },
+  {
+    "id": "sq-UR6ZAA333GJHFTDAXTASXM2H",
+    "name": "Baked BBQ Chicken",
+    "category": "Entrees",
+    "priceDisplay": "$8.99",
+    "price": 8.99,
+    "description": "",
+    "options": "",
+    "isPopular": false
+  },
+  {
+    "id": "sq-O643G6VMDKQMIFUV3PH5O6ON",
+    "name": "Soul Bowl",
+    "category": "Entrees",
+    "priceDisplay": "$24.99",
+    "price": 24.99,
+    "description": "Cornbread bowl with your choice of meat and two sides",
+    "options": "",
+    "isPopular": false
+  },
+  {
+    "id": "sq-5ZCIKVEE5IS3M7YDQI4U7MMQ",
+    "name": "Grits",
+    "category": "Entrees",
+    "priceDisplay": "$3.99  /  $4.99",
+    "price": 3.99,
+    "description": "",
+    "options": "Options: Regular ($3.99), w/ sugar ($3.99), w/ cheese ($4.99), w/ cheese and sugar ($4.99)",
+    "isPopular": false
+  },
+  {
+    "id": "sq-4ZCL6FG5NXJS4ZEDZHKVFB2M",
+    "name": "Fish 3pcs & Grits",
+    "category": "Entrees",
+    "priceDisplay": "$11.99  /  $12.99",
+    "price": 11.99,
+    "description": "",
+    "options": "Options: Regular ($11.99), w/ cheese ($12.99)",
+    "isPopular": false
+  },
+  {
+    "id": "sq-RPOV4RCY4JMV4VPWPYR2AH33",
+    "name": "Large Salad",
+    "category": "Sides",
+    "priceDisplay": "$9.99",
+    "price": 9.99,
+    "description": "",
+    "options": "",
+    "isPopular": false
+  },
+  {
+    "id": "sq-EZEFBHO4TYCMBJMAPJCPCR4H",
+    "name": "Dirty Soda",
+    "category": "Beverages",
+    "priceDisplay": "$2.99  /  $4.99",
+    "price": 2.99,
+    "description": "",
+    "options": "Options: LAVI Mix ($4.99), Baha Blast ($4.99), Mountain Dew ($2.99), Pepsi ($2.99), Root beer ($2.99)",
+    "isPopular": false
+  },
+  {
+    "id": "sq-ZRPLSFTKVZ53YJOIO7PIZI6F",
+    "name": "Lg Pan Whiting",
+    "category": "Catering",
+    "priceDisplay": "$84.99",
+    "price": 84.99,
+    "description": "",
+    "options": "",
+    "isPopular": true
+  },
+  {
+    "id": "sq-XCRE46RYYW3HQRZLZT7X5XZM",
+    "name": "Lg Pan Greens",
+    "category": "Catering",
+    "priceDisplay": "$79.99",
+    "price": 79.99,
+    "description": "",
+    "options": "",
+    "isPopular": false
+  },
+  {
+    "id": "sq-ZROT742KQHFZZGIO5JWMI7F4",
+    "name": "Curbside pickup (example service)",
+    "category": "Entrees",
+    "priceDisplay": "$0.00",
+    "price": 0,
+    "description": "Square created this example service to demonstrate a few advanced service settings. Check out the \"block extra time\" feature, which automatically adds extra minutes to your service duration, allowing you to make the most of the time between appointments. Create variations to offer a range of customized options with unique names, durations, prices, and more. Enable the \"bookable by customers online\" option to see how this service will appear to your customers when booking online.",
+    "options": "",
+    "isPopular": false
+  },
+  {
+    "id": "sq-DGPPQAT5SFHB7IKYES2XDGTQ",
+    "name": "Loaded Beef Patty",
+    "category": "Empanadas & Patties",
+    "priceDisplay": "$2.99",
+    "price": 2.99,
+    "description": "",
+    "options": "",
+    "isPopular": false
+  },
+  {
+    "id": "sq-OP7FZT2RQ4RP4XHKSLPJJOUJ",
+    "name": "Cat Fish 3pcs w/ fries",
+    "category": "Sides",
+    "priceDisplay": "$11.99  /  $17.99",
+    "price": 11.99,
+    "description": "",
+    "options": "Options: Regular ($11.99), Large ($17.99)",
+    "isPopular": false
+  },
+  {
+    "id": "sq-Q6BLZU7YX2TKCPYXZP7SQGPW",
+    "name": "Shrimp 5pcs",
+    "category": "Entrees",
+    "priceDisplay": "$5.99",
+    "price": 5.99,
+    "description": "",
+    "options": "",
+    "isPopular": false
+  },
+  {
+    "id": "sq-YQQO3VGU6GRAMTJ6V7YQJGPZ",
+    "name": "Shrimp 10pcs",
+    "category": "Entrees",
+    "priceDisplay": "$12.99",
+    "price": 12.99,
+    "description": "",
+    "options": "",
+    "isPopular": false
+  },
+  {
+    "id": "sq-DFX25JB4EE67JJQJMGZBXQJU",
+    "name": "Mushroom Sandwich",
+    "category": "Burgers & Hot Dogs",
+    "priceDisplay": "$9.99",
+    "price": 9.99,
+    "description": "",
+    "options": "",
+    "isPopular": false
+  },
+  {
+    "id": "sq-ZK5UW74IRDBYUTG6WJKCNWMW",
+    "name": "Vegan Burger",
+    "category": "Burgers & Hot Dogs",
+    "priceDisplay": "$8.99",
+    "price": 8.99,
+    "description": "",
+    "options": "",
+    "isPopular": false
+  },
+  {
+    "id": "sq-3SZ3LU3ON7TY4I2JOMWS5H5H",
+    "name": "Mushrooms Sautéed",
+    "category": "Vegan",
+    "priceDisplay": "$9.99",
+    "price": 9.99,
+    "description": "",
+    "options": "",
+    "isPopular": false
+  },
+  {
+    "id": "sq-HZ3C2GRKVTMRQU56DOE4ZYXE",
+    "name": "Mushrooms Fried",
+    "category": "Vegan",
+    "priceDisplay": "$9.99",
+    "price": 9.99,
+    "description": "",
+    "options": "",
+    "isPopular": false
+  },
+  {
+    "id": "sq-DEL35RWNXAH4337UVCM4TSFJ",
+    "name": "Peach Cobbler",
+    "category": "Sweet Treats",
+    "priceDisplay": "$3.99",
+    "price": 3.99,
+    "description": "This Peach Cobbler combines juicy peaches with a golden, flaky crust for a classic homemade dessert. Perfect for any occasion, enjoy it warm or chilled.",
+    "options": "",
+    "isPopular": false
+  },
+  {
+    "id": "sq-63CQ7WQAAO5IDHWYWNTO7TKS",
+    "name": "Large Side",
+    "category": "Entrees",
+    "priceDisplay": "$7.99",
+    "price": 7.99,
+    "description": "",
+    "options": "",
+    "isPopular": false
+  },
+  {
+    "id": "sq-3DDUZLOVW3JBTGJAAQFCASE6",
+    "name": "Large Side",
+    "category": "Entrees",
+    "priceDisplay": "$7.99",
+    "price": 7.99,
+    "description": "",
+    "options": "Options: Mac ($7.99), Yams ($7.99), Collard greens ($7.99), Mashed potatoes ($7.99), Cabbage ($7.99)",
+    "isPopular": false
+  },
+  {
+    "id": "sq-33H7PX3Z247DKXWLA3ZOIQVT",
+    "name": "Shrimp (10) & Grits",
+    "category": "Entrees",
+    "priceDisplay": "$16.99  /  $17.99",
+    "price": 16.99,
+    "description": "",
+    "options": "Options: regular ($16.99), Cheese Grits ($17.99)",
+    "isPopular": false
+  },
+  {
+    "id": "sq-4JA67RZMWQIL57AGOZCSQKIO",
+    "name": "Large Pan Curry Chicken",
+    "category": "Catering",
+    "priceDisplay": "$89.99",
+    "price": 89.99,
+    "description": "",
+    "options": "",
+    "isPopular": false
+  },
+  {
+    "id": "sq-XPAZIRI6SGI625X4T75M4VDH",
+    "name": "Rasta Pasta",
+    "category": "Entrees",
+    "priceDisplay": "$9.99",
+    "price": 9.99,
+    "description": "",
+    "options": "",
+    "isPopular": false
+  },
+  {
+    "id": "sq-EKFX736FV4YJ2GHNERLTQVMY",
+    "name": "Salmon Burger w/ fries",
+    "category": "Burgers & Hot Dogs",
+    "priceDisplay": "$6.99",
+    "price": 6.99,
+    "description": "",
+    "options": "",
+    "isPopular": true
+  },
+  {
+    "id": "sq-CJZVLACTRZAYPMZX3IEYDN7T",
+    "name": "Cinnabun",
+    "category": "Entrees",
+    "priceDisplay": "$2.99",
+    "price": 2.99,
+    "description": "",
+    "options": "",
+    "isPopular": false
+  },
+  {
+    "id": "sq-MM3SSOVFQMQJZ2OQZLRG5TMA",
+    "name": "Italian Sausage",
+    "category": "Entrees",
+    "priceDisplay": "$3.99",
+    "price": 3.99,
+    "description": "",
+    "options": "Options: Regular ($3.99), Sweet ($3.99), Hot ($3.99)",
+    "isPopular": false
+  },
+  {
+    "id": "sq-OKAUISAV5CIXUIJSZLOULTRJ",
+    "name": "Chilli",
+    "category": "Entrees",
+    "priceDisplay": "$9.99",
+    "price": 9.99,
+    "description": "",
+    "options": "",
+    "isPopular": false
+  },
+  {
+    "id": "sq-GUDFTNJNRISTNID5IL2KDCY6",
+    "name": "Hot Honey Chicken Sandwich w/ Fries",
+    "category": "Burgers & Hot Dogs",
+    "priceDisplay": "$4.99",
+    "price": 4.99,
+    "description": "",
+    "options": "",
+    "isPopular": false
+  },
+  {
+    "id": "sq-CFZFFRS4VJTJLBVJO2D4JXCS",
+    "name": "Curry Goat",
+    "category": "Entrees",
+    "priceDisplay": "$18.99  /  $32.99",
+    "price": 18.99,
+    "description": "",
+    "options": "Options: Small ($18.99), Medium ($24.99), Large ($32.99)",
+    "isPopular": false
+  },
+  {
+    "id": "sq-4VR3ON4WXCCEOEHSFCBOMOGL",
+    "name": "Pineapple Koolaid Large",
+    "category": "Entrees",
+    "priceDisplay": "$5.99",
+    "price": 5.99,
+    "description": "",
+    "options": "Options: Blue Raspberry Lemonade ($5.99), Watermelon ($5.99), Cherry ($5.99)",
+    "isPopular": false
+  },
+  {
+    "id": "sq-HKJKUTA6U4DDR5MTEPF6I6FZ",
+    "name": "Vegan Platter",
+    "category": "Vegan",
+    "priceDisplay": "$19.99",
+    "price": 19.99,
+    "description": "",
+    "options": "",
+    "isPopular": false
+  },
+  {
+    "id": "sq-JCBN3YUIXCZZNXPTEY3LSCDJ",
+    "name": "Chicken Soup Large",
+    "category": "Entrees",
+    "priceDisplay": "$8.99",
+    "price": 8.99,
+    "description": "",
+    "options": "",
+    "isPopular": false
+  },
+  {
+    "id": "sq-QMHAVI3APNHYDWAJL52O7S6F",
+    "name": "Bottle",
+    "category": "Entrees",
+    "priceDisplay": "$2.00",
+    "price": 2,
+    "description": "",
+    "options": "",
+    "isPopular": false
+  },
+  {
+    "id": "sq-66PNA3RVXGSGBOAU6KEUZXX7",
+    "name": "Soup",
+    "category": "Entrees",
+    "priceDisplay": "$5.99",
+    "price": 5.99,
+    "description": "",
+    "options": "",
+    "isPopular": false
   }
 ];
