@@ -59,7 +59,6 @@ export const EDITORIAL_MENU: EditorialMenuItem[] = [
     "price": 5.99,
     "description": "Enjoy crispy wings try pairing it with golden fries, available in a variety of delicious flavor options to suit your taste.",
     "options": "",
-    "image": "/images/hero_feast.png",
     "isPopular": true
   },
   {
@@ -85,7 +84,7 @@ export const EDITORIAL_MENU: EditorialMenuItem[] = [
   {
     "id": "sq-BDUK4AJFOSGSMEAC5HBBTDUA",
     "name": "Bacon Cheese Burger w/ fries",
-    "category": "Breakfast (All Day)",
+    "category": "Burgers & Hot Dogs",
     "priceDisplay": "$6.99",
     "price": 6.99,
     "description": "The Bacon Cheese Burger features a juicy beef patty, melty cheese, and crispy bacon, all stacked on a toasted bun for a flavorful and hearty meal.",
@@ -110,13 +109,12 @@ export const EDITORIAL_MENU: EditorialMenuItem[] = [
     "price": 3.99,
     "description": "This mac & cheese side dish features a creamy texture and rich cheesy flavor and golden brown top, perfect for a quick and easy addition to any meal.",
     "options": "",
-    "image": "/images/oxtail.png",
     "isPopular": true
   },
   {
     "id": "sq-RCLO6X754SPPC73EP365GQMH",
     "name": "String Beans",
-    "category": "Entrees",
+    "category": "Sides",
     "priceDisplay": "$3.99",
     "price": 3.99,
     "description": "Green beans offer a nutritious option with a savory, fresh taste, perfect as a side dish or a healthy addition to any meal.",
@@ -161,7 +159,6 @@ export const EDITORIAL_MENU: EditorialMenuItem[] = [
     "price": 20.99,
     "description": "Oxtail offers a savory flavor profile and tender meat texture, perfect for creating hearty and satisfying entrees. Ideal for slow-cooked dishes and rich stews. Your choice of two sides.",
     "options": "Options: Small ($20.99), Medium ($27.99), Large ($34.99)",
-    "image": "/images/oxtail.png",
     "isPopular": true
   },
   {
@@ -222,7 +219,6 @@ export const EDITORIAL_MENU: EditorialMenuItem[] = [
     "price": 8.99,
     "description": "Experience the bold flavors of authentic Caribbean cuisine with our jerk chicken, featuring tender meat seasoned with a perfectly balanced blend of spices. A satisfying choice for a flavorful entrée.",
     "options": "Options: Medium ($8.99), Large ($13.99)",
-    "image": "/images/hero_feast.png",
     "isPopular": true
   },
   {
@@ -238,7 +234,7 @@ export const EDITORIAL_MENU: EditorialMenuItem[] = [
   {
     "id": "sq-IXYK4VIVSSWQIM2VIIXPODQA",
     "name": "Gatorade",
-    "category": "Entrees",
+    "category": "Beverages",
     "priceDisplay": "$1.99",
     "price": 1.99,
     "description": "",
@@ -253,7 +249,6 @@ export const EDITORIAL_MENU: EditorialMenuItem[] = [
     "price": 8.99,
     "description": "Savor 8 crispy wings can be complemented by a generous side of golden fries, making it an ideal choice for sharing or enjoying solo.",
     "options": "",
-    "image": "/images/hero_feast.png",
     "isPopular": true
   },
   {
@@ -264,7 +259,6 @@ export const EDITORIAL_MENU: EditorialMenuItem[] = [
     "price": 8.99,
     "description": "Enjoy a fresh and crispy Whiting Entree featuring 4 pieces of tender fish, perfect for pairing with your favorite sides. A versatile option for any meal occasion.",
     "options": "Options: Regular ($8.99), Large ($13.99)",
-    "image": "/images/storefront.jpg",
     "isPopular": true
   },
   {
@@ -325,7 +319,6 @@ export const EDITORIAL_MENU: EditorialMenuItem[] = [
     "price": 2.99,
     "description": "Savor a unique fusion of flavors with our Jerk Chicken Taco, combining tender, spiced chicken with a bold, spicy kick. A mouth-watering choice for fans of Caribbean-inspired cuisine.",
     "options": "",
-    "image": "/images/hero_feast.png",
     "isPopular": true
   },
   {
@@ -381,7 +374,7 @@ export const EDITORIAL_MENU: EditorialMenuItem[] = [
   {
     "id": "sq-NSLVSB3DSF6YC6RH7TB7DQPF",
     "name": "Sausage",
-    "category": "Entrees",
+    "category": "Breakfast (All Day)",
     "priceDisplay": "$2.99",
     "price": 2.99,
     "description": "These breakfast sausages are crafted from premium pork, offering a savory flavor and juicy texture perfect for starting your day.",
@@ -401,7 +394,7 @@ export const EDITORIAL_MENU: EditorialMenuItem[] = [
   {
     "id": "sq-NWEZLQYEKHLUQTEHQU5OSIDK",
     "name": "Hashbrown",
-    "category": "Entrees",
+    "category": "Breakfast (All Day)",
     "priceDisplay": "$0.99",
     "price": 0.99,
     "description": "Golden-brown home fries with a crispy texture and savory seasoning, perfect as a side dish or breakfast favorite.",
@@ -426,13 +419,12 @@ export const EDITORIAL_MENU: EditorialMenuItem[] = [
     "price": 1.99,
     "description": "Savor the perfect blend of bold, spicy jerk chicken wrapped in a golden, flaky crust. This handheld treat is ideal for a flavorful snack or meal on the go.",
     "options": "",
-    "image": "/images/hero_feast.png",
     "isPopular": true
   },
   {
     "id": "sq-7DQZIYDYUTZMPKDCODZONPS5",
     "name": "Sausage, Egg & Cheese Empanada",
-    "category": "Breakfast (All Day)",
+    "category": "Empanadas & Patties",
     "priceDisplay": "$2.99",
     "price": 2.99,
     "description": "The sausage, egg, and cheese empanada offers a savory filling encased in a flaky, golden crust, making it a convenient and satisfying portable snack.",
@@ -447,7 +439,6 @@ export const EDITORIAL_MENU: EditorialMenuItem[] = [
     "price": 1.99,
     "description": "This mac & cheese empanada combines a creamy, cheesy filling with a golden, crispy crust, offering a convenient and satisfying snack for on-the-go enjoyment.",
     "options": "",
-    "image": "/images/oxtail.png",
     "isPopular": true
   },
   {
@@ -468,7 +459,6 @@ export const EDITORIAL_MENU: EditorialMenuItem[] = [
     "price": 8.99,
     "description": "Savor the unique fusion of bold Caribbean flavors and crispy texture with our Jerk Chicken Fries, featuring seasoned fries topped with tender, spiced jerk chicken.",
     "options": "",
-    "image": "/images/hero_feast.png",
     "isPopular": true
   },
   {
@@ -479,7 +469,6 @@ export const EDITORIAL_MENU: EditorialMenuItem[] = [
     "price": 8.99,
     "description": "Savor the authentic Jamaican taste with our Jerk Chicken Wrap, featuring tender chicken infused with spicy seasonings and wrapped for a flavorful, convenient meal.",
     "options": "",
-    "image": "/images/hero_feast.png",
     "isPopular": true
   },
   {
@@ -490,7 +479,6 @@ export const EDITORIAL_MENU: EditorialMenuItem[] = [
     "price": 4.99,
     "description": "Savor the Whiting Fried Fish Sandwich featuring a flaky fish fillet with a crispy coating, topped with delicious tartar sauce, all nestled in soft bread. A simple and satisfying meal option.",
     "options": "Options: Regular ($4.99), With cheese ($5.99)",
-    "image": "/images/storefront.jpg",
     "isPopular": true
   },
   {
@@ -501,7 +489,6 @@ export const EDITORIAL_MENU: EditorialMenuItem[] = [
     "price": 8.99,
     "description": "Curry chicken offers a savory flavor profile with a blend of aromatic spices. This versatile dish pairs well with rice, bread, or vegetables.\nIncludes rice.",
     "options": "Options: Regular ($8.99), Large ($13.99)",
-    "image": "/images/curry_chicken.png",
     "isPopular": false
   },
   {
@@ -512,7 +499,6 @@ export const EDITORIAL_MENU: EditorialMenuItem[] = [
     "price": 1.99,
     "description": "This curry chicken empanada combines a savory, spiced filling with a flaky, golden crust, offering a convenient and flavorful option for on-the-go meals or snacks.",
     "options": "",
-    "image": "/images/curry_chicken.png",
     "isPopular": true
   },
   {
@@ -523,7 +509,6 @@ export const EDITORIAL_MENU: EditorialMenuItem[] = [
     "price": 2.99,
     "description": "The Curry Chicken Taco combines bold spices with tender chicken for a unique flavor fusion. Perfect for a quick and easy meal option with a twist.",
     "options": "",
-    "image": "/images/curry_chicken.png",
     "isPopular": false
   },
   {
@@ -544,13 +529,12 @@ export const EDITORIAL_MENU: EditorialMenuItem[] = [
     "price": 8.99,
     "description": "Indulge in crispy chicken wings coated in a flavorful marinade and smothered in rich sauce, delivering a finger-licking good experience with every bite.",
     "options": "",
-    "image": "/images/hero_feast.png",
     "isPopular": true
   },
   {
     "id": "sq-E6IC5TU4D53QCXP63TYUJJP7",
     "name": "Salmon Bites",
-    "category": "Entrees",
+    "category": "Sides",
     "priceDisplay": "$13.99",
     "price": 13.99,
     "description": "Crispy and flavorful, Salmon Bites make a versatile choice as an appetizer or entrée, perfect for on-the-go snacking or sharing.",
@@ -595,7 +579,6 @@ export const EDITORIAL_MENU: EditorialMenuItem[] = [
     "price": 4.99,
     "description": "",
     "options": "",
-    "image": "/images/curry_chicken.png",
     "isPopular": false
   },
   {
@@ -646,7 +629,6 @@ export const EDITORIAL_MENU: EditorialMenuItem[] = [
     "price": 15.99,
     "description": "",
     "options": "Options: Regular ($15.99), Large ($24.99)",
-    "image": "/images/hero_feast.png",
     "isPopular": true
   },
   {
@@ -667,7 +649,6 @@ export const EDITORIAL_MENU: EditorialMenuItem[] = [
     "price": 9.99,
     "description": "Enjoy a flavorful fusion with the Jerk Chicken Burrito, packed with spiced chicken, hearty ingredients, and a touch of heat. A satisfying choice for a bold and filling meal.",
     "options": "",
-    "image": "/images/hero_feast.png",
     "isPopular": true
   },
   {
@@ -733,7 +714,7 @@ export const EDITORIAL_MENU: EditorialMenuItem[] = [
   {
     "id": "sq-AW3NB3OW3Z6E3C7Y7VWBO2RD",
     "name": "Snapple",
-    "category": "Entrees",
+    "category": "Beverages",
     "priceDisplay": "$1.99",
     "price": 1.99,
     "description": "",
@@ -748,7 +729,6 @@ export const EDITORIAL_MENU: EditorialMenuItem[] = [
     "price": 25.99,
     "description": "Oxtail Mac & Cheese combines tender, savory oxtail with a creamy cheese blend, creating a rich and satisfying comfort dish.",
     "options": "",
-    "image": "/images/oxtail.png",
     "isPopular": true
   },
   {
@@ -759,7 +739,6 @@ export const EDITORIAL_MENU: EditorialMenuItem[] = [
     "price": 8.99,
     "description": "The oxtail empanada combines a savory, tender oxtail filling with a perfectly crispy crust, offering an authentic and satisfying flavor in every bite.",
     "options": "",
-    "image": "/images/oxtail.png",
     "isPopular": true
   },
   {
@@ -770,7 +749,6 @@ export const EDITORIAL_MENU: EditorialMenuItem[] = [
     "price": 8.99,
     "description": "Enjoy 8 crispy fried wings coated in sweet and tangy honey BBQ sauce, served with a side of golden fries for a satisfying meal.",
     "options": "",
-    "image": "/images/hero_feast.png",
     "isPopular": true
   },
   {
@@ -791,13 +769,12 @@ export const EDITORIAL_MENU: EditorialMenuItem[] = [
     "price": 8.99,
     "description": "",
     "options": "",
-    "image": "/images/hero_feast.png",
     "isPopular": true
   },
   {
     "id": "sq-QOMJGN35QNEWF56DDPZTQLOU",
     "name": "Hotdog",
-    "category": "Entrees",
+    "category": "Burgers & Hot Dogs",
     "priceDisplay": "$1.99  /  $3.99",
     "price": 1.99,
     "description": "",
@@ -812,7 +789,6 @@ export const EDITORIAL_MENU: EditorialMenuItem[] = [
     "price": 8.99,
     "description": "",
     "options": "Options: Dry Rub ($8.99), Wet Sauce ($8.99)",
-    "image": "/images/hero_feast.png",
     "isPopular": true
   },
   {
@@ -823,7 +799,6 @@ export const EDITORIAL_MENU: EditorialMenuItem[] = [
     "price": 8.99,
     "description": "",
     "options": "",
-    "image": "/images/hero_feast.png",
     "isPopular": true
   },
   {
@@ -834,7 +809,6 @@ export const EDITORIAL_MENU: EditorialMenuItem[] = [
     "price": 64.99,
     "description": "",
     "options": "",
-    "image": "/images/hero_feast.png",
     "isPopular": true
   },
   {
@@ -845,7 +819,6 @@ export const EDITORIAL_MENU: EditorialMenuItem[] = [
     "price": 69.99,
     "description": "",
     "options": "",
-    "image": "/images/hero_feast.png",
     "isPopular": true
   },
   {
@@ -856,7 +829,6 @@ export const EDITORIAL_MENU: EditorialMenuItem[] = [
     "price": 64.99,
     "description": "",
     "options": "",
-    "image": "/images/curry_chicken.png",
     "isPopular": false
   },
   {
@@ -877,13 +849,12 @@ export const EDITORIAL_MENU: EditorialMenuItem[] = [
     "price": 64.99,
     "description": "",
     "options": "",
-    "image": "/images/hero_feast.png",
     "isPopular": true
   },
   {
     "id": "sq-F2XRPZIMOFQUHBFUFVBDTUXR",
     "name": "Half Pan String Beans",
-    "category": "Entrees",
+    "category": "Sides",
     "priceDisplay": "$39.99",
     "price": 39.99,
     "description": "",
@@ -908,7 +879,6 @@ export const EDITORIAL_MENU: EditorialMenuItem[] = [
     "price": 149.99,
     "description": "",
     "options": "",
-    "image": "/images/oxtail.png",
     "isPopular": true
   },
   {
@@ -929,7 +899,6 @@ export const EDITORIAL_MENU: EditorialMenuItem[] = [
     "price": 64.99,
     "description": "",
     "options": "",
-    "image": "/images/oxtail.png",
     "isPopular": true
   },
   {
@@ -940,7 +909,6 @@ export const EDITORIAL_MENU: EditorialMenuItem[] = [
     "price": 99.99,
     "description": "",
     "options": "",
-    "image": "/images/oxtail.png",
     "isPopular": true
   },
   {
@@ -951,7 +919,6 @@ export const EDITORIAL_MENU: EditorialMenuItem[] = [
     "price": 199.99,
     "description": "",
     "options": "",
-    "image": "/images/oxtail.png",
     "isPopular": true
   },
   {
@@ -972,7 +939,6 @@ export const EDITORIAL_MENU: EditorialMenuItem[] = [
     "price": 129.99,
     "description": "",
     "options": "",
-    "image": "/images/hero_feast.png",
     "isPopular": true
   },
   {
