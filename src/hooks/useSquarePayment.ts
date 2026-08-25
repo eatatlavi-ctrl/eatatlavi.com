@@ -59,13 +59,10 @@ export function useSquarePayment(): UseSquarePaymentReturn {
           '.input-container.is-focus': { borderColor: '#D4AF37' },
           '.input-container.is-error': { borderColor: '#ef4444' },
           input: { color: '#18181B', fontSize: '14px' },
-          '.cardNumber': { color: '#18181B' },
-          '.expirationDate': { color: '#18181B' },
-          '.cvv': { color: '#18181B' },
-          '.postalCode': { color: '#18181B' },
           'input::placeholder': { color: '#71717A' },
           '.message-icon': { color: '#D4AF37' },
           '.message-text': { color: '#71717A' },
+          '.message-text.is-error': { color: '#ef4444' },
         },
       });
       await cardRef.current.attach('#square-card-container');
