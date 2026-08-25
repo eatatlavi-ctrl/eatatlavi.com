@@ -1,0 +1,44 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg-main: #000000;
+    --bg-surface: #09090B;
+    --border-hairline: #27272A;
+    --text-primary: #FFFFFF;
+    --text-muted: #A1A1AA;
+  }
+
+  body {
+    background-color: #000000;
+    color: #FFFFFF;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: -0.01em;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, .font-serif {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    letter-spacing: -0.02em;
+  }
+}
+
+/* Editorial Minimalist Custom Classes */
+.border-hairline {
+  border-color: #27272A;
+}
+
+.dotted-leader {
+  background-image: radial-gradient(circle, #3F3F46 1px, transparent 1.5px);
+  background-position: bottom;
+  background-size: 8px 2px;
+  background-repeat: repeat-x;
+}
+
+.tracking-editorial {
+  letter-spacing: 0.25em;
+}
+
+.tracking-wide-3 {
+  letter-spacing: 0.3em;
+}

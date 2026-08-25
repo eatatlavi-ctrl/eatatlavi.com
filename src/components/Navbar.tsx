@@ -1,0 +1,134 @@
+import React, { useState, useEffect } from 'react';
+import { Phone, Menu as MenuIcon, X, Sparkles, ShoppingBag } from 'lucide-react';
+
+interface NavbarProps {
+  onOpenOrderModal: () => void;
+  onOpenCart?: () => void;
+  cartCount?: number;
+}
+
+export const Navbar: React.FC<NavbarProps> = ({ onOpenOrderModal, onOpenCart, cartCount = 0 }) => {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  return (
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      isScrolled 
+        ? 'bg-black/95 backdrop-blur-md border-b border-[#27272A] py-3.5 shadow-2xl' 
+        : 'bg-gradient-to-b from-black via-black/80 to-transparent py-5'
+    }`}>
+      <div className="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between">
+        
+        {/* LOGO */}
+        <a href="#" className="flex items-center space-x-3 group">
+          <img
+            src="/images/LOGOLAVI.png"
+            alt="LaVi Restaurant Logo"
+            className="h-9 sm:h-11 w-auto object-contain transition-opacity duration-300 group-hover:opacity-85"
+          />
+        </a>
+
+        {/* DESKTOP NAV LINKS */}
+        <nav className="hidden lg:flex items-center space-x-8 text-xs font-medium tracking-[0.2em] uppercase text-[#A1A1AA]">
+          <a href="#menu" className="hover:text-white transition-colors">Menu</a>
+          <a href="#about" className="hover:text-white transition-colors">About Us</a>
+          <a href="#reviews" className="hover:text-white transition-colors">Reviews</a>
+          <a href="#location" className="hover:text-white transition-colors">Location & Contact</a>
+        </nav>
+
+        {/* RIGHT: PHONE, CART & GOLD CTA BUTTON */}
+        <div className="hidden sm:flex items-center space-x-5">
+          <a
+            href="tel:3479343040"
+            className="hidden xl:flex items-center space-x-2 text-xs font-mono tracking-wider text-[#A1A1AA] hover:text-white transition-colors"
+          >
+            <Phone className="w-3.5 h-3.5 text-[#D4AF37]" />
+            <span>(347) 934-3040</span>
+          </a>
+
+          {/* CART ICON */}
+          {onOpenCart && (
+            <button
+              onClick={onOpenCart}
+              className="relative text-[#A1A1AA] hover:text-white transition-colors"
+              aria-label="Open cart"
+            >
+              <ShoppingBag className="w-5 h-5" />
+              {cartCount > 0 && (
+                <span className="absolute -top-1.5 -right-1.5 w-4 h-4 bg-[#D4AF37] text-black text-[9px] font-extrabold rounded-full flex items-center justify-center">
+                  {cartCount > 9 ? '9+' : cartCount}
+                </span>
+              )}
+            </button>
+          )}
+
+          <button
+            onClick={onOpenOrderModal}
+            className="bg-gradient-to-r from-[#E5C158] via-[#D4AF37] to-[#B38F24] hover:brightness-110 text-black font-bold text-xs tracking-[0.2em] uppercase px-6 py-2.5 rounded-none shadow-lg transition-all duration-300 flex items-center space-x-2"
+          >
+            <span>ORDER ONLINE</span>
+            <Sparkles className="w-3.5 h-3.5 text-black" />
+          </button>
+        </div>
+
+        {/* MOBILE MENU TOGGLE */}
+        <div className="lg:hidden flex items-center space-x-3">
+          <button
+            onClick={onOpenOrderModal}
+            className="sm:hidden bg-[#D4AF37] text-black font-bold text-[10px] tracking-wider uppercase px-3 py-1.5"
+          >
+            Order
+          </button>
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="text-white focus:outline-none p-1"
+            aria-label="Toggle Navigation"
+          >
+            {mobileMenuOpen ? <X className="w-6 h-6" /> : <MenuIcon className="w-6 h-6" />}
+          </button>
+        </div>
+
+      </div>
+
+      {/* MOBILE MENU */}
+      {mobileMenuOpen && (
+        <div className="lg:hidden bg-black/95 border-b border-[#27272A] px-6 pt-6 pb-8 space-y-6 text-center animate-fadeIn">
+          <nav className="flex flex-col space-y-4 text-xs font-medium tracking-[0.2em] uppercase text-[#A1A1AA]">
+            <a href="#menu" onClick={() => setMobileMenuOpen(false)} className="hover:text-white py-1">Menu</a>
+            <a href="#about" onClick={() => setMobileMenuOpen(false)} className="hover:text-white py-1">About Us</a>
+            <a href="#reviews" onClick={() => setMobileMenuOpen(false)} className="hover:text-white py-1">Reviews</a>
+            <a href="#location" onClick={() => setMobileMenuOpen(false)} className="hover:text-white py-1">Location & Contact</a>
+          </nav>
+
+          <div className="pt-2 flex flex-col space-y-3">
+            <a
+              href="tel:3479343040"
+              className="text-xs font-mono text-[#A1A1AA] flex items-center justify-center space-x-2 py-2 border border-[#27272A]"
+            >
+              <Phone className="w-4 h-4 text-[#D4AF37]" />
+              <span>Call (347) 934-3040</span>
+            </a>
+
+            <button
+              onClick={() => {
+                setMobileMenuOpen(false);
+                onOpenOrderModal();
+              }}
+              className="w-full bg-[#D4AF37] text-black font-bold text-xs tracking-[0.2em] uppercase py-3"
+            >
+              ORDER ONLINE
+            </button>
+          </div>
+        </div>
+      )}
+    </header>
+  );
+};
