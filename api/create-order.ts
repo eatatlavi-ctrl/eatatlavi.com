@@ -1,11 +1,11 @@
 // @ts-nocheck
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { Client, Environment } from 'square';
+import { SquareClient as Client, SquareEnvironment as Environment } from 'square';
 import { randomUUID } from 'crypto';
 
 // Square client — Access Token is ONLY here on the server, never sent to browser
 const client = new Client({
-  accessToken: process.env.SQUARE_ACCESS_TOKEN!,
+  token: process.env.SQUARE_ACCESS_TOKEN!,
   environment:
     process.env.SQUARE_ACCESS_TOKEN?.startsWith('sandbox')
       ? Environment.Sandbox
@@ -67,7 +67,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       ...(item.options ? { note: item.options } : {}),
     }));
 
-    const { result: orderResult } = await client.ordersApi.createOrder({
+    const { order } = await client.orders.create({
       order: {
         locationId: LOCATION_ID,
         lineItems,
@@ -95,11 +95,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       idempotencyKey: randomUUID(),
     });
 
-    const orderId = orderResult.order?.id;
+    const orderId = order?.id;
     if (!orderId) throw new Error('Failed to create order.');
 
     // ── STEP 2: Process Payment via Square Payments API ─────────────
-    const { result: paymentResult } = await client.paymentsApi.createPayment({
+    const { payment } = await client.payments.create({
       sourceId: cardToken,
       idempotencyKey: randomUUID(),
       amountMoney: {
@@ -112,7 +112,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       note: `LaVi Order — ${fulfillment} — ${customerName}`,
     });
 
-    const payment = paymentResult.payment;
     if (!payment) throw new Error('Payment failed.');
 
     return res.status(200).json({
