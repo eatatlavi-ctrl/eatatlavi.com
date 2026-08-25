@@ -54,24 +54,18 @@ export const ItemCustomizeModal: React.FC<ItemCustomizeModalProps> = ({
   if (!isOpen || !item) return null;
 
   const isEntree = item.category === 'Entrees';
-  const hasMultipleSizes = item.category !== 'Catering' && (item.options?.includes('Medium') || item.options?.includes('Large') || item.name.toLowerCase() === 'oxtails');
-
-  // Variations
-  const variations = [
-    { name: 'Small', addPrice: 0 },
-    { name: 'Medium', addPrice: item.name.toLowerCase().includes('oxtail') ? 9.00 : 5.00 },
-    { name: 'Large', addPrice: item.name.toLowerCase().includes('oxtail') ? 18.00 : 10.00 },
-  ];
+  const variations = item.variations && item.variations.length > 1 ? item.variations : [];
+  const hasMultipleSizes = variations.length > 0;
 
   // State
-  const [selectedVariation, setSelectedVariation] = useState<string>('Small');
+  const [selectedVariation, setSelectedVariation] = useState<string>('');
   const [selectedRice, setSelectedRice] = useState<string>('Rice & Peas');
   const [extraSides, setExtraSides] = useState<{ [key: string]: number }>({});
   const [upsells, setUpsells] = useState<{ [key: string]: number }>({});
   const [specialInstructions, setSpecialInstructions] = useState<string>('');
 
   useEffect(() => {
-    setSelectedVariation('Small');
+    setSelectedVariation(item.variations && item.variations.length > 1 ? item.variations[0].name : '');
     // Default to first available (non-soldout) rice option
     const firstAvailable = RICE_OPTIONS.find(r => !r.isSoldOut)?.name || 'Rice & Peas';
     setSelectedRice(firstAvailable);
@@ -84,7 +78,7 @@ export const ItemCustomizeModal: React.FC<ItemCustomizeModalProps> = ({
   let basePrice = item.price;
   if (hasMultipleSizes) {
     const selectedVarObj = variations.find((v) => v.name === selectedVariation);
-    basePrice = item.price + (selectedVarObj?.addPrice || 0);
+    basePrice = selectedVarObj ? selectedVarObj.price : item.price;
   }
 
   const selectedRiceObj = RICE_OPTIONS.find((r) => r.name === selectedRice);
@@ -221,11 +215,7 @@ export const ItemCustomizeModal: React.FC<ItemCustomizeModalProps> = ({
                         </div>
                         <span className="text-xs font-semibold text-gray-900">{v.name}</span>
                       </div>
-                      {v.addPrice > 0 ? (
-                        <span className="text-xs font-bold text-gray-700">+${v.addPrice.toFixed(2)}</span>
-                      ) : (
-                        <span className="text-xs text-gray-400 font-medium">Included</span>
-                      )}
+                      <span className="text-xs font-bold text-gray-700">${v.price.toFixed(2)}</span>
                     </label>
                   );
                 })}

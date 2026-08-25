@@ -11,6 +11,12 @@ export type MenuCategory =
   | 'Beverages'
   | 'Vegan';
 
+export interface Variation {
+  id: string;
+  name: string;
+  price: number;
+}
+
 export interface EditorialMenuItem {
   id: string;
   name: string;
@@ -19,6 +25,7 @@ export interface EditorialMenuItem {
   price: number; // numeric price for cart/checkout
   description?: string;
   options?: string;
+  variations?: Variation[];
   image?: string;
   isPopular?: boolean;
 }
