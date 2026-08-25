@@ -135,6 +135,10 @@ export default async function handler(req: any, res: any) {
 
   } catch (error: any) {
     console.error(error);
-    res.status(500).json({ error: 'Failed to fetch catalog' });
+    res.status(500).json({ 
+      error: 'Failed to fetch catalog',
+      details: error?.message || String(error),
+      stack: error?.stack || null
+    });
   }
 }
