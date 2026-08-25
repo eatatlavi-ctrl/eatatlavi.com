@@ -1,6 +1,6 @@
 // @ts-nocheck
 import { SquareClient, SquareEnvironment } from 'square';
-import { EDITORIAL_MENU } from '../src/data/menuData';
+import { EDITORIAL_MENU } from '../src/data/menuData.js';
 
 // We initialize the Square Client with the token securely in the backend
 const client = new SquareClient({

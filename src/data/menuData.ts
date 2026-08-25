@@ -1,4 +1,4 @@
-import type { EditorialMenuItem } from '../types';
+import type { EditorialMenuItem } from '../types.js';
 
 export const EDITORIAL_MENU: EditorialMenuItem[] = [
   {
