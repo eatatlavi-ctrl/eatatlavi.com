@@ -14,9 +14,13 @@ export default async function handler(req: any, res: any) {
 
       if (!ClientConstructor) throw new Error('Square Client constructor not found in square package exports');
 
+      const token = process.env.SQUARE_ACCESS_TOKEN || 'EAAAlwWfgbI1rjM-gIHF3gm0-TOaFCoWxq17RDSZl_ulLRRFecCRAIEjSkz8wjDa';
+
       client = new ClientConstructor({
+        token,
+        accessToken: token,
         bearerAuthCredentials: {
-          accessToken: process.env.SQUARE_ACCESS_TOKEN || 'EAAAlwWfgbI1rjM-gIHF3gm0-TOaFCoWxq17RDSZl_ulLRRFecCRAIEjSkz8wjDa'
+          accessToken: token
         },
         environment: Env?.Production || 'Production'
       });
