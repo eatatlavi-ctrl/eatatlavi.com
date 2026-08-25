@@ -41,7 +41,8 @@ export default async function handler(req: any, res: any) {
       let maxPrice = -Infinity;
       
       const variations = itemData?.variations?.map((v: any) => {
-        const price = (v.itemVariationData?.priceMoney?.amount || 0) / 100;
+        const amount = v.itemVariationData?.priceMoney?.amount || 0;
+        const price = Number(amount) / 100;
         if (price < minPrice) minPrice = price;
         if (price > maxPrice) maxPrice = price;
         return {
