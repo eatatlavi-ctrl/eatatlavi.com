@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { X, Check, ShoppingBag } from 'lucide-react';
+import { X, Plus, Minus } from 'lucide-react';
 import type { EditorialMenuItem } from '../types';
 
 interface ItemCustomizeModalProps {
@@ -10,42 +10,31 @@ interface ItemCustomizeModalProps {
 }
 
 const RICE_OPTIONS = [
-  'White Rice',
-  'Yellow Rice',
-  'Rice & Peas',
-  'Jollof Rice'
+  { id: 'rice-peas', name: 'Rice & Peas', price: 0 },
+  { id: 'white-rice', name: 'White Rice', price: 0 },
+  { id: 'rice-beans', name: 'Rice & Beans', price: 0 },
+  { id: 'no-rice', name: 'No Rice', price: 0 },
+  { id: 'soul-bowl', name: 'Soul Bowl', price: 10.49 },
+  { id: 'make-salad', name: 'Make It A Salad', price: 11.49 },
+  { id: 'rasta-pasta', name: 'Rasta Pasta', price: 12.99 },
 ];
 
-const SIDE_OPTIONS = [
-  '7-Cheese Mac & Cheese',
-  'Candied Yams',
-  'Southern Collard Greens',
-  'Steamed Island Cabbage',
-  'Sweet Fried Plantains',
-  'Sweet Butter Corn',
-  'Seasoned Green Beans',
-  'Creamy Mashed Potatoes',
-  'Homestyle Potato Salad',
-  'Seasoned French Fries',
-  'Honey Butter Corn Bread'
+const EXTRA_SIDES = [
+  { id: 'side-mac', name: 'Mac & Cheese', price: 4.99 },
+  { id: 'side-yams', name: 'Yams', price: 4.99 },
+  { id: 'side-[#collard]', name: 'Collard Greens', price: 4.99 },
+  { id: 'side-pudding', name: 'Banana Pudding', price: 4.99 },
+  { id: 'side-cabbage', name: 'Cabbage', price: 4.99 },
+  { id: 'side-cornbread', name: 'Honey Butter Corn Bread', price: 4.99 },
 ];
 
-const WING_FLAVORS = [
-  'Lemon Pepper',
-  'Garlic Parmesan',
-  'Buffalo',
-  'Sweet Chili',
-  'Honey Garlic',
-  'BuffaQue',
-  'BBQ'
-];
-
-const EMPANADA_FLAVORS = [
-  'Beef',
-  'Chicken',
-  'Curry Chicken',
-  'Jerk Chicken',
-  'Apple Cinnamon'
+const RECOMMENDED_UPSELLS = [
+  { id: 'up-curry-emp', name: 'Curry Chicken Empanada', price: 2.49 },
+  { id: 'up-jerk-emp', name: 'Jerk Chicken Empanada', price: 2.49 },
+  { id: 'up-apple-emp', name: 'Apple Pie Empanada', price: 2.49 },
+  { id: 'up-can-drink', name: 'Can Drink', price: 1.49 },
+  { id: 'up-kool-aid', name: 'Kool Aid', price: 2.49 },
+  { id: 'up-lemonade', name: 'Fresh Squeezed Lemonade Large', price: 7.99 },
 ];
 
 export const ItemCustomizeModal: React.FC<ItemCustomizeModalProps> = ({
@@ -56,250 +45,348 @@ export const ItemCustomizeModal: React.FC<ItemCustomizeModalProps> = ({
 }) => {
   if (!isOpen || !item) return null;
 
-  // Determine item features
-  const isEntree = item.category === 'Entrees' || item.name.toLowerCase().includes('oxtail') || item.name.toLowerCase().includes('ribs') || item.name.toLowerCase().includes('chicken');
-  const isWing = item.category === 'Wings' || item.name.toLowerCase().includes('wing');
-  const isEmpanada = item.category === 'Empanadas & Patties' || item.name.toLowerCase().includes('empanada');
+  const isEntree = item.category === 'Entrees' || item.name.toLowerCase().includes('oxtail') || item.name.toLowerCase().includes('chicken') || item.name.toLowerCase().includes('ribs');
+  const hasMultipleSizes = item.options?.includes('Medium') || item.options?.includes('Large') || item.name.toLowerCase().includes('oxtail');
 
-  // Variations (Sizes)
-  const hasMultipleSizes = item.options?.includes('Medium') || item.options?.includes('Large');
-  
+  // Variations
+  const variations = [
+    { name: 'Small', addPrice: 0 },
+    { name: 'Medium', addPrice: item.name.toLowerCase().includes('oxtail') ? 9.00 : 5.00 },
+    { name: 'Large', addPrice: item.name.toLowerCase().includes('oxtail') ? 18.00 : 10.00 },
+  ];
+
   // State
-  const [selectedSize, setSelectedSize] = useState<'Medium' | 'Large'>('Medium');
-  const [selectedRice, setSelectedRice] = useState<string>(RICE_OPTIONS[0]);
-  const [selectedSides, setSelectedSides] = useState<string[]>([]);
-  const [selectedFlavor, setSelectedFlavor] = useState<string>('');
+  const [selectedVariation, setSelectedVariation] = useState<string>('Small');
+  const [selectedRice, setSelectedRice] = useState<string>('Rice & Peas');
+  const [extraSides, setExtraSides] = useState<{ [key: string]: number }>({});
+  const [upsells, setUpsells] = useState<{ [key: string]: number }>({});
+  const [specialInstructions, setSpecialInstructions] = useState<string>('');
 
-  // Calculate dynamic price based on size
+  useEffect(() => {
+    setSelectedVariation('Small');
+    setSelectedRice('Rice & Peas');
+    setExtraSides({});
+    setUpsells({});
+    setSpecialInstructions('');
+  }, [item]);
+
+  // Price calculations
   let basePrice = item.price;
   if (hasMultipleSizes) {
-    if (item.name.toLowerCase().includes('oxtail')) {
-      basePrice = selectedSize === 'Medium' ? 20.99 : 31.99;
-    } else if (item.name.toLowerCase().includes('rib') || item.name.toLowerCase().includes('meatloaf') || item.name.toLowerCase().includes('turkey wing')) {
-      basePrice = selectedSize === 'Medium' ? 15.99 : 21.99;
-    } else {
-      basePrice = selectedSize === 'Medium' ? 8.99 : 13.99;
-    }
+    const selectedVarObj = variations.find((v) => v.name === selectedVariation);
+    basePrice = item.price + (selectedVarObj?.addPrice || 0);
   }
 
-  // Reset state when modal opens
-  useEffect(() => {
-    setSelectedSize('Medium');
-    setSelectedRice(RICE_OPTIONS[0]);
-    setSelectedSides([]);
-    setSelectedFlavor(isWing ? WING_FLAVORS[0] : isEmpanada ? EMPANADA_FLAVORS[0] : '');
-  }, [item, isWing, isEmpanada]);
+  const selectedRiceObj = RICE_OPTIONS.find((r) => r.name === selectedRice);
+  const ricePrice = selectedRiceObj?.price || 0;
 
-  const toggleSide = (sideName: string) => {
-    if (selectedSides.includes(sideName)) {
-      setSelectedSides(selectedSides.filter((s) => s !== sideName));
-    } else {
-      if (selectedSize === 'Medium' && selectedSides.length >= 1) {
-        setSelectedSides([sideName]); // replaces single side for medium
-      } else if (selectedSize === 'Large' && selectedSides.length >= 2) {
-        setSelectedSides([selectedSides[1], sideName]); // keeps max 2 for large
-      } else {
-        setSelectedSides([...selectedSides, sideName]);
+  const extraSidesTotal = Object.entries(extraSides).reduce((sum, [id, qty]) => {
+    const side = EXTRA_SIDES.find((s) => s.id === id);
+    return sum + (side?.price || 0) * qty;
+  }, 0);
+
+  const upsellsTotal = Object.entries(upsells).reduce((sum, [id, qty]) => {
+    const up = RECOMMENDED_UPSELLS.find((u) => u.id === id);
+    return sum + (up?.price || 0) * qty;
+  }, 0);
+
+  const totalPrice = basePrice + ricePrice + extraSidesTotal + upsellsTotal;
+
+  // Validation
+  const isVariationSelected = !hasMultipleSizes || !!selectedVariation;
+  const isRiceSelected = !isEntree || !!selectedRice;
+  const isFormValid = isVariationSelected && isRiceSelected;
+
+  const requiredCountNeeded = (hasMultipleSizes && !selectedVariation ? 1 : 0) + (isEntree && !selectedRice ? 1 : 0);
+
+  const toggleQty = (setMap: React.Dispatch<React.SetStateAction<{ [key: string]: number }>>, id: string, delta: number) => {
+    setMap((prev) => {
+      const current = prev[id] || 0;
+      const next = Math.max(0, current + delta);
+      if (next === 0) {
+        const copy = { ...prev };
+        delete copy[id];
+        return copy;
       }
-    }
+      return { ...prev, [id]: next };
+    });
   };
 
   const handleAddToCart = () => {
-    const optionParts: string[] = [];
+    if (!isFormValid) return;
 
-    if (hasMultipleSizes) {
-      optionParts.push(`Size: ${selectedSize}`);
-    }
-    if (isEntree) {
-      optionParts.push(`Rice: ${selectedRice}`);
-    }
-    if (selectedSides.length > 0) {
-      optionParts.push(`Sides: ${selectedSides.join(', ')}`);
-    }
-    if (selectedFlavor) {
-      optionParts.push(`Flavor: ${selectedFlavor}`);
-    }
+    const parts: string[] = [];
+    if (hasMultipleSizes) parts.push(`Size: ${selectedVariation}`);
+    if (isEntree) parts.push(`Rice: ${selectedRice}`);
 
-    const optionsSummary = optionParts.join(' · ');
-    onConfirmAdd(item.name, basePrice, optionsSummary);
+    const sidesList = Object.entries(extraSides).map(([id, qty]) => {
+      const s = EXTRA_SIDES.find((x) => x.id === id);
+      return `${s?.name} x${qty}`;
+    });
+    if (sidesList.length > 0) parts.push(`Sides: ${sidesList.join(', ')}`);
+
+    const upsellsList = Object.entries(upsells).map(([id, qty]) => {
+      const u = RECOMMENDED_UPSELLS.find((x) => x.id === id);
+      return `${u?.name} x${qty}`;
+    });
+    if (upsellsList.length > 0) parts.push(`Addons: ${upsellsList.join(', ')}`);
+
+    if (specialInstructions.trim()) parts.push(`Note: "${specialInstructions.trim()}"`);
+
+    onConfirmAdd(item.name, totalPrice, parts.join(' · '));
     onClose();
   };
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/90 backdrop-blur-md p-0 sm:p-4"
+      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/80 backdrop-blur-sm p-0 sm:p-4 animate-fadeIn"
       onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
     >
-      <div className="w-full sm:max-w-lg bg-[#09090B] border border-[#27272A] max-h-[92vh] flex flex-col shadow-2xl overflow-hidden">
-        
-        {/* HEADER */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-[#27272A] shrink-0">
-          <div>
-            <span className="text-[9px] font-mono tracking-[0.3em] uppercase text-[#D4AF37]">
-              Customize Your Dish
-            </span>
-            <h3 className="font-serif text-xl font-light text-white uppercase tracking-wide">
-              {item.name}
-            </h3>
-          </div>
-          <button onClick={onClose} className="text-[#A1A1AA] hover:text-white p-1">
-            <X className="w-5 h-5" />
-          </button>
+      <div className="w-full sm:max-w-lg bg-white text-black sm:rounded-2xl max-h-[90vh] flex flex-col shadow-2xl overflow-hidden relative">
+
+        {/* TOP HERO IMAGE OR CLOSE BUTTON */}
+        <div className="relative">
+          {item.image ? (
+            <div className="h-48 w-full overflow-hidden relative bg-gray-100">
+              <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
+              <button
+                onClick={onClose}
+                className="absolute top-3 left-3 bg-white/90 hover:bg-white text-black p-2 rounded-full shadow-md transition-all"
+                aria-label="Close"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+          ) : (
+            <div className="px-6 pt-5 pb-3 flex items-center justify-between border-b border-gray-100">
+              <h3 className="text-xl font-bold text-gray-900">{item.name}</h3>
+              <button
+                onClick={onClose}
+                className="text-gray-500 hover:text-black p-1 rounded-full hover:bg-gray-100 transition-colors"
+                aria-label="Close"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+          )}
         </div>
 
-        {/* BODY */}
-        <div className="flex-1 overflow-y-auto px-6 py-5 space-y-6">
+        {/* SCROLLABLE BODY */}
+        <div className="flex-1 overflow-y-auto px-6 py-4 space-y-6">
 
-          {/* 1. SIZE SELECTION (IF APPLICABLE) */}
+          {/* ITEM TITLE & DESCRIPTION */}
+          {item.image && (
+            <div>
+              <h3 className="text-2xl font-extrabold text-gray-900">{item.name}</h3>
+              {item.description && (
+                <p className="text-xs text-gray-600 font-normal mt-1 leading-relaxed">{item.description}</p>
+              )}
+            </div>
+          )}
+
+          {/* 1. VARIATION (REQUIRED · SELECT 1) */}
           {hasMultipleSizes && (
-            <div className="space-y-2">
-              <label className="block text-[10px] font-mono tracking-[0.25em] uppercase text-[#A1A1AA]">
-                1. Select Portion Size *
-              </label>
-              <div className="grid grid-cols-2 gap-3">
-                <button
-                  type="button"
-                  onClick={() => setSelectedSize('Medium')}
-                  className={`p-3 border text-left transition-all ${
-                    selectedSize === 'Medium'
-                      ? 'border-[#D4AF37] bg-[#D4AF37]/10 text-white'
-                      : 'border-[#27272A] text-[#A1A1AA] hover:border-white'
-                  }`}
-                >
-                  <span className="block text-xs font-mono font-bold text-white uppercase">Medium Plate</span>
-                  <span className="block text-[11px] text-[#D4AF37] mt-0.5 font-mono">
-                    ${item.name.toLowerCase().includes('oxtail') ? '20.99' : '8.99'}
+            <div className="space-y-3 pt-2">
+              <div>
+                <div className="flex items-center space-x-2">
+                  <h4 className="text-sm font-bold text-gray-900">Variation</h4>
+                  <span className="bg-amber-100 text-amber-900 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">
+                    Required · Select 1
                   </span>
-                  <span className="block text-[10px] text-[#A1A1AA] mt-1 font-sans">
-                    Includes 1 Meat + Flavored Rice
-                  </span>
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => setSelectedSize('Large')}
-                  className={`p-3 border text-left transition-all ${
-                    selectedSize === 'Large'
-                      ? 'border-[#D4AF37] bg-[#D4AF37]/10 text-white'
-                      : 'border-[#27272A] text-[#A1A1AA] hover:border-white'
-                  }`}
-                >
-                  <span className="block text-xs font-mono font-bold text-white uppercase">Large Combo Plate</span>
-                  <span className="block text-[11px] text-[#D4AF37] mt-0.5 font-mono">
-                    ${item.name.toLowerCase().includes('oxtail') ? '31.99' : '13.99'}
-                  </span>
-                  <span className="block text-[10px] text-[#A1A1AA] mt-1 font-sans">
-                    Includes 1 Meat + Rice + 2 Sides
-                  </span>
-                </button>
+                </div>
               </div>
-            </div>
-          )}
 
-          {/* 2. RICE SELECTION (FOR ENTREES) */}
-          {isEntree && (
-            <div className="space-y-2">
-              <label className="block text-[10px] font-mono tracking-[0.25em] uppercase text-[#A1A1AA]">
-                {hasMultipleSizes ? '2.' : '1.'} Select Flavored Rice * (Choose 1)
-              </label>
-              <div className="grid grid-cols-2 gap-2">
-                {RICE_OPTIONS.map((rice) => (
-                  <button
-                    key={rice}
-                    type="button"
-                    onClick={() => setSelectedRice(rice)}
-                    className={`p-3 text-xs font-mono uppercase tracking-wider text-left border flex items-center justify-between transition-all ${
-                      selectedRice === rice
-                        ? 'border-[#D4AF37] bg-[#D4AF37]/10 text-[#D4AF37] font-bold'
-                        : 'border-[#27272A] text-[#A1A1AA] hover:border-white hover:text-white'
-                    }`}
-                  >
-                    <span>{rice}</span>
-                    {selectedRice === rice && <Check className="w-3.5 h-3.5 text-[#D4AF37]" />}
-                  </button>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* 3. SIDES SELECTION (FOR LARGE COMBOS & ENTREE PLATTERS) */}
-          {isEntree && (
-            <div className="space-y-2">
-              <div className="flex items-center justify-between">
-                <label className="block text-[10px] font-mono tracking-[0.25em] uppercase text-[#A1A1AA]">
-                  {hasMultipleSizes ? '3.' : '2.'} Select Sides {selectedSize === 'Large' ? '(Choose up to 2)' : '(Optional Side Add-on)'}
-                </label>
-                <span className="text-[10px] font-mono text-[#D4AF37]">
-                  {selectedSides.length} / {selectedSize === 'Large' ? '2' : '1'} selected
-                </span>
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                {SIDE_OPTIONS.map((side) => {
-                  const isChecked = selectedSides.includes(side);
+              <div className="space-y-2 border-t border-gray-100 pt-2">
+                {variations.map((v) => {
+                  const isSelected = selectedVariation === v.name;
                   return (
-                    <button
-                      key={side}
-                      type="button"
-                      onClick={() => toggleSide(side)}
-                      className={`p-2.5 text-xs font-mono text-left border flex items-center justify-between transition-all ${
-                        isChecked
-                          ? 'border-[#D4AF37] bg-[#D4AF37]/10 text-white font-bold'
-                          : 'border-[#27272A] text-[#A1A1AA] hover:border-white hover:text-white'
+                    <label
+                      key={v.name}
+                      onClick={() => setSelectedVariation(v.name)}
+                      className={`flex items-center justify-between p-3.5 rounded-xl border cursor-pointer transition-all ${
+                        isSelected ? 'border-red-600 bg-red-50/50 shadow-sm' : 'border-gray-200 hover:border-gray-300'
                       }`}
                     >
-                      <span className="truncate pr-2">{side}</span>
-                      <div className={`w-4 h-4 rounded-sm border shrink-0 flex items-center justify-center ${isChecked ? 'border-[#D4AF37] bg-[#D4AF37] text-black' : 'border-[#3F3F46]'}`}>
-                        {isChecked && <Check className="w-3 h-3" />}
+                      <div className="flex items-center space-x-3">
+                        <div className={`w-5 h-5 rounded-full border flex items-center justify-center ${isSelected ? 'border-red-600 bg-red-600' : 'border-gray-300'}`}>
+                          {isSelected && <div className="w-2 h-2 rounded-full bg-white" />}
+                        </div>
+                        <span className="text-xs font-semibold text-gray-900">{v.name}</span>
                       </div>
-                    </button>
+                      {v.addPrice > 0 ? (
+                        <span className="text-xs font-bold text-gray-700">+${v.addPrice.toFixed(2)}</span>
+                      ) : (
+                        <span className="text-xs text-gray-400 font-medium">Included</span>
+                      )}
+                    </label>
                   );
                 })}
               </div>
             </div>
           )}
 
-          {/* 4. FLAVOR SELECTION (FOR WINGS & EMPANADAS) */}
-          {(isWing || isEmpanada) && (
-            <div className="space-y-2">
-              <label className="block text-[10px] font-mono tracking-[0.25em] uppercase text-[#A1A1AA]">
-                Select Flavor / Sauce Option *
-              </label>
-              <div className="grid grid-cols-2 gap-2">
-                {(isWing ? WING_FLAVORS : EMPANADA_FLAVORS).map((flv) => (
-                  <button
-                    key={flv}
-                    type="button"
-                    onClick={() => setSelectedFlavor(flv)}
-                    className={`p-3 text-xs font-mono uppercase tracking-wider text-left border flex items-center justify-between transition-all ${
-                      selectedFlavor === flv
-                        ? 'border-[#D4AF37] bg-[#D4AF37]/10 text-[#D4AF37] font-bold'
-                        : 'border-[#27272A] text-[#A1A1AA] hover:border-white hover:text-white'
-                    }`}
-                  >
-                    <span>{flv}</span>
-                    {selectedFlavor === flv && <Check className="w-3.5 h-3.5 text-[#D4AF37]" />}
-                  </button>
-                ))}
+          {/* 2. RICE / BASE (REQUIRED · SELECT 1) */}
+          {isEntree && (
+            <div className="space-y-3 pt-2 border-t border-gray-100">
+              <div className="flex items-center space-x-2">
+                <h4 className="text-sm font-bold text-gray-900">Rice / Base</h4>
+                <span className="bg-amber-100 text-amber-900 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">
+                  Required · Select 1
+                </span>
+              </div>
+
+              <div className="space-y-2">
+                {RICE_OPTIONS.map((rice) => {
+                  const isSelected = selectedRice === rice.name;
+                  return (
+                    <label
+                      key={rice.id}
+                      onClick={() => setSelectedRice(rice.name)}
+                      className={`flex items-center justify-between p-3.5 rounded-xl border cursor-pointer transition-all ${
+                        isSelected ? 'border-red-600 bg-red-50/50 shadow-sm' : 'border-gray-200 hover:border-gray-300'
+                      }`}
+                    >
+                      <div className="flex items-center space-x-3">
+                        <div className={`w-5 h-5 rounded-full border flex items-center justify-center ${isSelected ? 'border-red-600 bg-red-600' : 'border-gray-300'}`}>
+                          {isSelected && <div className="w-2 h-2 rounded-full bg-white" />}
+                        </div>
+                        <span className="text-xs font-semibold text-gray-900">{rice.name}</span>
+                      </div>
+                      {rice.price > 0 && (
+                        <span className="text-xs font-bold text-gray-700">+${rice.price.toFixed(2)}</span>
+                      )}
+                    </label>
+                  );
+                })}
               </div>
             </div>
           )}
 
-        </div>
+          {/* 3. ADD EXTRA SIDES (OPTIONAL · SELECT UP TO 5) */}
+          <div className="space-y-3 pt-2 border-t border-gray-100">
+            <div>
+              <h4 className="text-sm font-bold text-gray-900">Add Extra Sides</h4>
+              <span className="text-[11px] text-gray-500 font-normal">Optional · Select up to 5</span>
+            </div>
 
-        {/* FOOTER CONFIRM */}
-        <div className="px-6 py-4 border-t border-[#27272A] shrink-0 bg-black flex items-center justify-between">
-          <div>
-            <span className="text-[10px] font-mono text-[#A1A1AA] uppercase block">Total Price</span>
-            <span className="font-mono text-lg text-[#D4AF37] font-bold">${basePrice.toFixed(2)}</span>
+            <div className="space-y-2">
+              {EXTRA_SIDES.map((side) => {
+                const qty = extraSides[side.id] || 0;
+                return (
+                  <div key={side.id} className="flex items-center justify-between p-3 rounded-xl border border-gray-100 hover:border-gray-200">
+                    <div>
+                      <span className="text-xs font-semibold text-gray-900 block">{side.name}</span>
+                      <span className="text-xs font-bold text-gray-500">+${side.price.toFixed(2)}</span>
+                    </div>
+
+                    <div className="flex items-center space-x-2">
+                      {qty > 0 ? (
+                        <>
+                          <button
+                            onClick={() => toggleQty(setExtraSides, side.id, -1)}
+                            className="w-7 h-7 rounded-full border border-gray-300 text-gray-700 flex items-center justify-center hover:bg-gray-100"
+                          >
+                            <Minus className="w-3.5 h-3.5" />
+                          </button>
+                          <span className="text-xs font-bold text-gray-900 w-4 text-center">{qty}</span>
+                          <button
+                            onClick={() => toggleQty(setExtraSides, side.id, 1)}
+                            className="w-7 h-7 rounded-full border border-gray-300 text-gray-700 flex items-center justify-center hover:bg-gray-100"
+                          >
+                            <Plus className="w-3.5 h-3.5" />
+                          </button>
+                        </>
+                      ) : (
+                        <button
+                          onClick={() => toggleQty(setExtraSides, side.id, 1)}
+                          className="w-7 h-7 rounded-full border border-gray-300 text-gray-700 flex items-center justify-center hover:border-black hover:text-black"
+                        >
+                          <Plus className="w-3.5 h-3.5" />
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
           </div>
 
+          {/* 4. RECOMMENDED UPSELLS (DESSERTS & DRINKS) */}
+          <div className="space-y-3 pt-2 border-t border-gray-100">
+            <div>
+              <h4 className="text-sm font-bold text-gray-900">Recommended Add-ons & Drinks</h4>
+              <span className="text-[11px] text-gray-500 font-normal">Optional</span>
+            </div>
+
+            <div className="space-y-2">
+              {RECOMMENDED_UPSELLS.map((up) => {
+                const qty = upsells[up.id] || 0;
+                return (
+                  <div key={up.id} className="flex items-center justify-between p-3 rounded-xl border border-gray-100 hover:border-gray-200">
+                    <div>
+                      <span className="text-xs font-semibold text-gray-900 block">{up.name}</span>
+                      <span className="text-xs font-bold text-gray-500">+${up.price.toFixed(2)}</span>
+                    </div>
+
+                    <div className="flex items-center space-x-2">
+                      {qty > 0 ? (
+                        <>
+                          <button
+                            onClick={() => toggleQty(setUpsells, up.id, -1)}
+                            className="w-7 h-7 rounded-full border border-gray-300 text-gray-700 flex items-center justify-center hover:bg-gray-100"
+                          >
+                            <Minus className="w-3.5 h-3.5" />
+                          </button>
+                          <span className="text-xs font-bold text-gray-900 w-4 text-center">{qty}</span>
+                          <button
+                            onClick={() => toggleQty(setUpsells, up.id, 1)}
+                            className="w-7 h-7 rounded-full border border-gray-300 text-gray-700 flex items-center justify-center hover:bg-gray-100"
+                          >
+                            <Plus className="w-3.5 h-3.5" />
+                          </button>
+                        </>
+                      ) : (
+                        <button
+                          onClick={() => toggleQty(setUpsells, up.id, 1)}
+                          className="w-7 h-7 rounded-full border border-gray-300 text-gray-700 flex items-center justify-center hover:border-black hover:text-black"
+                        >
+                          <Plus className="w-3.5 h-3.5" />
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* 5. SPECIAL INSTRUCTIONS (PASSED TO SQUARE KITCHEN TICKET) */}
+          <div className="space-y-2 pt-2 border-t border-gray-100">
+            <h4 className="text-sm font-bold text-gray-900">Special Instructions</h4>
+            <textarea
+              rows={2}
+              value={specialInstructions}
+              onChange={(e) => setSpecialInstructions(e.target.value)}
+              placeholder="e.g. Extra oxtail gravy, gravy on rice, no cutlery needed"
+              className="w-full border border-gray-300 rounded-xl p-3 text-xs outline-none focus:border-red-600 font-sans transition-colors placeholder:text-gray-400"
+            />
+            <p className="text-[10px] text-gray-400">Special instructions are sent directly to the Square kitchen POS ticket.</p>
+          </div>
+
+        </div>
+
+        {/* STICKY RED DOORDASH STYLE BOTTOM CTA BUTTON */}
+        <div className="p-4 border-t border-gray-100 bg-white shrink-0">
           <button
-            type="button"
             onClick={handleAddToCart}
-            className="bg-gradient-to-r from-[#E5C158] via-[#D4AF37] to-[#B38F24] hover:brightness-110 text-black font-bold text-xs tracking-[0.2em] uppercase px-6 py-3 shadow-lg flex items-center space-x-2 transition-all"
+            disabled={!isFormValid}
+            className="w-full bg-[#E51800] hover:bg-[#CC1400] text-white font-extrabold text-sm py-4 rounded-xl shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
           >
-            <ShoppingBag className="w-4 h-4 text-black" />
-            <span>Add to Order · ${basePrice.toFixed(2)}</span>
+            {isFormValid ? (
+              <span>Add to Order · ${totalPrice.toFixed(2)}</span>
+            ) : (
+              <span>Make {requiredCountNeeded} required {requiredCountNeeded === 1 ? 'selection' : 'selections'}</span>
+            )}
           </button>
         </div>
 
