@@ -5,18 +5,25 @@ import { AboutSection } from './components/AboutSection';
 import { EditorialMenu } from './components/EditorialMenu';
 import { DeliveryModal } from './components/DeliveryModal';
 import { CheckoutModal } from './components/CheckoutModal';
+import { ItemCustomizeModal } from './components/ItemCustomizeModal';
 import { LocationFooter } from './components/LocationFooter';
-import type { CartItem } from './types';
+import type { CartItem, EditorialMenuItem } from './types';
 
 export function App() {
   const [isDeliveryModalOpen, setIsDeliveryModalOpen] = useState(false);
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
+  const [customizingItem, setCustomizingItem] = useState<EditorialMenuItem | null>(null);
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
-  // ── Cart Actions ────────────────────────────────────────────────────
-  const handleAddToCart = useCallback((name: string, price: number, options?: string) => {
+  // ── Initiate Customization Modal ──────────────────────────────────────
+  const handleInitiateAdd = useCallback((item: EditorialMenuItem) => {
+    setCustomizingItem(item);
+  }, []);
+
+  // ── Confirm Customization & Add to Cart ──────────────────────────────
+  const handleConfirmAdd = useCallback((name: string, price: number, optionsSummary: string) => {
     setCartItems((prev) => {
-      const existingIdx = prev.findIndex((i) => i.name === name && i.options === options);
+      const existingIdx = prev.findIndex((i) => i.name === name && i.options === optionsSummary);
       if (existingIdx > -1) {
         const updated = [...prev];
         updated[existingIdx] = { ...updated[existingIdx], quantity: updated[existingIdx].quantity + 1 };
@@ -29,7 +36,7 @@ export function App() {
           name,
           price,
           quantity: 1,
-          options,
+          options: optionsSummary,
         },
       ];
     });
@@ -55,14 +62,14 @@ export function App() {
   return (
     <div className="min-h-screen bg-black text-white font-sans antialiased selection:bg-white selection:text-black">
 
-      {/* MINIMAL HEADER / NAVBAR */}
+      {/* STICKY NAVBAR */}
       <Navbar
         onOpenOrderModal={() => setIsDeliveryModalOpen(true)}
         onOpenCart={() => setIsCheckoutOpen(true)}
         cartCount={totalCartCount}
       />
 
-      {/* EDITORIAL HERO SECTION */}
+      {/* HERO SECTION */}
       <HeroSection onOpenOrderModal={() => setIsDeliveryModalOpen(true)} />
 
       {/* SILIVE FEATURED ABOUT US SECTION */}
@@ -71,7 +78,7 @@ export function App() {
       {/* DOORDASH LAYOUT STOREFRONT & MENU */}
       <EditorialMenu
         onOpenOrderModal={() => setIsDeliveryModalOpen(true)}
-        onAddToCart={handleAddToCart}
+        onInitiateAdd={handleInitiateAdd}
       />
 
       {/* LOCATION, HOURS & FOOTER */}
@@ -85,6 +92,14 @@ export function App() {
           setIsDeliveryModalOpen(false);
           setIsCheckoutOpen(true);
         }}
+      />
+
+      {/* ITEM CUSTOMIZATION MODAL (Size, Flavored Rice & Sides) */}
+      <ItemCustomizeModal
+        item={customizingItem}
+        isOpen={!!customizingItem}
+        onClose={() => setCustomizingItem(null)}
+        onConfirmAdd={handleConfirmAdd}
       />
 
       {/* NATIVE SQUARE CHECKOUT MODAL */}
