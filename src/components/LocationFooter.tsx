@@ -57,19 +57,46 @@ export const LocationFooter: React.FC = () => {
           </div>
 
           {/* HOURS */}
-          <div className="md:col-span-3 text-left space-y-4">
+          <div className="md:col-span-2 text-left space-y-4">
             <h4 className="text-xs font-semibold tracking-[0.25em] text-[#A1A1AA] uppercase">
-              Hours of Operation
+              Hours
             </h4>
             <div className="space-y-2 text-xs text-[#A1A1AA] font-mono">
               <div className="flex items-center space-x-2">
                 <Clock className="w-4 h-4 text-white shrink-0" />
-                <span>Daily Kitchen Hours</span>
+                <span>Kitchen</span>
               </div>
               <p className="text-white pt-1">
-                Monday – Saturday: 11AM – 10PM<br />
-                Sunday: 12PM – 9PM
+                Mon–Sat: 11AM–10PM<br />
+                Sun: 12PM–9PM
               </p>
+            </div>
+          </div>
+
+          {/* DELIVERY PARTNERS */}
+          <div className="md:col-span-2 text-left space-y-4">
+            <h4 className="text-xs font-semibold tracking-[0.25em] text-[#A1A1AA] uppercase">
+              Delivery Partners
+            </h4>
+            <div className="space-y-3 text-xs font-mono">
+              <a
+                href="https://www.ubereats.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center space-x-1.5 text-[#A1A1AA] hover:text-white uppercase transition-colors"
+              >
+                <span>Uber Eats</span>
+                <ExternalLink className="w-3 h-3" />
+              </a>
+              <a
+                href="https://www.doordash.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center space-x-1.5 text-[#A1A1AA] hover:text-white uppercase transition-colors"
+              >
+                <span>DoorDash</span>
+                <ExternalLink className="w-3 h-3" />
+              </a>
             </div>
           </div>
 

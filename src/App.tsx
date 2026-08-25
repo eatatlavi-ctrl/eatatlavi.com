@@ -3,14 +3,16 @@ import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/HeroSection';
 import { AboutSection } from './components/AboutSection';
 import { EditorialMenu } from './components/EditorialMenu';
-import { DeliveryModal } from './components/DeliveryModal';
-import { CheckoutModal } from './components/CheckoutModal';
-import { ItemCustomizeModal } from './components/ItemCustomizeModal';
+import { CheckoutModal } from "./components/CheckoutModal";
+import { ItemCustomizeModal } from "./components/ItemCustomizeModal";
+import { InteractiveMenu } from './components/InteractiveMenu';
 import { LocationFooter } from './components/LocationFooter';
 import type { CartItem, EditorialMenuItem } from './types';
 
+export type ViewState = 'home' | 'menu' | 'store';
+
 export function App() {
-  const [isDeliveryModalOpen, setIsDeliveryModalOpen] = useState(false);
+  const [currentView, setCurrentView] = useState<ViewState>('home');
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
   const [customizingItem, setCustomizingItem] = useState<EditorialMenuItem | null>(null);
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
@@ -64,35 +66,32 @@ export function App() {
 
       {/* STICKY NAVBAR */}
       <Navbar
-        onOpenOrderModal={() => setIsDeliveryModalOpen(true)}
+        currentView={currentView}
+        onNavigate={setCurrentView}
         onOpenCart={() => setIsCheckoutOpen(true)}
         cartCount={totalCartCount}
       />
 
-      {/* HERO SECTION */}
-      <HeroSection onOpenOrderModal={() => setIsDeliveryModalOpen(true)} />
+      {/* DYNAMIC VIEW ROUTING */}
+      {currentView === 'home' && (
+        <>
+          <HeroSection onNavigate={setCurrentView} />
+          <AboutSection onNavigate={setCurrentView} />
+        </>
+      )}
 
-      {/* SILIVE FEATURED ABOUT US SECTION */}
-      <AboutSection onOpenOrderModal={() => setIsDeliveryModalOpen(true)} />
+      {currentView === 'menu' && (
+        <InteractiveMenu />
+      )}
 
-      {/* DOORDASH LAYOUT STOREFRONT & MENU */}
-      <EditorialMenu
-        onOpenOrderModal={() => setIsDeliveryModalOpen(true)}
-        onInitiateAdd={handleInitiateAdd}
-      />
+      {currentView === 'store' && (
+        <EditorialMenu
+          onInitiateAdd={handleInitiateAdd}
+        />
+      )}
 
-      {/* LOCATION, HOURS & FOOTER */}
+      {/* LOCATION, HOURS & FOOTER (Always visible at bottom) */}
       <LocationFooter />
-
-      {/* DELIVERY OPTIONS MODAL */}
-      <DeliveryModal
-        isOpen={isDeliveryModalOpen}
-        onClose={() => setIsDeliveryModalOpen(false)}
-        onOpenCheckout={() => {
-          setIsDeliveryModalOpen(false);
-          setIsCheckoutOpen(true);
-        }}
-      />
 
       {/* ITEM CUSTOMIZATION MODAL (Size, Flavored Rice & Sides) */}
       <ItemCustomizeModal

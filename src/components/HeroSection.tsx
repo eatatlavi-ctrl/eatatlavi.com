@@ -1,11 +1,13 @@
 import React from 'react';
 import { ArrowRight, Truck, Award, Sparkles } from 'lucide-react';
 
+import type { ViewState } from '../App';
+
 interface HeroSectionProps {
-  onOpenOrderModal: () => void;
+  onNavigate: (view: ViewState) => void;
 }
 
-export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenOrderModal }) => {
+export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
   return (
     <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-28 bg-black overflow-hidden border-b border-[#27272A]">
       
@@ -55,21 +57,21 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenOrderModal }) =>
             </p>
 
             {/* BUTTONS */}
-            <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center space-y-3.5 sm:space-y-0 sm:space-x-5">
+            <div className="flex flex-col sm:flex-row items-center sm:space-x-4 space-y-4 sm:space-y-0 pt-4">
               <button
-                onClick={onOpenOrderModal}
-                className="bg-gradient-to-r from-[#E5C158] via-[#D4AF37] to-[#B38F24] hover:brightness-110 text-black font-bold text-xs tracking-[0.2em] uppercase px-8 py-4 shadow-xl transition-all flex items-center justify-center space-x-2"
+                onClick={() => onNavigate('store')}
+                className="w-full sm:w-auto bg-[#D4AF37] hover:bg-white text-black font-extrabold text-sm tracking-[0.2em] uppercase px-8 py-4 transition-colors flex items-center justify-center space-x-2"
               >
                 <span>ORDER ONLINE</span>
                 <ArrowRight className="w-4 h-4 text-black" />
               </button>
 
-              <a
-                href="#menu"
-                className="border border-[#27272A] hover:border-white text-white font-semibold text-xs tracking-[0.2em] uppercase px-8 py-4 transition-all text-center"
+              <button
+                onClick={() => onNavigate('menu')}
+                className="border border-[#27272A] hover:border-white text-white font-semibold text-xs tracking-[0.2em] uppercase px-8 py-4 transition-all text-center w-full sm:w-auto"
               >
                 EXPLORE INTERACTIVE MENU
-              </a>
+              </button>
             </div>
 
           </div>
@@ -98,12 +100,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenOrderModal }) =>
                   </h3>
                 </div>
 
-                <a
-                  href="#menu"
+                <button
+                  onClick={() => onNavigate('menu')}
                   className="text-xs font-mono tracking-wider uppercase text-black bg-[#D4AF37] hover:bg-white px-4 py-2 font-bold transition-colors"
                 >
                   View
-                </a>
+                </button>
               </div>
 
             </div>

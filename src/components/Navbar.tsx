@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Phone, Menu as MenuIcon, X, Sparkles, ShoppingBag } from 'lucide-react';
 
+import type { ViewState } from '../App';
+
 interface NavbarProps {
-  onOpenOrderModal: () => void;
+  currentView: ViewState;
+  onNavigate: (view: ViewState) => void;
   onOpenCart?: () => void;
   cartCount?: number;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ onOpenOrderModal, onOpenCart, cartCount = 0 }) => {
+export const Navbar: React.FC<NavbarProps> = ({ currentView, onNavigate, onOpenCart, cartCount = 0 }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -38,10 +41,9 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenOrderModal, onOpenCart, ca
 
         {/* DESKTOP NAV LINKS */}
         <nav className="hidden lg:flex items-center space-x-8 text-xs font-medium tracking-[0.2em] uppercase text-[#A1A1AA]">
-          <a href="#menu" className="hover:text-white transition-colors">Menu</a>
-          <a href="#about" className="hover:text-white transition-colors">About Us</a>
-          <a href="#reviews" className="hover:text-white transition-colors">Reviews</a>
-          <a href="#location" className="hover:text-white transition-colors">Location & Contact</a>
+          <button onClick={() => onNavigate('home')} className={`transition-colors ${currentView === 'home' ? 'text-white' : 'hover:text-white'}`}>Home</button>
+          <button onClick={() => onNavigate('menu')} className={`transition-colors ${currentView === 'menu' ? 'text-white' : 'hover:text-white'}`}>Menu</button>
+          <a href={currentView === 'home' ? '#about' : '/#about'} onClick={() => onNavigate('home')} className="hover:text-white transition-colors">About Us</a>
         </nav>
 
         {/* RIGHT: PHONE, CART & GOLD CTA BUTTON */}
@@ -71,7 +73,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenOrderModal, onOpenCart, ca
           )}
 
           <button
-            onClick={onOpenOrderModal}
+            onClick={() => onNavigate('store')}
             className="bg-gradient-to-r from-[#E5C158] via-[#D4AF37] to-[#B38F24] hover:brightness-110 text-black font-bold text-xs tracking-[0.2em] uppercase px-6 py-2.5 rounded-none shadow-lg transition-all duration-300 flex items-center space-x-2"
           >
             <span>ORDER ONLINE</span>
@@ -82,7 +84,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenOrderModal, onOpenCart, ca
         {/* MOBILE MENU TOGGLE */}
         <div className="lg:hidden flex items-center space-x-3">
           <button
-            onClick={onOpenOrderModal}
+            onClick={() => onNavigate('store')}
             className="sm:hidden bg-[#D4AF37] text-black font-bold text-[10px] tracking-wider uppercase px-3 py-1.5"
           >
             Order
@@ -102,10 +104,9 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenOrderModal, onOpenCart, ca
       {mobileMenuOpen && (
         <div className="lg:hidden bg-black/95 border-b border-[#27272A] px-6 pt-6 pb-8 space-y-6 text-center animate-fadeIn">
           <nav className="flex flex-col space-y-4 text-xs font-medium tracking-[0.2em] uppercase text-[#A1A1AA]">
-            <a href="#menu" onClick={() => setMobileMenuOpen(false)} className="hover:text-white py-1">Menu</a>
-            <a href="#about" onClick={() => setMobileMenuOpen(false)} className="hover:text-white py-1">About Us</a>
-            <a href="#reviews" onClick={() => setMobileMenuOpen(false)} className="hover:text-white py-1">Reviews</a>
-            <a href="#location" onClick={() => setMobileMenuOpen(false)} className="hover:text-white py-1">Location & Contact</a>
+            <button onClick={() => { setMobileMenuOpen(false); onNavigate('home'); }} className={`py-1 ${currentView === 'home' ? 'text-white' : 'hover:text-white'}`}>Home</button>
+            <button onClick={() => { setMobileMenuOpen(false); onNavigate('menu'); }} className={`py-1 ${currentView === 'menu' ? 'text-white' : 'hover:text-white'}`}>Menu</button>
+            <button onClick={() => { setMobileMenuOpen(false); onNavigate('home'); }} className="hover:text-white py-1">About Us</button>
           </nav>
 
           <div className="pt-2 flex flex-col space-y-3">
@@ -120,7 +121,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenOrderModal, onOpenCart, ca
             <button
               onClick={() => {
                 setMobileMenuOpen(false);
-                onOpenOrderModal();
+                onNavigate('store');
               }}
               className="w-full bg-[#D4AF37] text-black font-bold text-xs tracking-[0.2em] uppercase py-3"
             >

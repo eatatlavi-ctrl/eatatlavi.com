@@ -2,10 +2,10 @@ import React from 'react';
 import { Sparkles, Heart, Utensils, Flame, Award } from 'lucide-react';
 
 interface AboutSectionProps {
-  onOpenOrderModal: () => void;
+  onNavigate: (view: "home" | "menu" | "store") => void;
 }
 
-export const AboutSection: React.FC<AboutSectionProps> = ({ onOpenOrderModal }) => {
+export const AboutSection: React.FC<AboutSectionProps> = ({ onNavigate }) => {
   return (
     <section id="about" className="py-24 bg-black border-t border-[#27272A] text-white relative overflow-hidden">
       
@@ -84,7 +84,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onOpenOrderModal }) 
 
             <div className="pt-4">
               <button
-                onClick={onOpenOrderModal}
+                onClick={() => onNavigate('store')}
                 className="bg-gradient-to-r from-[#E5C158] via-[#D4AF37] to-[#B38F24] hover:brightness-110 text-black font-bold text-xs tracking-[0.2em] uppercase px-8 py-4 shadow-xl transition-all"
               >
                 Experience LaVi Today &rarr;
