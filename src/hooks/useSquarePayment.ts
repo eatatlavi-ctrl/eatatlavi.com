@@ -27,8 +27,8 @@ interface UseSquarePaymentReturn {
   destroyCard: () => Promise<void>;
 }
 
-const APP_ID = import.meta.env.VITE_SQUARE_APP_ID as string;
-const LOCATION_ID = import.meta.env.VITE_SQUARE_LOCATION_ID as string;
+const APP_ID = (import.meta.env.VITE_SQUARE_APP_ID as string) || 'sq0idp-xjhiVAQmz57KPGdn7CQGMw';
+const LOCATION_ID = (import.meta.env.VITE_SQUARE_LOCATION_ID as string) || 'L1P9ANWYC0THW';
 
 export function useSquarePayment(): UseSquarePaymentReturn {
   const [isLoaded, setIsLoaded] = useState(false);
