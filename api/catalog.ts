@@ -1,29 +1,28 @@
 import * as sq from 'square';
 
-let client: any;
-try {
-  // @ts-ignore
-  const ClientConstructor = sq.Client || sq.default?.Client || sq.SquareClient;
-  // @ts-ignore
-  const Env = sq.SquareEnvironment || sq.default?.SquareEnvironment || sq.Environment;
-
-  if (!ClientConstructor) throw new Error('Square Client constructor not found in square package exports');
-
-  client = new ClientConstructor({
-    bearerAuthCredentials: {
-      accessToken: process.env.SQUARE_ACCESS_TOKEN || 'EAAAlwWfgbI1rjM-gIHF3gm0-TOaFCoWxq17RDSZl_ulLRRFecCRAIEjSkz8wjDa'
-    },
-    environment: Env?.Production || 'Production'
-  });
-} catch (err: any) {
-  console.error('Failed to initialize Square Client:', err.message || err);
-}
+let client: any = null;
 
 export default async function handler(req: any, res: any) {
   res.setHeader('Cache-Control', 's-maxage=60, stale-while-revalidate=3600');
 
   try {
-    if (!client) throw new Error('Square Client not initialized');
+    if (!client) {
+      // @ts-ignore
+      const ClientConstructor = sq.Client || sq.default?.Client || sq.SquareClient;
+      // @ts-ignore
+      const Env = sq.SquareEnvironment || sq.default?.SquareEnvironment || sq.Environment;
+
+      if (!ClientConstructor) throw new Error('Square Client constructor not found in square package exports');
+
+      client = new ClientConstructor({
+        bearerAuthCredentials: {
+          accessToken: process.env.SQUARE_ACCESS_TOKEN || 'EAAAlwWfgbI1rjM-gIHF3gm0-TOaFCoWxq17RDSZl_ulLRRFecCRAIEjSkz8wjDa'
+        },
+        environment: Env?.Production || 'Production'
+      });
+    }
+
+    if (!client) throw new Error('Square Client failed to initialize');
     
     const response = await client.catalog.search({
       objectTypes: ['ITEM', 'CATEGORY'],
