@@ -53,8 +53,8 @@ export const ItemCustomizeModal: React.FC<ItemCustomizeModalProps> = ({
 }) => {
   if (!isOpen || !item) return null;
 
-  const isEntree = item.category === 'Entrees' || item.name.toLowerCase().includes('oxtail') || item.name.toLowerCase().includes('chicken') || item.name.toLowerCase().includes('ribs');
-  const hasMultipleSizes = item.options?.includes('Medium') || item.options?.includes('Large') || item.name.toLowerCase().includes('oxtail');
+  const isEntree = item.category === 'Entrees';
+  const hasMultipleSizes = item.category !== 'Catering' && (item.options?.includes('Medium') || item.options?.includes('Large') || item.name.toLowerCase() === 'oxtails');
 
   // Variations
   const variations = [
