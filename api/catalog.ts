@@ -1,4 +1,6 @@
+// @ts-ignore
 import pkg from 'square';
+// @ts-ignore
 const { Client, Environment } = pkg;
 
 let client: any;
