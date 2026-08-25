@@ -13,12 +13,22 @@ export default async function handler(req: any, res: any) {
 
   try {
     const response = await client.catalogApi.searchCatalogObjects({
-      objectTypes: ['ITEM'],
+      objectTypes: ['ITEM', 'CATEGORY'],
       includeDeletedObjects: false,
       includeRelatedObjects: false
     });
 
-    const items = response.result.objects || [];
+    const objects = response.result.objects || [];
+    
+    // Map Square Category IDs to their Names
+    const categoryMap = new Map();
+    objects.forEach((obj: any) => {
+      if (obj.type === 'CATEGORY' && obj.categoryData?.name) {
+        categoryMap.set(obj.id, obj.categoryData.name);
+      }
+    });
+
+    const items = objects.filter((obj: any) => obj.type === 'ITEM');
 
     // Parse the Square items and merge with our rich editorial data
     const parsedCatalog = items.map((obj: any) => {
@@ -44,21 +54,39 @@ export default async function handler(req: any, res: any) {
         priceDisplay = `$${sorted[0].price.toFixed(2)}  /  $${sorted[sorted.length - 1].price.toFixed(2)}`;
       }
 
-      // 1. Look for this item in our existing rich menuData
+      // Determine native Square category name
+      let squareCategoryName = null;
+      if (itemData.categoryId && categoryMap.has(itemData.categoryId)) {
+        squareCategoryName = categoryMap.get(itemData.categoryId);
+      }
+
+      // 1. Look for this item in our existing rich menuData for photos/descriptions
       const existingMatch = EDITORIAL_MENU.find(e => e.name.toLowerCase() === name.toLowerCase());
 
-      // 2. Determine category & description
+      // 2. Determine final category & description
       let category = 'Uncategorized';
       let description = itemData.description || '';
       let isPopular = false;
       let image = undefined;
 
-      if (existingMatch) {
+      // Prioritize the native Square Category if it exists
+      if (squareCategoryName) {
+        category = squareCategoryName;
+        if (existingMatch) {
+          description = existingMatch.description || description;
+          isPopular = existingMatch.isPopular || false;
+          image = existingMatch.image;
+        }
+      } 
+      // Fallback 1: Use our rich editorial mapping
+      else if (existingMatch) {
         category = existingMatch.category;
         description = existingMatch.description || description;
         isPopular = existingMatch.isPopular || false;
         image = existingMatch.image;
-      } else {
+      } 
+      // Fallback 2: Keyword guessing for completely new items without a Square category
+      else {
         // AUTOCATEGORIZATION FOR FUTURE/NEW ITEMS (e.g., the 5 new beverages)
         const nameLower = name.toLowerCase();
         

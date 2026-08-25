@@ -1,15 +1,4 @@
-export type MenuCategory = 
-  | 'Entrees'
-  | 'Catering'
-  | 'Wings'
-  | 'Empanadas & Patties'
-  | 'Tacos, Burritos & Wraps'
-  | 'Burgers & Hot Dogs'
-  | 'Breakfast (All Day)'
-  | 'Sides'
-  | 'Sweet Treats'
-  | 'Beverages'
-  | 'Vegan';
+export type MenuCategory = string;
 
 export interface Variation {
   id: string;

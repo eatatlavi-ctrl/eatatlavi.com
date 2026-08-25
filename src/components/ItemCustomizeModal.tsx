@@ -54,6 +54,10 @@ export const ItemCustomizeModal: React.FC<ItemCustomizeModalProps> = ({
   if (!isOpen || !item) return null;
 
   const isEntree = item.category === 'Entrees';
+  const isCatering = item.category === 'Catering';
+  const isWings = item.category === 'Wings';
+  const showSides = isEntree || isCatering || isWings;
+  
   const variations = item.variations && item.variations.length > 1 ? item.variations : [];
   const hasMultipleSizes = variations.length > 0;
 
@@ -283,8 +287,9 @@ export const ItemCustomizeModal: React.FC<ItemCustomizeModalProps> = ({
           )}
 
           {/* 3. ADD EXTRA SIDES */}
-          <div className="space-y-3 pt-2 border-t border-gray-100">
-            <div>
+          {showSides && (
+            <div className="space-y-3 pt-2 border-t border-gray-100">
+              <div>
               <h4 className="text-sm font-bold text-gray-900">Add Extra Sides</h4>
               <span className="text-[11px] text-gray-500 font-normal">Optional · Select up to 5</span>
             </div>
@@ -333,6 +338,7 @@ export const ItemCustomizeModal: React.FC<ItemCustomizeModalProps> = ({
               })}
             </div>
           </div>
+          )}
 
           {/* 4. RECOMMENDED UPSELLS */}
           <div className="space-y-3 pt-2 border-t border-gray-100">

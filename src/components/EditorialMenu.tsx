@@ -2,19 +2,7 @@ import React, { useState } from 'react';
 import { Loader2, Plus, Sparkles } from 'lucide-react';
 import type { MenuCategory, EditorialMenuItem } from '../types';
 
-const CATEGORIES: MenuCategory[] = [
-  'Entrees',
-  'Catering',
-  'Wings',
-  'Empanadas & Patties',
-  'Tacos, Burritos & Wraps',
-  'Burgers & Hot Dogs',
-  'Breakfast (All Day)',
-  'Sides',
-  'Sweet Treats',
-  'Beverages',
-  'Vegan'
-];
+
 
 interface EditorialMenuProps {
   items: EditorialMenuItem[];
@@ -28,8 +16,11 @@ export const EditorialMenu: React.FC<EditorialMenuProps> = ({ items, isLoading, 
   // Most ordered / popular items for top showcase
   const popularItems = items.filter((item) => item.isPopular).slice(0, 6);
 
+  // Dynamically extract categories from items
+  const dynamicCategories = Array.from(new Set(items.map((item) => item.category))).filter(Boolean);
+
   // Group items by category
-  const categorizedMenu = CATEGORIES.map((cat) => ({
+  const categorizedMenu = dynamicCategories.map((cat) => ({
     category: cat,
     items: items.filter((item) => item.category === cat)
   })).filter((group) => group.items.length > 0);
@@ -159,7 +150,7 @@ export const EditorialMenu: React.FC<EditorialMenuProps> = ({ items, isLoading, 
               Full Menu Sections
             </h4>
             <nav className="space-y-1">
-              {CATEGORIES.map((cat) => (
+              {dynamicCategories.map((cat) => (
                 <button
                   key={cat}
                   onClick={() => scrollToCategory(cat)}
@@ -181,7 +172,7 @@ export const EditorialMenu: React.FC<EditorialMenuProps> = ({ items, isLoading, 
 
           {/* MOBILE STICKY HORIZONTAL BAR */}
           <div className="lg:hidden sticky top-16 z-30 bg-black/95 border-y border-[#27272A] py-3 -mx-4 px-4 overflow-x-auto scrollbar-none flex space-x-2">
-            {CATEGORIES.map((cat) => (
+            {dynamicCategories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => scrollToCategory(cat)}
