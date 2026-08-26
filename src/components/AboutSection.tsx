@@ -49,7 +49,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onNavigate }) => {
 
             <div className="space-y-4 text-sm text-[#A1A1AA] font-light leading-relaxed">
               <p>
-                Located at <strong className="text-white">500 Henderson Ave in West Brighton</strong>, LaVi Restaurant was born from a passion for scratch-made cooking, bold seasonings, and community heritage. Driven by the owner's vision to share her roots, the space was thoughtfully crafted into a vibrant sanctuary for authentic Caribbean and Southern soul food lovers.
+                Located at <strong className="text-white">500 Henderson Ave in West Brighton</strong>, LaVi Restaurant was born from a passion for scratch-made cooking, bold seasonings, and community heritage. Driven by the vision of a Staten Island local raised right here in West Brighton who wanted to share her roots, the space was thoughtfully crafted into a vibrant sanctuary for authentic Caribbean and Southern soul food lovers.
               </p>
 
               <p>
