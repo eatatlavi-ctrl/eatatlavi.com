@@ -67,13 +67,13 @@ export const LocationFooter: React.FC = () => {
                 <span>Kitchen</span>
               </div>
               <p className="text-white pt-1">
+                Monday Closed<br />
+                Tuesday 11 AM–8 PM<br />
                 Wednesday 11 AM–8 PM<br />
                 Thursday 11 AM–8 PM<br />
                 Friday 11 AM–8 PM<br />
                 Saturday 11 AM–8 PM<br />
-                Sunday 11 AM–8 PM<br />
-                Monday Closed<br />
-                Tuesday 11 AM–8 PM
+                Sunday 11 AM–8 PM
               </p>
             </div>
           </div>
