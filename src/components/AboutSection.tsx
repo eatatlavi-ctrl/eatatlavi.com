@@ -57,7 +57,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onNavigate }) => {
               </p>
 
               <p>
-                Every dish is prepared daily from scratch using fresh, high-quality ingredients, house-blended seasonings, and timeless family recipes cooked with love. Whether you're stopping by for an all-day breakfast platter, a hearty combo, to dine in and takeout, LaVi welcomes you with warmth and unmatched island hospitality.
+                Every dish is prepared daily from scratch using fresh, high-quality ingredients, house-blended seasonings, and timeless family recipes cooked with love. Whether you're stopping by for an all-day breakfast platter, a hearty combo, to dine in or takeout, LaVi welcomes you with warmth and unmatched island hospitality.
               </p>
             </div>
 
