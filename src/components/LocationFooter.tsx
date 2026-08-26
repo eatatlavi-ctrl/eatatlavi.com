@@ -71,8 +71,8 @@ export const LocationFooter: React.FC = () => {
                 Tuesday 11 AM–8 PM<br />
                 Wednesday 11 AM–8 PM<br />
                 Thursday 11 AM–8 PM<br />
-                Friday 11 AM–8 PM<br />
-                Saturday 11 AM–8 PM<br />
+                Friday 11 AM–2 AM<br />
+                Saturday 11 AM–2 AM<br />
                 Sunday 11 AM–8 PM
               </p>
             </div>
