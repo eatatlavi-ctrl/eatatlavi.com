@@ -15,9 +15,7 @@ export const LocationFooter: React.FC = () => {
               alt="LaVi Restaurant Logo"
               className="h-12 w-auto object-contain"
             />
-            <p className="text-xs text-[#A1A1AA] font-light leading-relaxed max-w-sm">
-              High-Fashion Editorial Digital Menu & Showcase. Premier Soul Food & Caribbean Destination in Staten Island, NY.
-            </p>
+
             <div className="pt-2 text-xs font-mono tracking-widest text-[#A1A1AA] uppercase">
               EATATLAVI.COM
             </div>
@@ -57,7 +55,7 @@ export const LocationFooter: React.FC = () => {
           </div>
 
           {/* HOURS */}
-          <div className="md:col-span-2 text-left space-y-4">
+          <div className="md:col-span-4 text-left space-y-4">
             <h4 className="text-xs font-semibold tracking-[0.25em] text-[#A1A1AA] uppercase">
               Hours
             </h4>
@@ -78,32 +76,7 @@ export const LocationFooter: React.FC = () => {
             </div>
           </div>
 
-          {/* DELIVERY PARTNERS */}
-          <div className="md:col-span-2 text-left space-y-4">
-            <h4 className="text-xs font-semibold tracking-[0.25em] text-[#A1A1AA] uppercase">
-              Delivery Partners
-            </h4>
-            <div className="space-y-3 text-xs font-mono">
-              <a
-                href="https://www.ubereats.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center space-x-1.5 text-[#A1A1AA] hover:text-white uppercase transition-colors"
-              >
-                <span>Uber Eats</span>
-                <ExternalLink className="w-3 h-3" />
-              </a>
-              <a
-                href="https://www.doordash.com/en/store/lavi-staten-island-44933219/?srsltid=AfmBOoob9WEnj4qTwaV74Cue1bkwUjO9sYzr5mzqIjsSdtLK9Z-YbzHo"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center space-x-1.5 text-[#A1A1AA] hover:text-white uppercase transition-colors"
-              >
-                <span>DoorDash</span>
-                <ExternalLink className="w-3 h-3" />
-              </a>
-            </div>
-          </div>
+
 
         </div>
 
