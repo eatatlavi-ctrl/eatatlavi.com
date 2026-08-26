@@ -41,7 +41,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
 
   const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
   const tax = subtotal * 0.08875; // NYC tax rate
-  const deliveryFee = fulfillment === 'delivery' && subtotal < 45 ? 5 : 0;
+  const deliveryFee = fulfillment === 'delivery' && subtotal < 35 ? 5 : 0;
   const total = subtotal + tax + deliveryFee;
 
   const remainingForDelivery = MINIMUM_DELIVERY_SUBTOTAL - subtotal;
@@ -198,10 +198,10 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                         </button>
                       ))}
                     </div>
-                    {fulfillment === 'delivery' && subtotal < 45 && (
-                      <p className="text-[10px] text-[#A1A1AA] mt-1.5 font-mono">+$5.00 delivery fee (free over $45)</p>
+                    {fulfillment === 'delivery' && subtotal < 35 && (
+                      <p className="text-[10px] text-[#A1A1AA] mt-1.5 font-mono">+$5.00 delivery fee (free over $35)</p>
                     )}
-                    {fulfillment === 'delivery' && subtotal >= 45 && (
+                    {fulfillment === 'delivery' && subtotal >= 35 && (
                       <p className="text-[10px] text-[#D4AF37] mt-1.5 font-mono">✓ Free local delivery unlocked!</p>
                     )}
                   </div>
