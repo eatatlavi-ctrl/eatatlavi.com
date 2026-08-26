@@ -22,12 +22,12 @@ export const LocationFooter: React.FC = () => {
           </div>
 
           {/* LOCATION & PHONE */}
-          <div className="md:col-span-4 text-left space-y-4">
+          <div className="md:col-span-4 text-center space-y-4 flex flex-col items-center">
             <h4 className="text-xs font-semibold tracking-[0.25em] text-[#A1A1AA] uppercase">
               Location & Contact
             </h4>
             <div className="space-y-3 text-xs text-white">
-              <div className="flex items-start space-x-3">
+              <div className="flex items-start justify-center space-x-3 text-left">
                 <MapPin className="w-4 h-4 text-white shrink-0 mt-0.5" />
                 <span>
                   500 Henderson Ave<br />
@@ -35,7 +35,7 @@ export const LocationFooter: React.FC = () => {
                 </span>
               </div>
 
-              <div className="flex items-center space-x-3">
+              <div className="flex items-center justify-center space-x-3">
                 <Phone className="w-4 h-4 text-white shrink-0" />
                 <a href="tel:3479343040" className="hover:underline font-mono">
                   (347) 934-3040
@@ -55,12 +55,12 @@ export const LocationFooter: React.FC = () => {
           </div>
 
           {/* HOURS */}
-          <div className="md:col-span-4 text-left space-y-4">
+          <div className="md:col-span-4 text-right space-y-4 flex flex-col items-end">
             <h4 className="text-xs font-semibold tracking-[0.25em] text-[#A1A1AA] uppercase">
               Hours
             </h4>
             <div className="space-y-2 text-xs text-[#A1A1AA] font-mono">
-              <div className="flex items-center space-x-2">
+              <div className="flex items-center justify-end space-x-2">
                 <Clock className="w-4 h-4 text-white shrink-0" />
                 <span>Kitchen</span>
               </div>
