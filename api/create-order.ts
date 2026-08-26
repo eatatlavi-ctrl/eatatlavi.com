@@ -1,7 +1,5 @@
 // @ts-nocheck
-import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { SquareClient as Client, SquareEnvironment as Environment } from 'square';
-import { randomUUID } from 'crypto';
 import { MINIMUM_DELIVERY_SUBTOTAL } from '../src/config.js';
 
 interface CartItem {
@@ -21,7 +19,7 @@ interface OrderRequest {
   amountCents: number;
 }
 
-export default async function handler(req: VercelRequest, res: VercelResponse) {
+export default async function handler(req: any, res: any) {
   // CORS headers (for local dev)
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
@@ -115,7 +113,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
           },
         ],
       },
-      idempotencyKey: randomUUID(),
+      idempotencyKey: globalThis.crypto.randomUUID(),
     });
 
     const orderId = order?.id;
@@ -127,7 +125,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     const { payment } = await client.payments.create({
       sourceId: cardToken,
-      idempotencyKey: randomUUID(),
+      idempotencyKey: globalThis.crypto.randomUUID(),
       amountMoney: {
         amount: finalAmount,
         currency: 'USD',
