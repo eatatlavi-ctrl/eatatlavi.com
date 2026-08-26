@@ -9,7 +9,7 @@ export const LocationFooter: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 pb-16 border-b border-[#27272A]">
           
           {/* BRAND COLUMN WITH LOGOLAVI.png */}
-          <div className="md:col-span-5 text-left space-y-6">
+          <div className="md:col-span-4 text-left space-y-6">
             <img
               src="/images/LOGOLAVI.png"
               alt="LaVi Restaurant Logo"
@@ -66,7 +66,7 @@ export const LocationFooter: React.FC = () => {
                 <Clock className="w-4 h-4 text-white shrink-0" />
                 <span>Kitchen</span>
               </div>
-              <p className="text-white pt-1">
+              <p className="text-white pt-1 whitespace-nowrap">
                 Monday Closed<br />
                 Tuesday 11 AM–8 PM<br />
                 Wednesday 11 AM–8 PM<br />
