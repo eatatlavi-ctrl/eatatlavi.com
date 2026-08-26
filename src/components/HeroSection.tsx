@@ -127,8 +127,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
           <div className="flex items-center space-x-3.5 p-4 border border-[#27272A] bg-[#09090B]/80 backdrop-blur-sm">
             <Truck className="w-6 h-6 text-[#A1A1AA] shrink-0" />
             <div>
-              <h4 className="text-xs font-mono tracking-widest text-white uppercase font-bold">Free Local Delivery</h4>
-              <p className="text-[11px] text-[#A1A1AA] mt-0.5">On all local orders over $35</p>
+              <h4 className="text-xs font-mono tracking-widest text-white uppercase font-bold">Fast & Speedy Delivery</h4>
+              <p className="text-[11px] text-[#A1A1AA] mt-0.5">Hot, fresh, and delivered right to your door</p>
             </div>
           </div>
 
