@@ -94,7 +94,7 @@ export const LocationFooter: React.FC = () => {
                 <ExternalLink className="w-3 h-3" />
               </a>
               <a
-                href="https://www.doordash.com"
+                href="https://www.doordash.com/en/store/lavi-staten-island-44933219/?srsltid=AfmBOoob9WEnj4qTwaV74Cue1bkwUjO9sYzr5mzqIjsSdtLK9Z-YbzHo"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center space-x-1.5 text-[#A1A1AA] hover:text-white uppercase transition-colors"
