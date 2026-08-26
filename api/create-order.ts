@@ -57,6 +57,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   try {
     // ── STEP 1: Create Order via Square Orders API ──────────────────
+    const subtotalCents = cartItems.reduce((sum, item) => sum + Math.round(item.price * 100) * item.quantity, 0);
+    const hasDeliveryFee = fulfillment === 'delivery' && subtotalCents < 4500;
+
     const lineItems = cartItems.map((item) => ({
       name: item.name,
       quantity: String(item.quantity),
@@ -71,6 +74,23 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       order: {
         locationId: LOCATION_ID,
         lineItems,
+        taxes: [
+          {
+            name: 'NYC Sales Tax',
+            percentage: '8.875',
+            scope: 'ORDER',
+          },
+        ],
+        serviceCharges: hasDeliveryFee ? [
+          {
+            name: 'Delivery Fee',
+            amountMoney: {
+              amount: BigInt(500),
+              currency: 'USD',
+            },
+            calculationPhase: 'TOTAL_PHASE',
+          },
+        ] : [],
         fulfillments: [
           {
             type: fulfillment === 'pickup' ? ('PICKUP' as const) : ('DELIVERY' as const),
@@ -99,11 +119,14 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     if (!orderId) throw new Error('Failed to create order.');
 
     // ── STEP 2: Process Payment via Square Payments API ─────────────
+    const finalAmount = order?.totalMoney?.amount;
+    if (!finalAmount) throw new Error('Order total could not be determined.');
+
     const { payment } = await client.payments.create({
       sourceId: cardToken,
       idempotencyKey: randomUUID(),
       amountMoney: {
-        amount: BigInt(amountCents),
+        amount: finalAmount,
         currency: 'USD',
       },
       orderId,
