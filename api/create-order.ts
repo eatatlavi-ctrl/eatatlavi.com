@@ -2,6 +2,7 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { SquareClient as Client, SquareEnvironment as Environment } from 'square';
 import { randomUUID } from 'crypto';
+import { MINIMUM_DELIVERY_SUBTOTAL } from '../src/config';
 
 // Square client — Access Token is ONLY here on the server, never sent to browser
 const client = new Client({
@@ -58,6 +59,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   try {
     // ── STEP 1: Create Order via Square Orders API ──────────────────
     const subtotalCents = cartItems.reduce((sum, item) => sum + Math.round(item.price * 100) * item.quantity, 0);
+
+    // Enforce delivery minimum
+    if (fulfillment === 'delivery' && subtotalCents < MINIMUM_DELIVERY_SUBTOTAL * 100) {
+      return res.status(400).json({ error: `Delivery orders require a $${MINIMUM_DELIVERY_SUBTOTAL.toFixed(2)} minimum.` });
+    }
+
     const hasDeliveryFee = fulfillment === 'delivery' && subtotalCents < 4500;
 
     const lineItems = cartItems.map((item) => ({

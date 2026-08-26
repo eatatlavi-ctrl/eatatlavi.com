@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { X, Minus, Plus, Trash2, ArrowRight, CheckCircle, Loader2, AlertCircle, ShieldCheck, Lock } from 'lucide-react';
 import type { CartItem } from '../types';
 import { useSquarePayment } from '../hooks/useSquarePayment';
+import { MINIMUM_DELIVERY_SUBTOTAL } from '../config';
 
 interface CheckoutModalProps {
   isOpen: boolean;
@@ -42,6 +43,9 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
   const tax = subtotal * 0.08875; // NYC tax rate
   const deliveryFee = fulfillment === 'delivery' && subtotal < 45 ? 5 : 0;
   const total = subtotal + tax + deliveryFee;
+
+  const remainingForDelivery = MINIMUM_DELIVERY_SUBTOTAL - subtotal;
+  const isDeliveryMinimumMet = fulfillment !== 'delivery' || remainingForDelivery <= 0;
 
   // Mount card form when entering payment step
   useEffect(() => {
@@ -376,16 +380,25 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
               </button>
             )}
             {step === 'payment' && (
-              <button
-                onClick={handlePlaceOrder}
-                disabled={isProcessing || !isLoaded}
-                className="w-full bg-[#D4AF37] text-black font-bold text-xs tracking-[0.2em] uppercase py-4 flex items-center justify-center space-x-2 hover:bg-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
-                {isProcessing ? (
-                  <><Loader2 className="w-4 h-4 animate-spin" /><span>Processing…</span></>
-                ) : (
-                  <><Lock className="w-3.5 h-3.5" /><span>Place Order · ${total.toFixed(2)}</span></>
+              <>
+                {fulfillment === 'delivery' && remainingForDelivery > 0 && (
+                  <div className="text-center mb-2">
+                    <p className="text-[10px] text-red-400 font-mono bg-red-500/10 border border-red-500/40 p-2">
+                      Delivery orders require a ${MINIMUM_DELIVERY_SUBTOTAL} minimum — add ${remainingForDelivery.toFixed(2)} more to checkout.
+                    </p>
+                  </div>
                 )}
-              </button>
+                <button
+                  onClick={handlePlaceOrder}
+                  disabled={isProcessing || !isLoaded || !isDeliveryMinimumMet}
+                  className="w-full bg-[#D4AF37] text-black font-bold text-xs tracking-[0.2em] uppercase py-4 flex items-center justify-center space-x-2 hover:bg-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+                  {isProcessing ? (
+                    <><Loader2 className="w-4 h-4 animate-spin" /><span>Processing…</span></>
+                  ) : (
+                    <><Lock className="w-3.5 h-3.5" /><span>Place Order · ${total.toFixed(2)}</span></>
+                  )}
+                </button>
+              </>
             )}
             {step !== 'cart' && (
               <button onClick={() => setStep(step === 'payment' ? 'details' : 'cart')}
