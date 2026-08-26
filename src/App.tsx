@@ -8,6 +8,7 @@ import { ItemCustomizeModal } from "./components/ItemCustomizeModal";
 import { InteractiveMenu } from './components/InteractiveMenu';
 import { LocationFooter } from './components/LocationFooter';
 import { CateringPage } from './components/CateringPage';
+import { EDITORIAL_MENU } from './data/menuData';
 import type { CartItem, EditorialMenuItem } from './types';
 
 export type ViewState = 'home' | 'menu' | 'store' | 'catering';
@@ -17,19 +18,23 @@ export function App() {
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
   const [customizingItem, setCustomizingItem] = useState<EditorialMenuItem | null>(null);
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
-  const [menuItems, setMenuItems] = useState<EditorialMenuItem[]>([]);
-  const [isLoadingMenu, setIsLoadingMenu] = useState(true);
+  // Pre-populate with local data so the menu is never empty (works in dev without the API)
+  const [menuItems, setMenuItems] = useState<EditorialMenuItem[]>(EDITORIAL_MENU);
+  const [isLoadingMenu, setIsLoadingMenu] = useState(false);
 
   useEffect(() => {
-    fetch('/api/catalog.ts')
-      .then(res => res.json())
-      .then(data => {
-        if (Array.isArray(data)) setMenuItems(data);
-        setIsLoadingMenu(false);
+    // In production Vercel will serve this route; in local dev it 404s and we
+    // gracefully keep the local EDITORIAL_MENU that was set as the default.
+    fetch('/api/catalog')
+      .then(res => {
+        if (!res.ok) throw new Error(`API responded ${res.status}`);
+        return res.json();
       })
-      .catch(err => {
-        console.error('Failed to load menu:', err);
-        setIsLoadingMenu(false);
+      .then(data => {
+        if (Array.isArray(data) && data.length > 0) setMenuItems(data);
+      })
+      .catch(() => {
+        // Silently fall back – EDITORIAL_MENU is already loaded
       });
   }, []);
 

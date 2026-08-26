@@ -15,7 +15,7 @@ export interface EditorialMenuItem {
   description?: string;
   options?: string;
   variations?: Variation[];
-  image?: string;
+  imageUrl?: string;
   isPopular?: boolean;
 }
 

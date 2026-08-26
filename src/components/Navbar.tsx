@@ -28,7 +28,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentView, onNavigate, onOpenC
         ? 'bg-black/95 backdrop-blur-md border-b border-[#27272A] py-3.5 shadow-2xl' 
         : 'bg-gradient-to-b from-black via-black/80 to-transparent py-5'
     }`}>
-      <div className="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between relative">
         
         {/* LOGO */}
         <a href="#" className="flex items-center space-x-3 group">
@@ -40,11 +40,11 @@ export const Navbar: React.FC<NavbarProps> = ({ currentView, onNavigate, onOpenC
         </a>
 
         {/* DESKTOP NAV LINKS */}
-        <nav className="hidden lg:flex items-center space-x-8 text-xs font-medium tracking-[0.2em] uppercase text-[#A1A1AA]">
-          <button onClick={() => onNavigate('home')} className={`transition-colors ${currentView === 'home' ? 'text-white' : 'hover:text-white'}`}>Home</button>
-          <button onClick={() => onNavigate('menu')} className={`transition-colors ${currentView === 'menu' ? 'text-white' : 'hover:text-white'}`}>Menu</button>
-          <a href={currentView === 'home' ? '#about' : '/#about'} onClick={() => onNavigate('home')} className="hover:text-white transition-colors">About Us</a>
-          <button onClick={() => onNavigate('catering')} className={`transition-colors ${currentView === 'catering' ? 'text-white' : 'hover:text-white'}`}>Catering</button>
+        <nav className="hidden lg:flex items-center space-x-8 text-xs font-bold tracking-[0.2em] text-[#A1A1AA] absolute left-1/2 -translate-x-1/2">
+          <button onClick={() => onNavigate('home')} className={`transition-colors ${currentView === 'home' ? 'text-white' : 'hover:text-white'}`}>HOME</button>
+          <button onClick={() => onNavigate('menu')} className={`transition-colors ${currentView === 'menu' ? 'text-white' : 'hover:text-white'}`}>MENU</button>
+          <a href={currentView === 'home' ? '#about' : '/#about'} onClick={() => onNavigate('home')} className="hover:text-white transition-colors">ABOUT US</a>
+          <button onClick={() => onNavigate('catering')} className={`transition-colors ${currentView === 'catering' ? 'text-white' : 'hover:text-white'}`}>CATERING</button>
         </nav>
 
         {/* RIGHT: PHONE, CART & GOLD CTA BUTTON */}

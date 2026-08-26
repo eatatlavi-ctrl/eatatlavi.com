@@ -154,9 +154,9 @@ export const ItemCustomizeModal: React.FC<ItemCustomizeModalProps> = ({
 
         {/* TOP HERO IMAGE OR CLOSE BUTTON */}
         <div className="relative">
-          {item.image ? (
+          {item.imageUrl ? (
             <div className="h-48 w-full overflow-hidden relative bg-gray-100">
-              <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
+              <img src={item.imageUrl} alt={item.name} className="w-full h-full object-cover" />
               <button
                 onClick={onClose}
                 className="absolute top-3 left-3 bg-white/90 hover:bg-white text-black p-2 rounded-full shadow-md transition-all"
@@ -183,7 +183,7 @@ export const ItemCustomizeModal: React.FC<ItemCustomizeModalProps> = ({
         <div className="flex-1 overflow-y-auto px-6 py-4 space-y-6">
 
           {/* ITEM TITLE & DESCRIPTION */}
-          {item.image && (
+          {item.imageUrl && (
             <div>
               <h3 className="text-2xl font-extrabold text-gray-900">{item.name}</h3>
               {item.description && (

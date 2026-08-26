@@ -69,15 +69,29 @@ export default async function handler(req: any, res: any) {
       let category = 'Uncategorized';
       let description = itemData.description || '';
       let isPopular = false;
-      let image = undefined;
+      let imageUrl = undefined;
 
       // Prioritize the native Square Category if it exists
-      if (squareCategoryName) {
+      
+      const categoryOverrides: Record<string, string> = {
+        'Whiting Fried Fish 3 with fries': 'Entrees',
+        'Salmon Salad': 'Entrees',
+        'Jerk Chicken Salad': 'Entrees',
+        'Large Salad': 'Entrees',
+        'Oxtail Mac & Cheese': 'Entrees',
+        'Cat Fish 3pcs w/ fries': 'Entrees',
+        'Soul Bowl': 'Entrees'
+      };
+
+      if (categoryOverrides[name]) {
+        category = categoryOverrides[name];
+      } else if (squareCategoryName) {
+
         category = squareCategoryName;
         if (existingMatch) {
           description = existingMatch.description || description;
           isPopular = existingMatch.isPopular || false;
-          image = existingMatch.image;
+          imageUrl = existingMatch.imageUrl;
         }
       } 
       // Fallback 1: Use our rich editorial mapping
@@ -85,7 +99,7 @@ export default async function handler(req: any, res: any) {
         category = existingMatch.category;
         description = existingMatch.description || description;
         isPopular = existingMatch.isPopular || false;
-        image = existingMatch.image;
+        imageUrl = existingMatch.imageUrl;
       } 
       // Fallback 2: Keyword guessing for completely new items without a Square category
       else {
@@ -126,7 +140,7 @@ export default async function handler(req: any, res: any) {
         description,
         variations: parsedVariations,
         isPopular,
-        image
+        imageUrl
       };
     });
 

@@ -76,11 +76,15 @@ export const CateringPage: React.FC<CateringPageProps> = ({ items, isLoading, on
                   </div>
 
                   <div className="shrink-0 flex flex-col items-end justify-between h-full space-y-3">
-                    {item.image ? (
+                    {item.imageUrl ? (
                       <div className="w-16 h-16 sm:w-20 sm:h-20 rounded overflow-hidden border border-[#27272A]">
-                        <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
+                        <img src={item.imageUrl} alt={item.name} className="w-full h-full object-cover" />
                       </div>
-                    ) : null}
+                    ) : (
+                      <div className="w-16 h-16 sm:w-20 sm:h-20 rounded overflow-hidden border border-[#27272A] bg-[#18181B] flex items-center justify-center">
+                        <span className="font-serif text-[12px] text-[#D4AF37] opacity-50 tracking-wider">LAVI</span>
+                      </div>
+                    )}
 
                     {onInitiateAdd && (
                       <button

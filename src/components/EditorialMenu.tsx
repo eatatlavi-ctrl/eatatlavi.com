@@ -108,9 +108,9 @@ export const EditorialMenu: React.FC<EditorialMenuProps> = ({ items, isLoading, 
                   </div>
 
                   <div className="shrink-0 relative">
-                    {item.image ? (
+                    {item.imageUrl ? (
                       <div className="w-20 h-20 rounded-md overflow-hidden relative border border-[#27272A]">
-                        <img src={item.image} alt={item.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform" />
+                        <img src={item.imageUrl} alt={item.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform" />
                         {onInitiateAdd && (
                           <button
                             type="button"
@@ -123,16 +123,19 @@ export const EditorialMenu: React.FC<EditorialMenuProps> = ({ items, isLoading, 
                         )}
                       </div>
                     ) : (
-                      onInitiateAdd && (
-                        <button
-                          type="button"
-                          onClick={(e) => { e.stopPropagation(); onInitiateAdd(item); }}
-                          className="w-10 h-10 bg-[#18181B] border border-[#27272A] group-hover:border-[#D4AF37] text-white group-hover:bg-[#D4AF37] group-hover:text-black flex items-center justify-center transition-all rounded-full"
-                          aria-label={`Customize ${item.name}`}
-                        >
-                          <Plus className="w-4 h-4" />
-                        </button>
-                      )
+                      <div className="w-20 h-20 rounded-md overflow-hidden relative border border-[#27272A] bg-[#18181B] flex items-center justify-center group-hover:border-[#D4AF37]/50 transition-colors">
+                        <span className="font-serif text-sm text-[#D4AF37] opacity-50 tracking-wider">LAVI</span>
+                        {onInitiateAdd && (
+                          <button
+                            type="button"
+                            onClick={(e) => { e.stopPropagation(); onInitiateAdd(item); }}
+                            className="absolute bottom-1 right-1 bg-white text-black p-1.5 rounded-full shadow-md hover:bg-[#D4AF37] transition-colors"
+                            aria-label={`Customize ${item.name}`}
+                          >
+                            <Plus className="w-3.5 h-3.5" />
+                          </button>
+                        )}
+                      </div>
                     )}
                   </div>
                 </div>
@@ -250,11 +253,15 @@ export const EditorialMenu: React.FC<EditorialMenuProps> = ({ items, isLoading, 
                       </div>
 
                       <div className="shrink-0 flex flex-col items-end justify-between h-full space-y-3">
-                        {item.image ? (
+                        {item.imageUrl ? (
                           <div className="w-16 h-16 rounded overflow-hidden border border-[#27272A]">
-                            <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
+                            <img src={item.imageUrl} alt={item.name} className="w-full h-full object-cover" />
                           </div>
-                        ) : null}
+                        ) : (
+                          <div className="w-16 h-16 rounded overflow-hidden border border-[#27272A] bg-[#18181B] flex items-center justify-center">
+                            <span className="font-serif text-[10px] text-[#D4AF37] opacity-50 tracking-wider">LAVI</span>
+                          </div>
+                        )}
 
                         {onInitiateAdd && (
                           <button
