@@ -20,7 +20,7 @@ export function App() {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   // Pre-populate with local data so the menu is never empty (works in dev without the API)
   const [menuItems, setMenuItems] = useState<EditorialMenuItem[]>(EDITORIAL_MENU);
-  const [isLoadingMenu, setIsLoadingMenu] = useState(false);
+  const isLoadingMenu = false;
 
   useEffect(() => {
     // In production Vercel will serve this route; in local dev it 404s and we
