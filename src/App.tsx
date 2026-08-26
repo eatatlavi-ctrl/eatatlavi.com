@@ -7,9 +7,10 @@ import { CheckoutModal } from "./components/CheckoutModal";
 import { ItemCustomizeModal } from "./components/ItemCustomizeModal";
 import { InteractiveMenu } from './components/InteractiveMenu';
 import { LocationFooter } from './components/LocationFooter';
+import { CateringPage } from './components/CateringPage';
 import type { CartItem, EditorialMenuItem } from './types';
 
-export type ViewState = 'home' | 'menu' | 'store';
+export type ViewState = 'home' | 'menu' | 'store' | 'catering';
 
 export function App() {
   const [currentView, setCurrentView] = useState<ViewState>('home');
@@ -101,6 +102,14 @@ export function App() {
 
       {currentView === 'store' && (
         <EditorialMenu
+          items={menuItems}
+          isLoading={isLoadingMenu}
+          onInitiateAdd={handleInitiateAdd}
+        />
+      )}
+
+      {currentView === 'catering' && (
+        <CateringPage
           items={menuItems}
           isLoading={isLoadingMenu}
           onInitiateAdd={handleInitiateAdd}

@@ -44,6 +44,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentView, onNavigate, onOpenC
           <button onClick={() => onNavigate('home')} className={`transition-colors ${currentView === 'home' ? 'text-white' : 'hover:text-white'}`}>Home</button>
           <button onClick={() => onNavigate('menu')} className={`transition-colors ${currentView === 'menu' ? 'text-white' : 'hover:text-white'}`}>Menu</button>
           <a href={currentView === 'home' ? '#about' : '/#about'} onClick={() => onNavigate('home')} className="hover:text-white transition-colors">About Us</a>
+          <button onClick={() => onNavigate('catering')} className={`transition-colors ${currentView === 'catering' ? 'text-white' : 'hover:text-white'}`}>Catering</button>
         </nav>
 
         {/* RIGHT: PHONE, CART & GOLD CTA BUTTON */}
@@ -107,6 +108,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentView, onNavigate, onOpenC
             <button onClick={() => { setMobileMenuOpen(false); onNavigate('home'); }} className={`py-1 ${currentView === 'home' ? 'text-white' : 'hover:text-white'}`}>Home</button>
             <button onClick={() => { setMobileMenuOpen(false); onNavigate('menu'); }} className={`py-1 ${currentView === 'menu' ? 'text-white' : 'hover:text-white'}`}>Menu</button>
             <button onClick={() => { setMobileMenuOpen(false); onNavigate('home'); }} className="hover:text-white py-1">About Us</button>
+            <button onClick={() => { setMobileMenuOpen(false); onNavigate('catering'); }} className={`py-1 ${currentView === 'catering' ? 'text-white' : 'hover:text-white'}`}>Catering</button>
           </nav>
 
           <div className="pt-2 flex flex-col space-y-3">
