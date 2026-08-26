@@ -2,7 +2,7 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { SquareClient as Client, SquareEnvironment as Environment } from 'square';
 import { randomUUID } from 'crypto';
-import { MINIMUM_DELIVERY_SUBTOTAL } from '../src/config';
+import { MINIMUM_DELIVERY_SUBTOTAL } from '../src/config.js';
 
 interface CartItem {
   name: string;
