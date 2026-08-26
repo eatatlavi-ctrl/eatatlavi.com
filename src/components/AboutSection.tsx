@@ -44,12 +44,12 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onNavigate }) => {
           <div className="lg:col-span-6 space-y-6 text-left">
             
             <h3 className="font-serif text-2xl sm:text-3xl font-light text-white leading-snug">
-              Transforming a Neighborhood Gem into Staten Island’s Premier Comfort Food Destination.
+              Sharing Heritage Through Staten Island’s Premier Comfort Food Destination.
             </h3>
 
             <div className="space-y-4 text-sm text-[#A1A1AA] font-light leading-relaxed">
               <p>
-                Located at <strong className="text-white">500 Henderson Ave in West Brighton</strong>, LaVi Restaurant was born from a passion for scratch-made cooking, bold seasonings, and community heritage. What was once a local neighborhood deli has been thoughtfully transformed into a vibrant sanctuary for authentic Caribbean and Southern soul food lovers.
+                Located at <strong className="text-white">500 Henderson Ave in West Brighton</strong>, LaVi Restaurant was born from a passion for scratch-made cooking, bold seasonings, and community heritage. Driven by the owner's vision to share her roots, the space was thoughtfully crafted into a vibrant sanctuary for authentic Caribbean and Southern soul food lovers.
               </p>
 
               <p>
@@ -57,7 +57,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onNavigate }) => {
               </p>
 
               <p>
-                Every dish is prepared daily from scratch using fresh, high-quality ingredients, house-blended seasonings, and timeless family recipes cooked with love. Whether you're stopping by for an all-day breakfast platter, a hearty chalkboard combo, or takeout for the family, LaVi welcomes you with warmth and unmatched island hospitality.
+                Every dish is prepared daily from scratch using fresh, high-quality ingredients, house-blended seasonings, and timeless family recipes cooked with love. Whether you're stopping by for an all-day breakfast platter, a healthy combo, or takeout for the family, LaVi welcomes you with warmth and unmatched island hospitality.
               </p>
             </div>
 
