@@ -1,14 +1,10 @@
 {
   "version": 2,
-  "headers": [
-    {
-      "source": "/.well-known/apple-developer-merchantid-domain-association",
-      "headers": [
-        { "key": "Content-Type", "value": "application/json" }
-      ]
-    }
-  ],
   "routes": [
+    {
+      "src": "/.well-known/apple-developer-merchantid-domain-association",
+      "dest": "/api/well-known/apple-developer-merchantid-domain-association"
+    },
     { "src": "/api/(.*)", "dest": "/api/$1" },
     { "handle": "filesystem" },
     { "src": "/(.*)", "dest": "/index.html" }
