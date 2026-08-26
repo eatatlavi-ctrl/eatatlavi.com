@@ -4,17 +4,6 @@ import { SquareClient as Client, SquareEnvironment as Environment } from 'square
 import { randomUUID } from 'crypto';
 import { MINIMUM_DELIVERY_SUBTOTAL } from '../src/config';
 
-// Square client — Access Token is ONLY here on the server, never sent to browser
-const client = new Client({
-  token: process.env.SQUARE_ACCESS_TOKEN!,
-  environment:
-    process.env.SQUARE_ACCESS_TOKEN?.startsWith('sandbox')
-      ? Environment.Sandbox
-      : Environment.Production,
-});
-
-const LOCATION_ID = process.env.SQUARE_LOCATION_ID || 'L1P9ANWYC0THW';
-
 interface CartItem {
   name: string;
   price: number;   // dollars
@@ -41,22 +30,29 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method === 'OPTIONS') return res.status(200).end();
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
-  const {
-    cartItems,
-    cardToken,
-    customerName,
-    customerPhone,
-    fulfillment,
-    deliveryAddress,
-    amountCents,
-  } = req.body as OrderRequest;
-
-  // Basic validation
-  if (!cartItems?.length || !cardToken || !customerName || !customerPhone) {
-    return res.status(400).json({ error: 'Missing required fields.' });
-  }
-
   try {
+    const client = new Client({
+      token: process.env.SQUARE_ACCESS_TOKEN || '',
+      environment: process.env.SQUARE_ACCESS_TOKEN?.startsWith('sandbox')
+        ? Environment.Sandbox
+        : Environment.Production,
+    });
+    const LOCATION_ID = process.env.SQUARE_LOCATION_ID || 'L1P9ANWYC0THW';
+
+    const {
+      cartItems,
+      cardToken,
+      customerName,
+      customerPhone,
+      fulfillment,
+      deliveryAddress,
+    } = req.body as OrderRequest;
+
+    // Basic validation
+    if (!cartItems?.length || !cardToken || !customerName || !customerPhone) {
+      return res.status(400).json({ error: 'Missing required fields.' });
+    }
+
     // ── STEP 1: Create Order via Square Orders API ──────────────────
     const subtotalCents = cartItems.reduce((sum, item) => sum + Math.round(item.price * 100) * item.quantity, 0);
 
@@ -150,12 +146,19 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       receiptUrl: payment.receiptUrl ?? null,
       status: payment.status,
     });
-  } catch (error) {
-    console.error('Square API error:', error);
+  } catch (error: any) {
+    console.error('Square API error or syntax crash:', error);
+    
+    // Check if it's a Square API error
     if (error && typeof error === 'object' && 'errors' in error) {
-      const msg = (error as any).errors?.[0]?.detail || error.message;
+      const msg = error.errors?.[0]?.detail || error.message;
       return res.status(400).json({ error: msg });
     }
-    return res.status(500).json({ error: 'Order could not be processed. Please try again.' });
+    
+    // Handle BigInt serialization crash issue natively just in case error message has BigInt
+    return res.status(500).json({ 
+      error: 'Order could not be processed. Please try again.',
+      details: error?.message || String(error)
+    });
   }
 }
