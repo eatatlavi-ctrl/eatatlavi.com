@@ -364,16 +364,26 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
         {step !== 'confirmed' && cartItems.length > 0 && (
           <div className="px-6 py-4 border-t border-[#27272A] shrink-0 space-y-2">
             {step === 'cart' && (
-              <button onClick={() => setStep('details')}
-                className="w-full bg-white text-black font-bold text-xs tracking-[0.2em] uppercase py-4 flex items-center justify-center space-x-2 hover:bg-[#D4AF37] transition-colors">
-                <span>Continue to Details</span>
-                <ArrowRight className="w-4 h-4" />
-              </button>
+              <>
+                {fulfillment === 'delivery' && remainingForDelivery > 0 && (
+                  <div className="text-center mb-2">
+                    <p className="text-[10px] text-red-400 font-mono bg-red-500/10 border border-red-500/40 p-2">
+                      Delivery orders require a ${MINIMUM_DELIVERY_SUBTOTAL.toFixed(2)} minimum — add ${remainingForDelivery.toFixed(2)} more to checkout.
+                    </p>
+                  </div>
+                )}
+                <button onClick={() => setStep('details')}
+                  disabled={fulfillment === 'delivery' && remainingForDelivery > 0}
+                  className="w-full bg-white text-black font-bold text-xs tracking-[0.2em] uppercase py-4 flex items-center justify-center space-x-2 hover:bg-[#D4AF37] transition-colors disabled:opacity-40 disabled:cursor-not-allowed">
+                  <span>Continue to Details</span>
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+              </>
             )}
             {step === 'details' && (
               <button
                 onClick={() => setStep('payment')}
-                disabled={!customerName.trim() || !customerPhone.trim() || (fulfillment === 'delivery' && !deliveryAddress.trim())}
+                disabled={!customerName.trim() || !customerPhone.trim() || (fulfillment === 'delivery' && !deliveryAddress.trim()) || (fulfillment === 'delivery' && remainingForDelivery > 0)}
                 className="w-full bg-white text-black font-bold text-xs tracking-[0.2em] uppercase py-4 flex items-center justify-center space-x-2 hover:bg-[#D4AF37] transition-colors disabled:opacity-40 disabled:cursor-not-allowed">
                 <span>Continue to Payment</span>
                 <ArrowRight className="w-4 h-4" />
@@ -384,7 +394,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                 {fulfillment === 'delivery' && remainingForDelivery > 0 && (
                   <div className="text-center mb-2">
                     <p className="text-[10px] text-red-400 font-mono bg-red-500/10 border border-red-500/40 p-2">
-                      Delivery orders require a ${MINIMUM_DELIVERY_SUBTOTAL} minimum — add ${remainingForDelivery.toFixed(2)} more to checkout.
+                      Delivery orders require a ${MINIMUM_DELIVERY_SUBTOTAL.toFixed(2)} minimum — add ${remainingForDelivery.toFixed(2)} more to checkout.
                     </p>
                   </div>
                 )}
