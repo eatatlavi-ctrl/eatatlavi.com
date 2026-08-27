@@ -33,7 +33,11 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
   const [customerName, setCustomerName] = useState('');
   const [customerPhone, setCustomerPhone] = useState('');
   const [fulfillment, setFulfillment] = useState<'pickup' | 'delivery'>('pickup');
-  const [deliveryAddress, setDeliveryAddress] = useState('');
+  const [deliveryStreet, setDeliveryStreet] = useState('');
+  const [deliveryUnit, setDeliveryUnit] = useState('');
+  const [deliveryCity, setDeliveryCity] = useState('');
+  const [deliveryState, setDeliveryState] = useState('');
+  const [deliveryZip, setDeliveryZip] = useState('');
   const [orderResult, setOrderResult] = useState<OrderResult | null>(null);
   const [submitError, setSubmitError] = useState<string | null>(null);
 
@@ -64,7 +68,11 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
       setStep('cart');
       setCustomerName('');
       setCustomerPhone('');
-      setDeliveryAddress('');
+      setDeliveryStreet('');
+      setDeliveryUnit('');
+      setDeliveryCity('');
+      setDeliveryState('');
+      setDeliveryZip('');
       setOrderResult(null);
       setSubmitError(null);
       destroyCard();
@@ -86,7 +94,13 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
           customerName,
           customerPhone,
           fulfillment,
-          deliveryAddress: fulfillment === 'delivery' ? deliveryAddress : undefined,
+          deliveryAddress: fulfillment === 'delivery' ? {
+            street: deliveryStreet,
+            unit: deliveryUnit,
+            city: deliveryCity,
+            state: deliveryState,
+            zip: deliveryZip
+          } : undefined,
           amountCents: Math.round(total * 100),
         }),
       });
@@ -104,7 +118,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
     } catch (err: any) {
       setSubmitError(err.message || 'Something went wrong. Please try again.');
     }
-  }, [cartItems, customerName, customerPhone, fulfillment, deliveryAddress, total, processPayment, onClearCart]);
+  }, [cartItems, customerName, customerPhone, fulfillment, deliveryStreet, deliveryUnit, deliveryCity, deliveryState, deliveryZip, total, processPayment, onClearCart]);
 
   if (!isOpen) return null;
 
@@ -252,15 +266,59 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                 />
               </div>
               {fulfillment === 'delivery' && (
-                <div>
-                  <label className="block text-[10px] font-mono tracking-[0.25em] uppercase text-[#A1A1AA] mb-1.5">Delivery Address *</label>
-                  <input
-                    type="text"
-                    value={deliveryAddress}
-                    onChange={(e) => setDeliveryAddress(e.target.value)}
-                    placeholder="123 Main St, Staten Island, NY"
-                    className="w-full bg-transparent border border-[#27272A] focus:border-[#D4AF37] text-white text-sm px-4 py-3 outline-none transition-colors placeholder:text-[#3F3F46] font-sans"
-                  />
+                <div className="space-y-3">
+                  <div>
+                    <label className="block text-[10px] font-mono tracking-[0.25em] uppercase text-[#A1A1AA] mb-1.5">Street Address *</label>
+                    <input
+                      type="text"
+                      value={deliveryStreet}
+                      onChange={(e) => setDeliveryStreet(e.target.value)}
+                      placeholder="123 Main St"
+                      className="w-full bg-transparent border border-[#27272A] focus:border-[#D4AF37] text-white text-sm px-4 py-3 outline-none transition-colors placeholder:text-[#3F3F46] font-sans"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] font-mono tracking-[0.25em] uppercase text-[#A1A1AA] mb-1.5">Apt / Unit (Optional)</label>
+                    <input
+                      type="text"
+                      value={deliveryUnit}
+                      onChange={(e) => setDeliveryUnit(e.target.value)}
+                      placeholder="Apt 4B"
+                      className="w-full bg-transparent border border-[#27272A] focus:border-[#D4AF37] text-white text-sm px-4 py-3 outline-none transition-colors placeholder:text-[#3F3F46] font-sans"
+                    />
+                  </div>
+                  <div className="grid grid-cols-3 gap-2">
+                    <div className="col-span-1">
+                      <label className="block text-[10px] font-mono tracking-[0.25em] uppercase text-[#A1A1AA] mb-1.5">City *</label>
+                      <input
+                        type="text"
+                        value={deliveryCity}
+                        onChange={(e) => setDeliveryCity(e.target.value)}
+                        placeholder="Staten Island"
+                        className="w-full bg-transparent border border-[#27272A] focus:border-[#D4AF37] text-white text-sm px-4 py-3 outline-none transition-colors placeholder:text-[#3F3F46] font-sans"
+                      />
+                    </div>
+                    <div className="col-span-1">
+                      <label className="block text-[10px] font-mono tracking-[0.25em] uppercase text-[#A1A1AA] mb-1.5">State *</label>
+                      <input
+                        type="text"
+                        value={deliveryState}
+                        onChange={(e) => setDeliveryState(e.target.value)}
+                        placeholder="NY"
+                        className="w-full bg-transparent border border-[#27272A] focus:border-[#D4AF37] text-white text-sm px-4 py-3 outline-none transition-colors placeholder:text-[#3F3F46] font-sans"
+                      />
+                    </div>
+                    <div className="col-span-1">
+                      <label className="block text-[10px] font-mono tracking-[0.25em] uppercase text-[#A1A1AA] mb-1.5">ZIP *</label>
+                      <input
+                        type="text"
+                        value={deliveryZip}
+                        onChange={(e) => setDeliveryZip(e.target.value)}
+                        placeholder="10310"
+                        className="w-full bg-transparent border border-[#27272A] focus:border-[#D4AF37] text-white text-sm px-4 py-3 outline-none transition-colors placeholder:text-[#3F3F46] font-sans"
+                      />
+                    </div>
+                  </div>
                 </div>
               )}
 
@@ -383,7 +441,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
             {step === 'details' && (
               <button
                 onClick={() => setStep('payment')}
-                disabled={!customerName.trim() || !customerPhone.trim() || (fulfillment === 'delivery' && !deliveryAddress.trim()) || (fulfillment === 'delivery' && remainingForDelivery > 0)}
+                disabled={!customerName.trim() || !customerPhone.trim() || (fulfillment === 'delivery' && (!deliveryStreet.trim() || !deliveryCity.trim() || !deliveryState.trim() || !deliveryZip.trim())) || (fulfillment === 'delivery' && remainingForDelivery > 0)}
                 className="w-full bg-white text-black font-bold text-xs tracking-[0.2em] uppercase py-4 flex items-center justify-center space-x-2 hover:bg-[#D4AF37] transition-colors disabled:opacity-40 disabled:cursor-not-allowed">
                 <span>Continue to Payment</span>
                 <ArrowRight className="w-4 h-4" />

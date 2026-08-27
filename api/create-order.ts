@@ -9,13 +9,21 @@ interface CartItem {
   options?: string;
 }
 
+interface DeliveryAddress {
+  street: string;
+  unit?: string;
+  city: string;
+  state: string;
+  zip: string;
+}
+
 interface OrderRequest {
   cartItems: CartItem[];
   cardToken: string;
   customerName: string;
   customerPhone: string;
   fulfillment: 'pickup' | 'delivery';
-  deliveryAddress?: string;
+  deliveryAddress?: DeliveryAddress;
   amountCents: number;
 }
 
@@ -104,10 +112,22 @@ export default async function handler(req: any, res: any) {
                 }
               : {
                   deliveryDetails: {
-                    recipient: { displayName: customerName, phoneNumber: customerPhone },
-                    ...(deliveryAddress
-                      ? { deliverTo: { displayName: deliveryAddress } as any }
-                      : {}),
+                    recipient: { 
+                      displayName: customerName, 
+                      phoneNumber: customerPhone,
+                      ...(deliveryAddress ? {
+                        address: {
+                          addressLine1: deliveryAddress.street,
+                          addressLine2: deliveryAddress.unit || undefined,
+                          locality: deliveryAddress.city,
+                          administrativeDistrictLevel1: deliveryAddress.state,
+                          postalCode: deliveryAddress.zip,
+                          country: 'US' as const,
+                        }
+                      } : {})
+                    },
+                    managedDelivery: true,
+                    courierProviderName: "Best Available",
                   },
                 }),
           },
