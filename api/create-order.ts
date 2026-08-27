@@ -128,6 +128,8 @@ export default async function handler(req: any, res: any) {
                     },
                     managedDelivery: true,
                     courierProviderName: "Best Available",
+                    scheduleType: "ASAP" as const,
+                    prepTimeDuration: "PT20M",
                   },
                 }),
           },
