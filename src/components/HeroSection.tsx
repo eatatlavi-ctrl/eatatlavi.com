@@ -59,7 +59,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
             {/* BUTTONS */}
             <div className="flex flex-col sm:flex-row items-center sm:space-x-4 space-y-4 sm:space-y-0 pt-4">
               <button
-                onClick={() => onNavigate('store')}
+                onClick={() => window.open('https://eatatlavi.square.site', '_blank')}
                 className="w-full sm:w-auto bg-[#D4AF37] hover:bg-white text-black font-extrabold text-sm tracking-[0.2em] uppercase px-8 py-4 transition-colors flex items-center justify-center space-x-2"
               >
                 <span>ORDER ONLINE</span>

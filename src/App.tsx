@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/HeroSection';
 import { AboutSection } from './components/AboutSection';
-import { EditorialMenu } from './components/EditorialMenu';
 
 import { InteractiveMenu } from './components/InteractiveMenu';
 import { LocationFooter } from './components/LocationFooter';
@@ -10,7 +9,7 @@ import { CateringPage } from './components/CateringPage';
 import { EDITORIAL_MENU } from './data/menuData';
 import type { EditorialMenuItem } from './types';
 
-export type ViewState = 'home' | 'menu' | 'store' | 'catering';
+export type ViewState = 'home' | 'menu' | 'catering';
 
 export function App() {
   const [currentView, setCurrentView] = useState<ViewState>('home');
@@ -50,7 +49,7 @@ export function App() {
       {currentView === 'home' && (
         <>
           <HeroSection onNavigate={setCurrentView} />
-          <AboutSection onNavigate={setCurrentView} />
+          <AboutSection />
         </>
       )}
 
@@ -58,12 +57,6 @@ export function App() {
         <InteractiveMenu items={menuItems} isLoading={isLoadingMenu} />
       )}
 
-      {currentView === 'store' && (
-        <EditorialMenu
-          items={menuItems}
-          isLoading={isLoadingMenu}
-        />
-      )}
 
       {currentView === 'catering' && (
         <CateringPage

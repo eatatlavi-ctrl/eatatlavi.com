@@ -1,5 +1,5 @@
 import React from 'react';
-import { Loader2, Plus } from 'lucide-react';
+import { Loader2 } from 'lucide-react';
 import type { EditorialMenuItem } from '../types';
 
 interface CateringPageProps {
@@ -85,15 +85,7 @@ export const CateringPage: React.FC<CateringPageProps> = ({ items, isLoading }) 
                       </div>
                     )}
 
-                      <button
-                        type="button"
-                        onClick={(e) => { e.stopPropagation(); window.open('https://eatatlavi.square.site', '_blank'); }}
-                        className="bg-[#18181B] hover:bg-[#D4AF37] text-[#A1A1AA] hover:text-black border border-[#27272A] hover:border-[#D4AF37] text-[10px] font-mono uppercase font-bold tracking-wider px-3 py-1.5 transition-all flex items-center space-x-1 mt-auto"
-                        aria-label={`Order ${item.name}`}
-                      >
-                        <Plus className="w-3 h-3" />
-                        <span>Add</span>
-                      </button>
+
                   </div>
                 </div>
               ))}

@@ -55,7 +55,7 @@ export const InteractiveMenu: React.FC<InteractiveMenuProps> = ({ items, isLoadi
             LaVi Restaurant Digital Menu
           </h2>
           <p className="text-xs text-[#A1A1AA] max-w-lg mx-auto font-light">
-            Browse our full kitchen menu below.
+            Browse our full kitchen menu below. Click any item to place your order on our official Square site.
           </p>
           <div className="w-16 h-px bg-[#D4AF37] mx-auto mt-4" />
         </div>
@@ -84,7 +84,8 @@ export const InteractiveMenu: React.FC<InteractiveMenuProps> = ({ items, isLoadi
               {popularItems.map((item) => (
                 <div
                   key={item.id}
-                  className="group bg-black border border-[#27272A] p-4 flex justify-between items-start space-x-4 shadow-lg relative overflow-hidden"
+                  className="group bg-black border border-[#27272A] hover:border-[#D4AF37]/70 p-4 flex justify-between items-start space-x-4 shadow-lg relative overflow-hidden cursor-pointer transition-colors"
+                  onClick={() => window.open('https://eatatlavi.square.site', '_blank')}
                 >
                   <div className="flex-1 min-w-0 space-y-1">
                     <span className="text-[9px] font-mono text-[#D4AF37] uppercase tracking-widest block">
@@ -106,11 +107,15 @@ export const InteractiveMenu: React.FC<InteractiveMenuProps> = ({ items, isLoadi
                   </div>
 
                   <div className="shrink-0 relative">
-                    {item.image ? (
+                    {item.imageUrl ? (
                       <div className="w-20 h-20 rounded-md overflow-hidden relative border border-[#27272A]">
-                        <img src={item.image} alt={item.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform" />
+                        <img src={item.imageUrl} alt={item.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform" />
                       </div>
-                    ) : null}
+                    ) : (
+                      <div className="w-20 h-20 rounded-md overflow-hidden relative border border-[#27272A] bg-[#18181B] flex items-center justify-center">
+                        <span className="font-serif text-[12px] text-[#D4AF37] opacity-50 tracking-wider">LAVI</span>
+                      </div>
+                    )}
                   </div>
                 </div>
               ))}
@@ -199,7 +204,8 @@ export const InteractiveMenu: React.FC<InteractiveMenuProps> = ({ items, isLoadi
                   {items.map((item) => (
                     <div
                       key={item.id}
-                      className="group bg-black border border-[#27272A] p-4 flex justify-between items-start space-x-3 relative"
+                      className="group bg-black border border-[#27272A] hover:border-[#D4AF37]/70 p-4 flex justify-between items-start space-x-3 relative cursor-pointer transition-colors shadow-lg"
+                      onClick={() => window.open('https://eatatlavi.square.site', '_blank')}
                     >
                       <div className="flex-1 min-w-0 pr-2">
                         <div className="flex items-baseline justify-between gap-2">
@@ -226,11 +232,15 @@ export const InteractiveMenu: React.FC<InteractiveMenuProps> = ({ items, isLoadi
                       </div>
 
                       <div className="shrink-0 flex flex-col items-end justify-between h-full space-y-3">
-                        {item.image ? (
-                          <div className="w-16 h-16 rounded overflow-hidden border border-[#27272A]">
-                            <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
+                        {item.imageUrl ? (
+                          <div className="w-16 h-16 sm:w-20 sm:h-20 rounded overflow-hidden border border-[#27272A]">
+                            <img src={item.imageUrl} alt={item.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform" />
                           </div>
-                        ) : null}
+                        ) : (
+                          <div className="w-16 h-16 sm:w-20 sm:h-20 rounded overflow-hidden border border-[#27272A] bg-[#18181B] flex items-center justify-center">
+                            <span className="font-serif text-[10px] sm:text-[12px] text-[#D4AF37] opacity-50 tracking-wider">LAVI</span>
+                          </div>
+                        )}
                       </div>
                     </div>
                   ))}

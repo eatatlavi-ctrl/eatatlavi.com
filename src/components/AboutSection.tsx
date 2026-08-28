@@ -1,11 +1,7 @@
 import React from 'react';
 import { Sparkles, Heart, Utensils, Flame, Award } from 'lucide-react';
 
-interface AboutSectionProps {
-  onNavigate: (view: "home" | "menu" | "store") => void;
-}
-
-export const AboutSection: React.FC<AboutSectionProps> = ({ onNavigate }) => {
+export const AboutSection: React.FC = () => {
   return (
     <section id="about" className="py-24 bg-black border-t border-[#27272A] text-white relative overflow-hidden">
       
@@ -84,8 +80,8 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onNavigate }) => {
 
             <div className="pt-4">
               <button
-                onClick={() => onNavigate('store')}
-                className="bg-gradient-to-r from-[#E5C158] via-[#D4AF37] to-[#B38F24] hover:brightness-110 text-black font-bold text-xs tracking-[0.2em] uppercase px-8 py-4 shadow-xl transition-all"
+                onClick={() => window.open('https://eatatlavi.square.site', '_blank')}
+                className="w-full sm:w-auto bg-[#D4AF37] hover:bg-white text-black font-extrabold text-sm tracking-[0.2em] uppercase px-8 py-4 transition-colors"
               >
                 Experience LaVi Today &rarr;
               </button>
