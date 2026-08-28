@@ -5,10 +5,9 @@ import type { EditorialMenuItem } from '../types';
 interface CateringPageProps {
   items: EditorialMenuItem[];
   isLoading: boolean;
-  onInitiateAdd?: (item: EditorialMenuItem) => void;
 }
 
-export const CateringPage: React.FC<CateringPageProps> = ({ items, isLoading, onInitiateAdd }) => {
+export const CateringPage: React.FC<CateringPageProps> = ({ items, isLoading }) => {
   const cateringItems = items.filter((item) => item.category === 'Catering');
 
   return (
@@ -24,7 +23,7 @@ export const CateringPage: React.FC<CateringPageProps> = ({ items, isLoading, on
             Catering
           </h2>
           <p className="text-xs text-[#A1A1AA] max-w-lg mx-auto font-light">
-            Half Pan & Large Pan Trays. Perfect for your next gathering. Click any item to customize and add to your order.
+            Half Pan & Large Pan Trays. Perfect for your next gathering. Click any item to place your catering order on our official Square site.
           </p>
           <div className="w-16 h-px bg-[#D4AF37] mx-auto mt-6" />
         </div>
@@ -50,7 +49,7 @@ export const CateringPage: React.FC<CateringPageProps> = ({ items, isLoading, on
               {cateringItems.map((item) => (
                 <div
                   key={item.id}
-                  onClick={() => onInitiateAdd?.(item)}
+                  onClick={() => window.open('https://eatatlavi.square.site', '_blank')}
                   className="group bg-black border border-[#27272A] hover:border-[#D4AF37]/70 p-4 flex justify-between items-start space-x-3 transition-all relative cursor-pointer shadow-lg"
                 >
                   <div className="flex-1 min-w-0 pr-2">
@@ -86,17 +85,15 @@ export const CateringPage: React.FC<CateringPageProps> = ({ items, isLoading, on
                       </div>
                     )}
 
-                    {onInitiateAdd && (
                       <button
                         type="button"
-                        onClick={(e) => { e.stopPropagation(); onInitiateAdd(item); }}
+                        onClick={(e) => { e.stopPropagation(); window.open('https://eatatlavi.square.site', '_blank'); }}
                         className="bg-[#18181B] hover:bg-[#D4AF37] text-[#A1A1AA] hover:text-black border border-[#27272A] hover:border-[#D4AF37] text-[10px] font-mono uppercase font-bold tracking-wider px-3 py-1.5 transition-all flex items-center space-x-1 mt-auto"
-                        aria-label={`Customize ${item.name}`}
+                        aria-label={`Order ${item.name}`}
                       >
                         <Plus className="w-3 h-3" />
                         <span>Add</span>
                       </button>
-                    )}
                   </div>
                 </div>
               ))}

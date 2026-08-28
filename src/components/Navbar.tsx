@@ -6,11 +6,9 @@ import type { ViewState } from '../App';
 interface NavbarProps {
   currentView: ViewState;
   onNavigate: (view: ViewState) => void;
-  onOpenCart?: () => void;
-  cartCount?: number;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ currentView, onNavigate, onOpenCart, cartCount = 0 }) => {
+export const Navbar: React.FC<NavbarProps> = ({ currentView, onNavigate }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -57,24 +55,10 @@ export const Navbar: React.FC<NavbarProps> = ({ currentView, onNavigate, onOpenC
             <span>(347) 934-3040</span>
           </a>
 
-          {/* CART ICON */}
-          {onOpenCart && (
-            <button
-              onClick={onOpenCart}
-              className="relative text-[#A1A1AA] hover:text-white transition-colors"
-              aria-label="Open cart"
-            >
-              <ShoppingBag className="w-5 h-5" />
-              {cartCount > 0 && (
-                <span className="absolute -top-1.5 -right-1.5 w-4 h-4 bg-[#D4AF37] text-black text-[9px] font-extrabold rounded-full flex items-center justify-center">
-                  {cartCount > 9 ? '9+' : cartCount}
-                </span>
-              )}
-            </button>
-          )}
+
 
           <button
-            onClick={() => onNavigate('store')}
+            onClick={() => window.open('https://eatatlavi.square.site', '_blank')}
             className="bg-gradient-to-r from-[#E5C158] via-[#D4AF37] to-[#B38F24] hover:brightness-110 text-black font-bold text-xs tracking-[0.2em] uppercase px-6 py-2.5 rounded-none shadow-lg transition-all duration-300 flex items-center space-x-2"
           >
             <span>ORDER ONLINE</span>
@@ -85,7 +69,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentView, onNavigate, onOpenC
         {/* MOBILE MENU TOGGLE */}
         <div className="lg:hidden flex items-center space-x-3">
           <button
-            onClick={() => onNavigate('store')}
+            onClick={() => window.open('https://eatatlavi.square.site', '_blank')}
             className="sm:hidden bg-[#D4AF37] text-black font-bold text-[10px] tracking-wider uppercase px-3 py-1.5"
           >
             Order
@@ -123,7 +107,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentView, onNavigate, onOpenC
             <button
               onClick={() => {
                 setMobileMenuOpen(false);
-                onNavigate('store');
+                window.open('https://eatatlavi.square.site', '_blank');
               }}
               className="w-full bg-[#D4AF37] text-black font-bold text-xs tracking-[0.2em] uppercase py-3"
             >
