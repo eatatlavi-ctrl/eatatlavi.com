@@ -421,22 +421,24 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
         {/* FOOTER ACTIONS */}
         {step !== 'confirmed' && cartItems.length > 0 && (
           <div className="px-6 py-4 border-t border-[#27272A] shrink-0 space-y-2">
-            {step === 'cart' && (
-              <>
-                {fulfillment === 'delivery' && remainingForDelivery > 0 && (
-                  <div className="text-center mb-2">
-                    <p className="text-[10px] text-red-400 font-mono bg-red-500/10 border border-red-500/40 p-2">
-                      Delivery orders require a ${MINIMUM_DELIVERY_SUBTOTAL.toFixed(2)} minimum — add ${remainingForDelivery.toFixed(2)} more to checkout.
-                    </p>
-                  </div>
-                )}
-                <button onClick={() => setStep('details')}
-                  disabled={fulfillment === 'delivery' && remainingForDelivery > 0}
-                  className="w-full bg-white text-black font-bold text-xs tracking-[0.2em] uppercase py-4 flex items-center justify-center space-x-2 hover:bg-[#D4AF37] transition-colors disabled:opacity-40 disabled:cursor-not-allowed">
-                  <span>Continue to Details</span>
+            {step === 'cart' && fulfillment === 'pickup' && (
+              <button onClick={() => setStep('details')}
+                className="w-full bg-white text-black font-bold text-xs tracking-[0.2em] uppercase py-4 flex items-center justify-center space-x-2 hover:bg-[#D4AF37] transition-colors">
+                <span>Continue to Details</span>
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            )}
+            {step === 'cart' && fulfillment === 'delivery' && (
+              <div className="space-y-3 text-center pt-1">
+                <p className="text-[11px] text-[#A1A1AA] font-mono leading-relaxed px-2">
+                  To guarantee reliable courier dispatch, delivery orders are currently processed through our official ordering page.
+                </p>
+                <button onClick={() => window.location.href = 'https://eatatlavi.square.site'}
+                  className="w-full bg-white text-black font-bold text-xs tracking-[0.2em] uppercase py-4 flex items-center justify-center space-x-2 hover:bg-[#D4AF37] transition-colors">
+                  <span>Continue to Delivery Order</span>
                   <ArrowRight className="w-4 h-4" />
                 </button>
-              </>
+              </div>
             )}
             {step === 'details' && (
               <button
