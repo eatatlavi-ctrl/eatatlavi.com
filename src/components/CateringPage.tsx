@@ -15,7 +15,7 @@ export const CateringPage: React.FC<CateringPageProps> = ({ items, isLoading }) 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 pt-10">
         
         {/* HEADER TITLE */}
-        <div className="text-center space-y-3 mb-16">
+        <div className="text-center space-y-3 mb-12">
           <span className="text-[10px] font-mono tracking-[0.3em] uppercase text-[#D4AF37]">
             Events & Parties
           </span>
@@ -25,7 +25,30 @@ export const CateringPage: React.FC<CateringPageProps> = ({ items, isLoading }) 
           <p className="text-xs text-[#A1A1AA] max-w-lg mx-auto font-light">
             Half Pan & Large Pan Trays. Perfect for your next gathering. Click any item to place your catering order on our official Square site.
           </p>
-          <div className="w-16 h-px bg-[#D4AF37] mx-auto mt-6" />
+          <div className="w-16 h-px bg-[#D4AF37] mx-auto mt-6 mb-8" />
+        </div>
+
+        {/* CATERING CTA SECTION */}
+        <div className="bg-black border border-[#D4AF37]/30 p-8 sm:p-12 text-center max-w-3xl mx-auto mb-16 shadow-2xl relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-b from-[#D4AF37]/5 to-transparent pointer-events-none" />
+          <h3 className="font-serif text-xl sm:text-2xl font-light text-white mb-6 relative z-10">
+            Order your catering items for any occasion online now for delivery or pickup!
+          </h3>
+          <button
+            onClick={() => window.open('https://eatatlavi.square.site', '_blank')}
+            className="bg-gradient-to-r from-[#E5C158] via-[#D4AF37] to-[#B38F24] hover:brightness-110 text-black font-extrabold text-sm tracking-[0.2em] uppercase px-8 py-4 transition-all inline-block relative z-10"
+          >
+            ORDER ONLINE
+          </button>
+          <p className="text-xs font-mono text-[#A1A1AA] mt-6 tracking-wide relative z-10">
+            * We recommend ordering catering at least one week in advance.
+          </p>
+          <p className="text-xs text-[#A1A1AA] mt-3 font-light relative z-10">
+            For rush orders, call us at{' '}
+            <a href="tel:3479343040" className="text-[#D4AF37] font-bold hover:underline">
+              (347) 934-3040
+            </a>
+          </p>
         </div>
 
         {isLoading ? (
