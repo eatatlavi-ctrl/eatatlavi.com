@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Phone, Menu as MenuIcon, X, Sparkles, ShoppingBag } from 'lucide-react';
+import { Phone, Menu as MenuIcon, X, Sparkles } from 'lucide-react';
 
 import type { ViewState } from '../App';
 
